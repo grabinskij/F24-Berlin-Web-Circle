@@ -1,4 +1,3 @@
-import React from 'react'
 import airbnbLogo from "../../assets/logo_airbnb.svg"
 import ButtonBeAHost from '../ButtonBeAHost/ButtonBeAHost'
 import HeaderUserMenu from '../HeaderUserMenu/HeaderUserMenu'
@@ -6,9 +5,9 @@ import LanguageSelector from '../LanguageSelector/LanguageSelector'
 import SearchPanel from '../SearchPanel/SearchPanel'
 import styles from "./Header.module.css"
 
-const Header = () => {
+const Header = ({context}) => {
 
-    const handelRegionClick = (item) => {}
+    const { setIsVisiable } = context;
 
     return (
         <div className={styles.headerSectionContainer}>
@@ -19,7 +18,7 @@ const Header = () => {
                 <SearchPanel />
                 <div className={styles.userMenusWrapper}>
                     <ButtonBeAHost />
-                    <LanguageSelector />
+                    <LanguageSelector setIsVisiable={setIsVisiable}/>
                     <HeaderUserMenu />
                 </div>
             </header>
