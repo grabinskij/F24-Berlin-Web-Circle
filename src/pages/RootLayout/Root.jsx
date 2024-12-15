@@ -5,11 +5,14 @@ import colors from '../../theme/colors';
 import styles from "./Root.module.css"
 import { useEffect, useState } from "react";
 import SharePopup from "../../components/SharePopup/SharePopup";
+import LanguagePopUp from "../../components/LanguagePopUp/LanguagePopUp";
 
 
 const Root = () =>
 {
 	const [modalIsVisible, setModalIsVisible] = useState(false);
+  const [isVisible, setIsVisiable] = useState(false);
+
   const closeModal = () => setModalIsVisible(false);
 
 	useEffect(() => {
@@ -23,8 +26,17 @@ const Root = () =>
   const modalContext = {
     modalIsVisible,
     setModalIsVisible,
-    closeModal
+    closeModal,
   };
+
+  const headerContext = {
+    isVisible,
+    setIsVisiable
+  };
+
+  const handelClose = () => {
+    setIsVisiable(false);
+  }
 
 	const themeStyles = {
 		"--primary": colors.primary,
@@ -34,7 +46,7 @@ const Root = () =>
 
 	return (
 		<div style={themeStyles} className={`${styles.rootLayout} ${modalIsVisible ? styles.modalOpen : ''}`}>
-			<Header/>
+			<Header context={headerContext}/>
 			<div className={styles.layoutBody}>
 				<Outlet context={modalContext} />
 			</div>
@@ -46,6 +58,9 @@ const Root = () =>
           <SharePopup onClick={closeModal} />
         </>
       )}
+      <div className={styles.languagePopUp}>
+          <LanguagePopUp onCloseClick={handelClose} isVisible={isVisible}/>
+      </div>
 		</div>
 	)
 }
