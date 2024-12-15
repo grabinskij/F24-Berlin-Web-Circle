@@ -25,69 +25,70 @@ import {
   useSearchParams,
 } from 'react-router-dom'
 import FilterButton from '../FilterButton/FilterButton'
+import { useTranslation } from 'react-i18next'
 
 const categories = [
   {
-    label: 'Amazing Pools',
+    label: 'amazingPools',
     tag: constants.AMAZING_POOLS,
     icon: <FaSwimmingPool size={28} />,
   },
   {
-    label: 'Beachfront',
+    label: 'beachfront',
     tag: constants.BEACHFRONT,
     icon: <FaUmbrellaBeach size={28} />,
   },
   {
-    label: 'Cabins',
+    label: 'cabins',
     tag: constants.CABINS,
     icon: <MdOutlineCabin size={28} />,
   },
   {
-    label: 'Tiny Homes',
+    label: 'tinyHomes',
     tag: constants.TINY_HOMES,
     icon: <GiHouse size={28} />,
   },
   {
-    label: 'Castles',
+    label: 'castles',
     tag: constants.CASTLES,
     icon: <MdOutlineCastle size={28} />,
   },
   {
-    label: 'Camping',
+    label: 'camping',
     tag: constants.CAMPING,
     icon: <FaCampground size={28} />,
   },
-  { label: 'Luxe', tag: constants.LUXE, icon: <GiDiamondHard size={28} /> },
-  { label: 'Arctic', tag: constants.ARCTIC, icon: <GiSnowflake2 size={28} /> },
-  { label: 'Caravans', tag: constants.CARAVANS, icon: <FaCaravan size={28} /> },
+  { label: 'luxe', tag: constants.LUXE, icon: <GiDiamondHard size={28} /> },
+  { label: 'arctic', tag: constants.ARCTIC, icon: <GiSnowflake2 size={28} /> },
+  { label: 'caravans', tag: constants.CARAVANS, icon: <FaCaravan size={28} /> },
   {
-    label: 'Tree Houses',
+    label: 'treeHouses',
     tag: constants.TREE_HOUSES,
     icon: <FaTree size={28} />,
   },
   {
-    label: 'Fishing Boats',
+    label: 'fishingBoats',
     tag: constants.FISHING_BOATS,
     icon: <GiFishingBoat size={28} />,
   },
   {
-    label: 'Sailboats',
+    label: 'sailboats',
     tag: constants.SAILBOATS,
     icon: <GiSailboat size={28} />,
   },
   {
-    label: 'Luxury Villas',
+    label: 'luxuryVillas',
     tag: constants.LUXURY_VILLAS,
     icon: <GiDiamondHard size={28} />,
   },
   {
-    label: 'Beach Houses',
+    label: 'beachHouses',
     tag: constants.BEACH_HOUSES,
     icon: <FaUmbrellaBeach size={28} />,
   },
-  { label: 'Chalets', tag: constants.CHALETS, icon: <GiHouse size={28} /> },
+  { label: 'chalets', tag: constants.CHALETS, icon: <GiHouse size={28} /> },
   {
-    label: 'Riverside Cabins',
+    label: 'riversideCabins',
     tag: constants.RIVERSIDE_CABINS,
     icon: <MdOutlineCabin size={28} />,
   },
@@ -104,6 +105,8 @@ const CategoryTabs = ({ toggleModal, setHistogramData }) => {
   const [isDragging, setIsDragging] = useState(false)
   const [startX, setStartX] = useState(0)
   const [scrollLeft, setScrollLeft] = useState(0)
+
+  const { t } = useTranslation();
 
   const handleTabClick = (tag) => {
     if (!isDragging) {
@@ -229,7 +232,7 @@ const CategoryTabs = ({ toggleModal, setHistogramData }) => {
                 onClick={() => handleTabClick(category.tag)}
               >
                 <div className={styles.tabIcon}>{category.icon}</div>
-                <span className={styles.tabLabel}>{category.label}</span>
+                <span className={styles.tabLabel}>{t(`categories.${category.label}`)}</span>
               </div>
             ))}
           </div>
