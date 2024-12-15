@@ -19,11 +19,13 @@
     align-items: start;
     justify-content: center;
 }
-.item {
+.item button{
     border-radius: 0.25rem;
-    padding: 0.25rem;
+    padding: 0.4rem 0.8rem;
+    outline: none;
+    border: none;
 }
-.item:hover {
+.item button:hover {
     cursor: pointer;
     background-color: #F7F7F7;
     color: rgb(44, 44, 44);
