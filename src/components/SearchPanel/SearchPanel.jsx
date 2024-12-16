@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import SearchBar from "../SearchBar/SearchBar";
 import ToggleButtonsStaysExperiences from "../ToggleButtonsStaysExperiences/ToggleButtonsStaysExperiences";
 import styles from "./SearchPanel.module.css";
@@ -6,11 +6,14 @@ import { createSearchParams, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import FilterButton from "../FilterButton/FilterButton";
+import { useTranslation } from "react-i18next";
 
 const SearchPanel = () => {
     const [searchType, setSearchType] = useState("stays");
     const [searchQuery, setSearchQuery] = useState(""); // State for mobile search input
     const navigate = useNavigate();
+
+    const { t } = useTranslation();
 
     // Toggle between "stays" and "experiences"
     const toggleSearchType = (type) => {
@@ -85,8 +88,8 @@ const SearchPanel = () => {
                             onChange={(e) => setSearchQuery(e.target.value)}
                         />
                         <div className={styles.mobileSearchPlaceholder}>
-                            Anywhere <span className={styles.dot}>•</span> Any week{" "}
-                            <span className={styles.dot}>•</span> Add guests
+                            {t('search.anywhere')}<span className={styles.dot}>•</span> {t('search.anyWeek')}{" "} 
+                            <span className={styles.dot}>•</span> {t('search.addGuests')}
                         </div>
                     </div>
                 </div>

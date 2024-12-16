@@ -1,3 +1,4 @@
+
 export const calculateNights = (checkIn, checkOut) => {
   return ((new Date(checkOut) - new Date(checkIn)) / (1000 * 60 * 60 * 24)) | 0
 }
@@ -174,9 +175,13 @@ export function formatDateToMonthDay(dateString) {
 }
 
 
-export function formatDateRange(checkIn, checkOut) {
-  const parseDate = (dateString) => {
-    if (!dateString || dateString === "Add dates") return null;
+export function formatDateRange(checkIn, checkOut, monthTranslations, language) {
+  
+  const parseDate = (dateString) => {    
+    const placeholder = ["Add dates", "Daten hinzufügen", "Додати дати"];
+    if (!dateString || placeholder.includes(dateString)) {
+      return null;
+    }
     const [month, day, year] = dateString.split("/").map(Number);
     return new Date(year, month - 1, day); 
   };
@@ -185,26 +190,32 @@ export function formatDateRange(checkIn, checkOut) {
   const checkOutDate = parseDate(checkOut);
 
   if (!checkInDate && !checkOutDate) {
-    return "Add dates";
+    return monthTranslations.addDates;
   }
+
+  const locale = language === 'de' ? 'de-DE' : language === 'ukr' ? 'uk-UA' : 'en-US';
 
   if (checkInDate && !checkOutDate) {
     const optionsMonthDay = { month: "short", day: "numeric" };
-    return checkInDate.toLocaleDateString("en-US", optionsMonthDay);
+    return checkInDate.toLocaleDateString(locale, optionsMonthDay);
   }
 
   const optionsMonthDay = { month: "short", day: "numeric" };
   const optionsDayOnly = { day: "numeric" };
 
-  const checkInMonth = checkInDate.toLocaleDateString("en-US", { month: "short" });
-  const checkOutMonth = checkOutDate.toLocaleDateString("en-US", { month: "short" });
+  const checkInMonthIndex = checkInDate.getMonth();
+  const checkOutMonthIndex = checkOutDate ? checkOutDate.getMonth() : null;
+
+  const checkInMonth = monthTranslations[checkInMonthIndex];
+  const checkOutMonth = checkOutMonthIndex !== null ? monthTranslations[checkOutMonthIndex] : null;
 
   if (checkInMonth === checkOutMonth) {
-    return `${checkInDate.toLocaleDateString("en-US", optionsMonthDay)} - ${checkOutDate.toLocaleDateString("en-US", optionsDayOnly)}`;
+    return `${checkInDate.toLocaleDateString(locale, optionsMonthDay)} - ${checkOutDate.toLocaleDateString(locale, optionsDayOnly)}`;
   }
 
-  return `${checkInDate.toLocaleDateString("en-US", optionsMonthDay)} - ${checkOutDate.toLocaleDateString("en-US", optionsMonthDay)}`;
+  return `${checkInDate.toLocaleDateString(locale, optionsMonthDay)} - ${checkOutDate ? checkOutDate.toLocaleDateString(locale, optionsMonthDay) : ''}`;
 }
+
 
 
 export function convertDateObjectToString(dateObject) {

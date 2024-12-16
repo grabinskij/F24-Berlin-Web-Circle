@@ -37,7 +37,7 @@ const AddGuestsPopUp = ({
       );
       }
     }, [adjustedAdultsCount, setGuests, isSearchWhoDropdown]);
-
+console.log(guestsData)
   return (
     <div className={styles.popup} style={style}>
       {guestsData?.map((guest) => {

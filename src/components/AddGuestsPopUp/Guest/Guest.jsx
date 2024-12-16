@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import styles from './Guest.module.css'
+import { useTranslation } from 'react-i18next'
 
 const Guest = ({
   title,
@@ -21,6 +22,8 @@ const Guest = ({
 }) => {
   const [count, setCount] = useState(initialCount)
   const { peopleNumber, petsNumber } = allowGuestsNumber
+
+  const { t } = useTranslation();
 
   const petsSearchNumber = 5
   const searchTotalPeopleNumber = 16
@@ -142,9 +145,18 @@ const Guest = ({
           isSearchWhoDropdown ? styles.whoDropdownDetailContainer : ''
         }`}
       >
-        <div className={styles.title}>{title}</div>
+        <div className={styles.title}>{
+          title === "Adults" && t('search.adults') ||
+          title === "Infants" && t('search.infants') ||
+          title === "Children" && t('search.children') ||
+          title === "Pets" && t('search.Pets')
+        }</div>
         {descriptionType === 'string' ? (
-          <div>{description}</div>
+          <div>{
+            title === "Adults" && t('search.age') ||
+            title === "Infants" && t('search.under') ||
+            title === "Children" && t('search.ages')
+          }</div>
         ) : (
           !isSearchWhoDropdown && (
             <div
