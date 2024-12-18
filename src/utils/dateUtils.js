@@ -152,24 +152,33 @@ export const isWithinMinStay = (
 }
 
 
-export function formatDateToMonthDay(dateString) {
+export function formatDateToMonthDay(dateString, language) {
+  
+  const languagePlaceholder = language === 'de' ? 'Datum' : language === 'ukr' ? 'Дата' : 'Add dates';
+  
+  const placeholder = ["Add dates", "Datum", "Дата"];
   if (!dateString || typeof dateString !== "string") {
     throw new Error("Invalid dateString provided");
   }
-  if (dateString === "Add dates") {
+  if (dateString === languagePlaceholder) {
     return dateString;
   }
-  const parts = dateString.split("/");
-  if (parts.length !== 3) {
+
+  const parts = dateString.split("/"); 
+  if (!placeholder.includes(dateString) && parts.length !== 3) {
     throw new Error("dateString must be in MM/DD/YYYY format");
   }
   const [month, day, year] = parts.map(Number);
-  if (isNaN(month) || isNaN(day) || isNaN(year)) {
+  if (isNaN(month) && !placeholder.includes(dateString) || 
+      isNaN(day) && !placeholder.includes(dateString) ||
+      isNaN(year) && !placeholder.includes(dateString)) {
     throw new Error("dateString contains invalid numbers");
   }
   const date = new Date(year, month - 1, day); 
-  if (isNaN(date.getTime())) {
+  if (!placeholder.includes(dateString) && isNaN(date.getTime())) {
     throw new Error("Invalid date created from dateString");
+  } else if (placeholder.includes(dateString)) {
+    return dateString;
   }
   return new Intl.DateTimeFormat("en-US", { month: "short", day: "2-digit" }).format(date);
 }
@@ -178,7 +187,7 @@ export function formatDateToMonthDay(dateString) {
 export function formatDateRange(checkIn, checkOut, monthTranslations, language) {
   
   const parseDate = (dateString) => {    
-    const placeholder = ["Add dates", "Daten hinzufügen", "Додати дати"];
+    const placeholder = ["Add dates", "Datum", "Дата"];
     if (!dateString || placeholder.includes(dateString)) {
       return null;
     }

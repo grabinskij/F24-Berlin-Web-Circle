@@ -49,6 +49,16 @@ const SearchBar = ({ searchType, onSearch }) => {
     "pets": 0
   });
 
+  const languagePlaceholder = i18n.language === 'de' ? 'Datum' : i18n.language === 'ukr' ? 'Дата' : 'Add dates';
+  const placeholder = ["Add dates", "Datum", "Дата"];
+
+  useEffect(() => {
+    if(searchCheckIn.includes(placeholder) || searchCheckOut.includes(placeholder)) {
+    setSearchCheckIn(languagePlaceholder);
+    setSearchCheckOut(languagePlaceholder);
+    }
+  }, [languagePlaceholder]);
+
   const monthTranslations = {
     january: t('search.months.january'),
     february: t('search.months.february'),
@@ -177,7 +187,10 @@ const SearchBar = ({ searchType, onSearch }) => {
   }
 
   useEffect(() => {
-    searchCheckIn && searchCheckIn !== "Add dates" ? setSelectedBlock("checkOut") : setSelectedBlock("checkIn")
+    searchCheckIn && searchCheckIn !== "Add dates" ||
+    searchCheckIn && searchCheckIn !== 'Datum' ||
+    searchCheckIn && searchCheckIn !== 'Дата' ? 
+    setSelectedBlock("checkOut") : setSelectedBlock("checkIn")
   }, [searchCheckIn])
 
   useEffect(() => {
@@ -327,9 +340,9 @@ const SearchBar = ({ searchType, onSearch }) => {
             >
               <div className={styles.checkInTextWrapper}>
                 <span className={styles.label}>{t('search.checkIn')}</span>
-                <div className={styles.checkInText}>{formatDateToMonthDay(searchCheckIn)}
+                <div className={styles.checkInText}>{formatDateToMonthDay(searchCheckIn, i18n.language)}
                   <span className={styles.additionalDates}>
-                    {searchCheckIn && searchCheckIn !== "Add dates" && (
+                    {searchCheckIn && searchCheckIn !== t('search.addDates') && (
                       <>
                         {selectedOption === "1-day" && "±1"}
                         {selectedOption === "2-days" && "±2"}
@@ -341,12 +354,12 @@ const SearchBar = ({ searchType, onSearch }) => {
                   </span>
                 </div>
               </div>
-              {searchCheckIn && searchCheckIn !== "Add dates" && selectedBlock === "checkIn" && (
+              {searchCheckIn && searchCheckIn !== t('search.addDates') && selectedBlock === "checkIn" && (
               <button 
                 onClick={(e) => {
                   e.stopPropagation();
-                  setSearchCheckIn("Add dates")
-                  setSearchCheckOut("Add dates")
+                  setSearchCheckIn(t('search.addDates'))
+                  setSearchCheckOut(t('search.addDates'))
                 }}
                 className={styles.searchDeleteContentBtn}
               >
@@ -382,9 +395,9 @@ const SearchBar = ({ searchType, onSearch }) => {
             >
               <div className={styles.checkOutTextWrapper}>
                 <span className={styles.label}>{t('search.checkOut')}</span>
-                <div className={styles.checkOutText}>{formatDateToMonthDay(searchCheckOut)}
+                <div className={styles.checkOutText}>{formatDateToMonthDay(searchCheckOut, i18n.language)}
                   <span className={styles.additionalDates}>
-                    {searchCheckOut && searchCheckOut !== "Add dates" && (
+                    {searchCheckOut && searchCheckOut !== t('search.addDates') && (
                       <>
                         {selectedOption === "1-day" && "±1"}
                         {selectedOption === "2-days" && "±2"}
@@ -396,12 +409,12 @@ const SearchBar = ({ searchType, onSearch }) => {
                   </span>
                 </div>
               </div>
-              {searchCheckOut && searchCheckOut !== "Add dates" && selectedBlock === "checkOut" && (
+              {searchCheckOut && searchCheckOut !== t('search.addDates') && selectedBlock === "checkOut" && (
               <button 
                 onClick={(e) => {
                   e.stopPropagation()
-                  setSearchCheckIn("Add dates")
-                  setSearchCheckOut("Add dates")
+                  setSearchCheckIn(t('search.addDates'))
+                  setSearchCheckOut(t('search.addDates'))
                 }}
                 className={styles.searchDeleteContentBtn}
               >
