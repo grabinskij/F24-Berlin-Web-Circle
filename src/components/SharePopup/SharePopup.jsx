@@ -13,13 +13,15 @@ import {
   faCopy,
   faEllipsis,
 } from "@fortawesome/free-solid-svg-icons";
+import { useTranslation } from "react-i18next";
 
 const SharePopup = ({ onClick }) => {
+  const { t } = useTranslation();
   return (
     <div className={styles.shareModal}>
         {/* Pass the onClick prop to CloseIcon */}
         <CloseIcon onClick={onClick} />
-        <h2 className={styles.text}>Share this experience</h2>
+        <h2 className={styles.text}>{t('sharePopup.shareExperience')}</h2>
 
 
       <div className={styles.modalContent}>
@@ -30,20 +32,20 @@ const SharePopup = ({ onClick }) => {
             className={styles.modalThumbnail}
           />
           <div className={styles.modalTitle}>
-            <p>Join the Living Room Session with Doja Cat</p>
+            <p>{t('sharePopup.joinSession')}</p>
           </div>
         </div>
 
         {/* Flexbox for button layout */}
         <div className={styles.modalButtons}>
           <button >
-            <FontAwesomeIcon icon={faCopy} /> Copy Link
+            <FontAwesomeIcon icon={faCopy} /> {t('sharePopup.copyLink')}
           </button>
           <button>
             <FontAwesomeIcon icon={faEnvelope} /> Email
           </button>
           <button>
-            <i className="icon">💬</i> Messages
+            <i className="icon">💬</i> {t('sharePopup.messages')}
           </button>
           <button>
             <FontAwesomeIcon icon={faWhatsapp} /> WhatsApp
@@ -58,7 +60,7 @@ const SharePopup = ({ onClick }) => {
             <FontAwesomeIcon icon={faXTwitter} /> Twitter
           </button>
           <button>
-            <FontAwesomeIcon icon={faEllipsis} /> More options
+            <FontAwesomeIcon icon={faEllipsis} /> {t('sharePopup.moreOptions')}
           </button>
         </div>
       </div>

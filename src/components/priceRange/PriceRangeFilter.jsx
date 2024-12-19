@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import ReactSlider from "react-slider";
 import "./PriceRangeFilter.css";
+import { useTranslation } from "react-i18next";
 
 const PriceRangeFilter = () => {
   const [sliderValues, setSliderValues] = useState([134, 340]);
+
+  const { t } = useTranslation();
 
   // Mock histogram data
   const histogramData = [
@@ -39,8 +42,8 @@ const PriceRangeFilter = () => {
   return (
     <div className="price-range-container">
       {/* Header */}
-      <h2>Price range</h2>
-      <p>Nightly prices including fees and taxes</p>
+      <h2>{t("priceRangeModal.priceRange")}</h2>
+      <p>{t("priceRangeModal.nightlyPrices")}</p>
 
       {/* Histogram */}
       <div className="histogram">
@@ -74,7 +77,7 @@ const PriceRangeFilter = () => {
         onChange={handleSliderChange}
         pearling
         minDistance={10}
-        renderTrack={(props, state) => {
+        renderTrack={(props) => {
           const trackColor =
             props.key === "track-0"
               ? "lightgray"
@@ -97,7 +100,7 @@ const PriceRangeFilter = () => {
       {/* Inputs */}
       <div className="price-inputs-container">
         <div className="price-input">
-          <label>Minimum</label>
+          <label>{t("priceRangeModal.minimum")}</label>
           <input
             type="text"
             value={`$${sliderValues[0]}`}
@@ -105,7 +108,7 @@ const PriceRangeFilter = () => {
           />
         </div>
         <div className="price-input">
-          <label>Maximum</label>
+          <label>{t("priceRangeModal.maximum")}</label>
           <input
             type="text"
             value={`$${sliderValues[1]}+`}

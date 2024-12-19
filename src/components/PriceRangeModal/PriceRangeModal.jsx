@@ -1,12 +1,15 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import styles from "./PriceRangeModal.module.css";
 import PriceRangeFilter from "../priceRange/PriceRangeFilter";
 import { CloseIcon } from "../../icons/CloseIcon";
+import { useTranslation } from "react-i18next";
 
 const PriceRangeModal = ({ isOpen, onClose, histogramData, className, priceRangeRef }) => {
-  const [bedrooms, setBedrooms] = useState(0); // State for Bedrooms
-  const [beds, setBeds] = useState(0); // State for Beds
-  const [bathrooms, setBathrooms] = useState(0); // State for Bathrooms
+  const [bedrooms, setBedrooms] = useState(0); 
+  const [beds, setBeds] = useState(0); 
+  const [bathrooms, setBathrooms] = useState(0); 
+
+  const { t } = useTranslation();
 
   // Increment and Decrement Handlers
   const increment = (setter, value) => setter(value + 1);
@@ -24,7 +27,7 @@ const PriceRangeModal = ({ isOpen, onClose, histogramData, className, priceRange
           <div className={styles.customCloseWrapper} onClick={onClose}>
             <CloseIcon />
           </div>
-          <h4>Filters</h4>
+          <h4>{t("categories.filters")}</h4>
         </div>
 
        <div className={styles.range}>
@@ -33,16 +36,16 @@ const PriceRangeModal = ({ isOpen, onClose, histogramData, className, priceRange
 
         {/* Rooms and Beds Section */}
         <div className={styles.roomsSection}>
-          <h4 className={styles.title}>Rooms and Beds</h4>
+          <h4 className={styles.title}>{t("priceRangeModal.roomsBeds")}</h4>
 
           {/* Bedrooms Section */}
           <div className={styles.section}>
             <div className={styles.label}>
-              <h4 className={styles.subtitle}>Bedrooms</h4>
+              <h4 className={styles.subtitle}>{t("priceRangeModal.bedrooms")}</h4>
             </div>
             <div className={styles.increment}>
               <button className={styles.button} onClick={() => decrement(setBedrooms, bedrooms)}>-</button>
-              <h4 className={styles.sub}>{bedrooms || "Any"}</h4>
+              <h4 className={styles.sub}>{bedrooms || t("priceRangeModal.any")}</h4>
               <button className={styles.button} onClick={() => increment(setBedrooms, bedrooms)}>+</button>
             </div>
           </div>
@@ -50,11 +53,11 @@ const PriceRangeModal = ({ isOpen, onClose, histogramData, className, priceRange
           {/* Beds Section */}
           <div className={styles.section}>
             <div className={styles.label}>
-              <h4 className={styles.subtitle}>Beds</h4>
+              <h4 className={styles.subtitle}>{t("priceRangeModal.beds")}</h4>
             </div>
             <div className={styles.increment}>
               <button className={styles.button} onClick={() => decrement(setBeds, beds)}>-</button>
-              <h4 className={styles.sub}>{beds || "Any"}</h4>
+              <h4 className={styles.sub}>{beds || t("priceRangeModal.any")}</h4>
               <button className={styles.button} onClick={() => increment(setBeds, beds)}>+</button>
             </div>
           </div>
@@ -62,11 +65,11 @@ const PriceRangeModal = ({ isOpen, onClose, histogramData, className, priceRange
           {/* Bathrooms Section */}
           <div className={styles.section}>
             <div className={styles.label}>
-              <h4 className={styles.subtitle}>Bathrooms</h4>
+              <h4 className={styles.subtitle}>{t("priceRangeModal.bathrooms")}</h4>
             </div>
             <div className={styles.increment}>
               <button className={styles.button} onClick={() => decrement(setBathrooms, bathrooms)}>-</button>
-              <h4 className={styles.sub}>{bathrooms || "Any"}</h4>
+              <h4 className={styles.sub}>{bathrooms || t("priceRangeModal.any")}</h4>
               <button className={styles.button} onClick={() => increment(setBathrooms, bathrooms)}>+</button>
             </div>
           </div>
@@ -79,9 +82,9 @@ const PriceRangeModal = ({ isOpen, onClose, histogramData, className, priceRange
             setBeds(0);
             setBathrooms(0);
           }}>
-            Clear all
+            {t("priceRangeModal.clearAll")}
           </button>
-          <button className={styles.buttonModal}>Show 1,000+ places</button>
+          <button className={styles.buttonModal}>{t("priceRangeModal.showPlaces")}</button>
         </div>
       </div>
     </div>

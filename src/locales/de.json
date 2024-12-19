@@ -15,7 +15,8 @@
     "luxuryVillas": "Luxusvillen",
     "beachHouses": "Strandhäuser",
     "chalets": "Chalets",
-    "riversideCabins": "Flusskabinen"
+    "riversideCabins": "Flusskabinen",
+    "filters": "Filter"
   },
   "search": {
     "searchDestinations": "Reiseziele suchen",
@@ -86,5 +87,25 @@
     "under": "Unter 2",
     "anywhere": "Überall",
     "anyWeek": "Beliebige Woche"
+  },
+  "priceRangeModal": {
+   "roomsBeds": "Zimmer und Betten",
+    "bedrooms": "Schlafzimmer",
+    "beds": "Betten",
+    "bathrooms": "Badezimmer",
+    "clearAll": "Alles löschen",
+    "showPlaces": "Zeige 1.000+ Unterkünfte",
+    "priceRange": "Preisspanne",
+    "nightlyPrices": "Nächtliche Preise einschließlich Gebühren und Steuern",
+    "minimum": "Minimum",
+    "maximum": "Maximum",
+    "any": "Jede(r)"
+  },
+  "sharePopup": {
+    "shareExperience": "Teile diese Erfahrung",
+    "joinSession": "Nimm an der Living Room Session mit Doja Cat teil",
+    "copyLink": "Link kopieren",
+    "messages": "Nachrichten",
+    "moreOptions": "Weitere Optionen"
   }
 }

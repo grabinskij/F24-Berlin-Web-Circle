@@ -15,7 +15,8 @@
     "luxuryVillas": "Luxury Villas",
     "beachHouses": "Beach Houses",
     "chalets": "Chalets",
-    "riversideCabins": "Riverside Cabins"
+    "riversideCabins": "Riverside Cabins",
+    "filters": "Filters"
   },
   "search": {
     "searchDestinations": "Search destinations",
@@ -86,5 +87,25 @@
     "under": "Under 2",
     "anywhere": "Anywhere",
     "anyWeek": "Any week"
-  }
+  },
+    "priceRangeModal": {
+      "roomsBeds": "Rooms and Beds",
+      "bedrooms": "Bedrooms",
+      "beds": "Beds",
+      "bathrooms": "Bathrooms",
+      "clearAll": "Clear all",
+      "showPlaces": "Show 1,000+ places",
+      "priceRange": "Price range",
+      "nightlyPrices": "Nightly prices including fees and taxes",
+      "minimum": "Minimum",
+      "maximum": "Maximum",
+      "any": "Any"
+  },
+  "sharePopup": {
+      "shareExperience": "Share this experience",
+      "joinSession": "Join the Living Room Session with Doja Cat",
+      "copyLink": "Copy Link",
+      "messages": "Messages",
+      "moreOptions": "More options"
+    }
 }
