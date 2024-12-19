@@ -1,14 +1,17 @@
+import { useTranslation } from 'react-i18next';
 import styles from './DataIncrementsButtonForTheCalendar.module.css'; 
 
 const DateIncrementsButtonForTheCalendar = ({selectedOption, setSelectedOption}) => {
 
+  const { t } = useTranslation();
+
   const options = [
-    { label: 'Exact dates', value: 'exact' },
-    { label: '±1 day', value: '1-day' },
-    { label: '±2 days', value: '2-days' },
-    { label: '±3 days', value: '3-days' },
-    { label: '±7 days', value: '7-days' },
-    { label: '±14 days', value: '14-days' }
+    { label: `${t('search.days.exactDates')}`, value: 'exact' },
+    { label: `±1 ${t('search.days.day')}`, value: '1-day' },
+    { label: `±2 ${t("search.days.days")}`, value: '2-days' },
+    { label: `±3 ${t("search.days.days")}`, value: '3-days' },
+    { label: `±7 ${t("search.days.daysUkr")}`, value: '7-days' },
+    { label: `±14 ${t("search.days.daysUkr")}`, value: '14-days' }
   ];
 
   const handleOptionChange = (value) => {

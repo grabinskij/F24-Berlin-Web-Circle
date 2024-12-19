@@ -13,6 +13,7 @@ import {
 } from '../../utils/dateUtils'
 import {findNextAvailableDate} from '../../utils/findNextAvailableDate'
 import { useWindowSize } from '../../hooks/useWindowSize'
+import { useTranslation } from 'react-i18next'
 
 const Calendar = ({ 
   dayItemWidth, 
@@ -60,6 +61,8 @@ const Calendar = ({
     }
     return null;
   });
+
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (!isSearchBarCalendar && checkInDate) {
@@ -211,7 +214,15 @@ const Calendar = ({
 }
 
   const renderDaysOfWeek = () => {
-    const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+    const days = [
+      t('search.days.sun'),
+      t('search.days.mon'),
+      t('search.days.tue'),
+      t('search.days.wed'),
+      t('search.days.thu'),
+      t('search.days.fri'),
+      t('search.days.sat'),
+    ];
     return days.map((day, index) => (
       <div key={index} className={styles.dayHeader}>
         {day}
@@ -410,7 +421,23 @@ const Calendar = ({
   const renderCalendarForMonth = (date) => {
     const year = date.getFullYear()
     const month = date.getMonth()
-    const monthName = date.toLocaleString('default', { month: 'long' })
+
+    const monthNames = [
+      t('search.months.january'),
+      t('search.months.february'),
+      t('search.months.march'),
+      t('search.months.april'),
+      t('search.months.may'),
+      t('search.months.june'),
+      t('search.months.july'),
+      t('search.months.august'),
+      t('search.months.september'),
+      t('search.months.october'),
+      t('search.months.november'),
+      t('search.months.december'),
+    ];
+    const monthName = monthNames[month];
+
     const isCurrentMonth =
       currentMonth.getFullYear() === year && currentMonth.getMonth() === month
 

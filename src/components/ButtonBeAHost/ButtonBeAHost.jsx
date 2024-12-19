@@ -1,11 +1,12 @@
-import React from 'react'
 import styles from "./ButtonBeAHost.module.css"
+import { useTranslation } from 'react-i18next';
 
 const ButtonBeAHost = () => {
+  const { t } = useTranslation();
   return (
     <div >
       <button className={styles.hostButton}>
-        Airbnb your home
+      {t('search.airbnbYourHome')}
       </button>
     </div>
   )

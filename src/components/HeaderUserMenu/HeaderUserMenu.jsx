@@ -1,6 +1,7 @@
 import { useState } from "react";
 import styles from "./HeaderUserMenu.module.css";
 import useOutsideClick from "../../hooks/useOutsideClick";
+import { useTranslation } from "react-i18next";
 
 const HeaderUserMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -8,6 +9,8 @@ const HeaderUserMenu = () => {
   const handleClick = () => {
     setIsOpen((prevState) => !prevState);
   };
+
+  const { t } = useTranslation();
 
   const userMenuRef = useOutsideClick(() => setIsOpen(false));
 
@@ -50,13 +53,12 @@ const HeaderUserMenu = () => {
       {isOpen && (
         <div className={styles.dropdownMenu}>
           <ul>
-            <li className={styles.signUp}>Sign Up</li>
-            <li>Log In</li>
+            <li className={styles.signUp}>{t('search.signUp')}</li>
+            <li>{t('search.logIn')}</li> 
             <hr className={styles.menuSeperator} />
-            <li>Gift Cards</li>
-            <li>Airbnb your home</li>
-            <li>Host an experience</li>
-            <li>Help Center</li>
+            <li>{t('search.giftCards')}</li>
+            <li>{t('search.hostAnExperience')}</li>
+            <li>{t('search.helpCenter')}</li>
           </ul>
         </div>
       )}

@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useRef, useState } from "react";
 import styles from "./SearchBar.module.css";
 import Calendar from "../Calendar/Calendar";
-import CalendarToggle from "../calendarToggle/CalendarToggle";
+// import CalendarToggle from "../calendarToggle/CalendarToggle";
 import DataIncrementsButtonForTheCalendar from "../DataIncrementsButtonForTheCalendar/DataIncrementsButtonForTheCalendar";
 import useOutsideClick from "../../hooks/useOutsideClick";
 import { formatDateToMonthDay, formatDateRange, convertStringToDateObject, convertDateObjectToString } from "../../utils/dateUtils";
@@ -12,11 +12,16 @@ import AddGuestsPopUp from "../AddGuestsPopUp/AddGuestsPopUp";
 import DestinationPopUp from "../DestinationPopUp/DestinationPopUp";
 import { calculateGuestCounts } from "../../utils/guestCounts";
 import { useWindowSize } from "../../hooks/useWindowSize";
+import { useTranslation } from "react-i18next";
+
 
 const SearchBar = ({ searchType, onSearch }) => {
+  const { t, i18n } = useTranslation();
+  const languagePlaceholder = i18n.language === 'de' ? 'Datum' : i18n.language === 'ukr' ? 'Дата' : 'Add dates';
+
   const [selectedOption, setSelectedOption] = useState('exact');
-  const [searchCheckIn, setSearchCheckIn] = useState("Add dates");
-  const [searchCheckOut, setSearchCheckOut] = useState("Add dates");
+  const [searchCheckIn, setSearchCheckIn] = useState(languagePlaceholder);
+  const [searchCheckOut, setSearchCheckOut] = useState(languagePlaceholder);
   const [checkInToServer, setCheckInToServer] = useState('');
   const [checkOutToServer, setCheckOutToServer] = useState('');
   const [location, setLocation] = useState("");
@@ -45,6 +50,47 @@ const SearchBar = ({ searchType, onSearch }) => {
     "infants": 0,
     "pets": 0
   });
+
+  const placeholder = ["Add dates", "Datum", "Дата"];
+  
+  function languageInput() {
+    const isCheckInPlaceholder = placeholder.includes(searchCheckIn);
+    const isCheckOutPlaceholder = placeholder.includes(searchCheckOut);
+  
+    if (isCheckInPlaceholder || isCheckOutPlaceholder) {
+      if (!isCheckInPlaceholder && isCheckOutPlaceholder) {
+        setSearchCheckOut(languagePlaceholder);
+      } else {
+        setSearchCheckIn(languagePlaceholder);
+        setSearchCheckOut(languagePlaceholder);
+      }
+    }
+  }
+
+  useEffect(() => {
+      languageInput()
+  },[languagePlaceholder])
+
+  useEffect(() => {
+    setLocation("")
+  },[i18n.language])
+
+
+  const monthTranslations = {
+    january: t('search.months.january'),
+    february: t('search.months.february'),
+    march: t('search.months.march'),
+    april: t('search.months.april'),
+    may: t('search.months.may'),
+    june: t('search.months.june'),
+    july: t('search.months.july'),
+    august: t('search.months.august'),
+    september: t('search.months.september'),
+    october: t('search.months.october'),
+    november: t('search.months.november'),
+    december: t('search.months.december'),
+    addDates: t('search.addDates'),
+  };
 
   const currentSearchTotalPeople = guestSearchCounts.adults + guestSearchCounts.children;
 
@@ -158,7 +204,10 @@ const SearchBar = ({ searchType, onSearch }) => {
   }
 
   useEffect(() => {
-    searchCheckIn && searchCheckIn !== "Add dates" ? setSelectedBlock("checkOut") : setSelectedBlock("checkIn")
+    searchCheckIn && searchCheckIn !== "Add dates" ||
+    searchCheckIn && searchCheckIn !== 'Datum' ||
+    searchCheckIn && searchCheckIn !== 'Дата' ? 
+    setSelectedBlock("checkOut") : setSelectedBlock("checkIn")
   }, [searchCheckIn])
 
   useEffect(() => {
@@ -256,11 +305,11 @@ const SearchBar = ({ searchType, onSearch }) => {
           ref={destinationRef}
         >
           <div className={styles.locationContentWrapper} onClick={handelDestinationClick}>
-            <span className={styles.label}>Where</span>
+            <span className={styles.label}>{t('search.where')}</span>
             <input
               className={styles.inputTextPlaceholder}
               type="text"
-              placeholder="Search destinations"
+              placeholder={t('search.searchDestinations')}
               value={location}
               onChange={(e) => setLocation(e.target.value)}
               onKeyDown={(e) => {
@@ -274,7 +323,7 @@ const SearchBar = ({ searchType, onSearch }) => {
           </div>
           { handelDestinationPopUp && 
             <div className={styles.popupContainer}>
-              <DestinationPopUp title={"Search by region"} onClick={(e)=>handelDestination(e)}/>
+              <DestinationPopUp title={t('search.searchByRegion')} onClick={(e)=>handelDestination(e)}/>
             </div>
           }
         </div>
@@ -307,10 +356,10 @@ const SearchBar = ({ searchType, onSearch }) => {
               onMouseLeave={() => handleMouseHover("checkIn", false)}
             >
               <div className={styles.checkInTextWrapper}>
-                <span className={styles.label}>Check in</span>
-                <div className={styles.checkInText}>{formatDateToMonthDay(searchCheckIn)}
+                <span className={styles.label}>{t('search.checkIn')}</span>
+                <div className={styles.checkInText}>{languagePlaceholder && formatDateToMonthDay(searchCheckIn, i18n.language, monthTranslations)}
                   <span className={styles.additionalDates}>
-                    {searchCheckIn && searchCheckIn !== "Add dates" && (
+                    {searchCheckIn && searchCheckIn !== t('search.addDates') && (
                       <>
                         {selectedOption === "1-day" && "±1"}
                         {selectedOption === "2-days" && "±2"}
@@ -322,12 +371,12 @@ const SearchBar = ({ searchType, onSearch }) => {
                   </span>
                 </div>
               </div>
-              {searchCheckIn && searchCheckIn !== "Add dates" && selectedBlock === "checkIn" && (
+              {searchCheckIn && searchCheckIn !== t('search.addDates') && selectedBlock === "checkIn" && (
               <button 
                 onClick={(e) => {
                   e.stopPropagation();
-                  setSearchCheckIn("Add dates")
-                  setSearchCheckOut("Add dates")
+                  setSearchCheckIn(t('search.addDates'))
+                  setSearchCheckOut(t('search.addDates'))
                 }}
                 className={styles.searchDeleteContentBtn}
               >
@@ -362,10 +411,10 @@ const SearchBar = ({ searchType, onSearch }) => {
                 }}
             >
               <div className={styles.checkOutTextWrapper}>
-                <span className={styles.label}>Check out</span>
-                <div className={styles.checkOutText}>{formatDateToMonthDay(searchCheckOut)}
+                <span className={styles.label}>{t('search.checkOut')}</span>
+                <div className={styles.checkOutText}>{languagePlaceholder && formatDateToMonthDay(searchCheckOut, i18n.language, monthTranslations)}
                   <span className={styles.additionalDates}>
-                    {searchCheckOut && searchCheckOut !== "Add dates" && (
+                    {searchCheckOut && searchCheckOut !== t('search.addDates') && (
                       <>
                         {selectedOption === "1-day" && "±1"}
                         {selectedOption === "2-days" && "±2"}
@@ -377,12 +426,12 @@ const SearchBar = ({ searchType, onSearch }) => {
                   </span>
                 </div>
               </div>
-              {searchCheckOut && searchCheckOut !== "Add dates" && selectedBlock === "checkOut" && (
+              {searchCheckOut && searchCheckOut !== t('search.addDates') && selectedBlock === "checkOut" && (
               <button 
                 onClick={(e) => {
                   e.stopPropagation()
-                  setSearchCheckIn("Add dates")
-                  setSearchCheckOut("Add dates")
+                  setSearchCheckIn(t('search.addDates'))
+                  setSearchCheckOut(t('search.addDates'))
                 }}
                 className={styles.searchDeleteContentBtn}
               >
@@ -392,9 +441,9 @@ const SearchBar = ({ searchType, onSearch }) => {
             </div>
             {showCalendar && (
               <div className={`${styles.calendarWrapper} ${closing ? styles.close : styles.open}`}>
-                <div className={styles.calendarToggleWrapper}>
+                {/* <div className={styles.calendarToggleWrapper}>
                   <CalendarToggle />
-                </div>
+                </div> */}
                 <div className={styles.calendarContentWrapper}>
                   <Calendar 
                     dayItemWidth="48px" 
@@ -432,17 +481,17 @@ const SearchBar = ({ searchType, onSearch }) => {
               onMouseLeave={() => handleMouseHover("date", false)}
             >
               <div className={styles.dateTextWrapper}>
-                <span className={styles.label}>Date</span>
+                <span className={styles.label}>{t('search.date')}</span>
                 <div className={styles.experienceDatesWrapper}>
-                  <span className={styles.checkInText}>{formatDateRange(searchCheckIn, searchCheckOut)}</span>
+                  <span className={styles.checkInText}>{formatDateRange(searchCheckIn, searchCheckOut, monthTranslations, i18n.language)}</span>
                 </div>
               </div>
-              {searchCheckIn && searchCheckIn !== "Add dates" && selectedBlock === "date" && ( 
+              {searchCheckIn && searchCheckIn !== t('search.addDates') && selectedBlock === "date" && ( 
               <button 
                 onClick={(e) => {
                   e.stopPropagation()
-                  setSearchCheckIn("Add dates")
-                  setSearchCheckOut("Add dates")
+                  setSearchCheckIn(t('search.addDates'))
+                  setSearchCheckOut(t('search.addDates'))
                 }}
                 className={styles.searchDeleteContentBtn}
               >
@@ -492,20 +541,20 @@ const SearchBar = ({ searchType, onSearch }) => {
           }} 
         >
           <div className={styles.inputContainerWhoInner}>
-            <span className={styles.label}>Who</span>
+            <span className={styles.label}>{t('search.who')}</span>
             <span className={styles.guestsText}>
               {adultsAndChildrenCount ? `${adultsAndChildrenCount <=15 ? adultsAndChildrenCount :
-                 adultsAndChildrenCount + '+'} guest${adultsAndChildrenCount !== 1 ? 's' : ''}` : ''}
-              {infantsCount ? `, ${infantsCount} infant${infantsCount !== 1 ? 's' : ''}` : ''}
-              {petsCount ? `, ${petsCount} pet${petsCount !== 1 ? 's' : ''}` : ''}
-              {!adultsAndChildrenCount && !infantsCount && !petsCount && 'Add guests'}
+               adultsAndChildrenCount + '+'} ${adultsAndChildrenCount !== 1 ? t('search.guests') : t('search.guest')}` : ''}
+              {infantsCount ? `, ${infantsCount} ${infantsCount !== 1 ? t('search.infants') : t('search.infant')}` : ''}
+              {petsCount ? `, ${petsCount} ${petsCount !== 1 ? t('search.pets') : t('search.pet')}` : ''}
+              {!adultsAndChildrenCount && !infantsCount && !petsCount && t('search.addGuests')}
             </span>
           </div>
-          {guests && guests !== "Add guests" && selectedBlock === "guests" && ( 
+          {guests && guests !== t('search.addGuests') && selectedBlock === "guests" && ( 
           <button 
             onClick={(e) => {
               e.stopPropagation()
-              setGuests("Add guests")
+              setGuests(t('search.addGuests'))
             }}
             className={styles.searchDeleteContentBtn}
           >

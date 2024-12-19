@@ -6,18 +6,22 @@ import SouthEastAsia from '../../assets/Destination/SouthEastAsia.webp';
 import MiddleEast from '../../assets/Destination/MiddleEast.webp';
 import Italy from '../../assets/Destination/Italy.webp';
 import DestinationButton from './DestinationButton/DestinationButton';
+import { useTranslation } from 'react-i18next';
 
 const DestinationPopUp = ({
     title,
     onClick,
 }) => {
+
+const { t } = useTranslation();
+
 const destinations = [
-    {image:World, description:"I'm flexible"},
-    {image:UnitedStates, description:"United States"},
-    {image:Spain, description:"Spain"},
-    {image:SouthEastAsia, description:"Southeast Asia"},
-    {image:MiddleEast, description:"Middle East"},
-    {image:Italy, description:"Italy"}];
+    {image:World, description: t('search.imFlexible')},
+    {image:UnitedStates, description: t('search.unitedStates')},
+    {image:Spain, description: t('search.spain')},
+    {image:SouthEastAsia, description: t('search.southeastAsia')},
+    {image:MiddleEast, description: t('search.middleEast')},
+    {image:Italy, description: t('search.italy')}];
 
 const handelDestination = (item) =>{
     onClick(item);
