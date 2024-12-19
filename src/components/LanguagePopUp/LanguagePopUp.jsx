@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next'
 const LanguagePopUp = ({ onCloseClick, isVisible }) => {
   const [isLanguageSelected, setIsLanguageSelected] = useState(true)
 
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const changeLanguage = (lng) => {
     try {
@@ -59,7 +59,7 @@ const LanguagePopUp = ({ onCloseClick, isVisible }) => {
               }
               onClick={handelLanguageClick}
             >
-              <p>Language and region</p>
+              <p>{t('search.languageAndRegion')}</p>
             </div>
             <div
               className={
@@ -69,7 +69,7 @@ const LanguagePopUp = ({ onCloseClick, isVisible }) => {
               }
               onClick={handelCurrencyClick}
             >
-              <p>Currency</p>
+              <p>{t('search.currency')}</p>
             </div>
           </div>
           <div className={Styles.selectionIndicatorContainer}>

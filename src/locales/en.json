@@ -56,15 +56,17 @@
       "december": "December"
     },
     "days": {
-      "sunday": "Sunday",
-      "monday": "Monday",
-      "tuesday": "Tuesday",
-      "wednesday": "Wednesday",
-      "thursday": "Thursday",
-      "friday": "Friday",
-      "saturday": "Saturday",
-      "day": "Day",
-      "days": "Days"
+      "sun": "Sun",
+      "mon": "Mon",
+      "tue": "Tue",
+      "wed": "Wed",
+      "thu": "Thu",
+      "fri": "Fri",
+      "sat": "Sat",
+      "day": "day",
+      "days": "days",
+      "daysUkr": "days",
+      "exactDates": "Exact dates"
     },
     "flexible": "Flexible",
     "stays": "Stays",

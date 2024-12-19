@@ -152,35 +152,71 @@ export const isWithinMinStay = (
 }
 
 
-export function formatDateToMonthDay(dateString, language) {
+// export function formatDateToMonthDay(dateString, language) {
   
-  const languagePlaceholder = language === 'de' ? 'Datum' : language === 'ukr' ? 'Дата' : 'Add dates';
+//   // const languagePlaceholder = language === 'de' ? 'Datum' : language === 'ukr' ? 'Дата' : 'Add dates';
   
+//   const placeholder = ["Add dates", "Datum", "Дата"];
+//   if (!dateString || typeof dateString !== "string") {
+//     throw new Error("Invalid dateString provided");
+//   }
+
+//   if (placeholder.includes(dateString)) {
+//     return dateString;
+//   }
+
+//   const parts = dateString.split("/"); 
+//   if (!placeholder.includes(dateString) && parts.length !== 3) {
+//     throw new Error("dateString must be in MM/DD/YYYY format");
+//   }
+//   const [month, day, year] = parts.map(Number);
+//   if (isNaN(month) && !placeholder.includes(dateString) || 
+//       isNaN(day) && !placeholder.includes(dateString) ||
+//       isNaN(year) && !placeholder.includes(dateString)) {
+//     throw new Error("dateString contains invalid numbers");
+//   }
+//   const date = new Date(year, month - 1, day); 
+//   if (!placeholder.includes(dateString) && isNaN(date.getTime())) {
+//     throw new Error("Invalid date created from dateString");
+//   } else if (placeholder.includes(dateString)) {
+//     return dateString;
+//   }
+//   const locale = language === 'de' ? 'de-DE' : language === 'ukr' ? 'uk-UA' : 'en-US';
+
+//   return new Intl.DateTimeFormat(locale, { month: "short", day: "2-digit" }).format(date);
+// }
+
+export function formatDateToMonthDay(dateString, language, monthTranslations) {
   const placeholder = ["Add dates", "Datum", "Дата"];
-  if (!dateString || typeof dateString !== "string") {
-    throw new Error("Invalid dateString provided");
-  }
-  if (dateString === languagePlaceholder) {
-    return dateString;
+
+  if (!dateString || placeholder.includes(dateString)) {
+    return monthTranslations.addDates;
   }
 
-  const parts = dateString.split("/"); 
-  if (!placeholder.includes(dateString) && parts.length !== 3) {
-    throw new Error("dateString must be in MM/DD/YYYY format");
+  try {
+    const parts = dateString.split("/");
+    if (parts.length !== 3) {
+      throw new Error("dateString must be in MM/DD/YYYY format");
+    }
+
+    const [month, day, year] = parts.map(Number);
+    const date = new Date(year, month - 1, day);
+    
+    if (isNaN(date.getTime())) {
+      throw new Error("Invalid date");
+    }
+
+    const locale = language === 'de' ? 'de-DE' : 
+                  language === 'ukr' ? 'uk-UA' : 'en-US';
+
+    return new Intl.DateTimeFormat(locale, { 
+      month: "short", 
+      day: "2-digit" 
+    }).format(date);
+  } catch (error) {
+    console.error("Date formatting error:", error);
+    return dateString; 
   }
-  const [month, day, year] = parts.map(Number);
-  if (isNaN(month) && !placeholder.includes(dateString) || 
-      isNaN(day) && !placeholder.includes(dateString) ||
-      isNaN(year) && !placeholder.includes(dateString)) {
-    throw new Error("dateString contains invalid numbers");
-  }
-  const date = new Date(year, month - 1, day); 
-  if (!placeholder.includes(dateString) && isNaN(date.getTime())) {
-    throw new Error("Invalid date created from dateString");
-  } else if (placeholder.includes(dateString)) {
-    return dateString;
-  }
-  return new Intl.DateTimeFormat("en-US", { month: "short", day: "2-digit" }).format(date);
 }
 
 

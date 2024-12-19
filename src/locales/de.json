@@ -56,15 +56,17 @@
       "december": "Dezember"
     },
     "days": {
-      "sunday": "Sonntag",
-      "monday": "Montag",
-      "tuesday": "Dienstag",
-      "wednesday": "Mittwoch",
-      "thursday": "Donnerstag",
-      "friday": "Freitag",
-      "saturday": "Samstag",
+      "sun": "So",
+      "mon": "Mo",
+      "tue": "Di",
+      "wed": "Mi",
+      "thu": "Do",
+      "fri": "Fr",
+      "sat": "Sa",
       "day": "Tag",
-      "days": "Tage"
+      "days": "Tage",
+      "daysUkr": "Tage",
+      "exactDates": "Exakte Daten"
     },
     "flexible": "Flexibel",
     "stays": "Unterkünfte",

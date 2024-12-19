@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useRef, useState } from "react";
 import styles from "./SearchBar.module.css";
 import Calendar from "../Calendar/Calendar";
-import CalendarToggle from "../calendarToggle/CalendarToggle";
+// import CalendarToggle from "../calendarToggle/CalendarToggle";
 import DataIncrementsButtonForTheCalendar from "../DataIncrementsButtonForTheCalendar/DataIncrementsButtonForTheCalendar";
 import useOutsideClick from "../../hooks/useOutsideClick";
 import { formatDateToMonthDay, formatDateRange, convertStringToDateObject, convertDateObjectToString } from "../../utils/dateUtils";
@@ -17,9 +17,11 @@ import { useTranslation } from "react-i18next";
 
 const SearchBar = ({ searchType, onSearch }) => {
   const { t, i18n } = useTranslation();
+  const languagePlaceholder = i18n.language === 'de' ? 'Datum' : i18n.language === 'ukr' ? 'Дата' : 'Add dates';
+
   const [selectedOption, setSelectedOption] = useState('exact');
-  const [searchCheckIn, setSearchCheckIn] = useState(t('search.addDates'));
-  const [searchCheckOut, setSearchCheckOut] = useState(t('search.addDates'));
+  const [searchCheckIn, setSearchCheckIn] = useState(languagePlaceholder);
+  const [searchCheckOut, setSearchCheckOut] = useState(languagePlaceholder);
   const [checkInToServer, setCheckInToServer] = useState('');
   const [checkOutToServer, setCheckOutToServer] = useState('');
   const [location, setLocation] = useState("");
@@ -49,15 +51,30 @@ const SearchBar = ({ searchType, onSearch }) => {
     "pets": 0
   });
 
-  const languagePlaceholder = i18n.language === 'de' ? 'Datum' : i18n.language === 'ukr' ? 'Дата' : 'Add dates';
   const placeholder = ["Add dates", "Datum", "Дата"];
+  
+  function languageInput() {
+    const isCheckInPlaceholder = placeholder.includes(searchCheckIn);
+    const isCheckOutPlaceholder = placeholder.includes(searchCheckOut);
+  
+    if (isCheckInPlaceholder || isCheckOutPlaceholder) {
+      if (!isCheckInPlaceholder && isCheckOutPlaceholder) {
+        setSearchCheckOut(languagePlaceholder);
+      } else {
+        setSearchCheckIn(languagePlaceholder);
+        setSearchCheckOut(languagePlaceholder);
+      }
+    }
+  }
 
   useEffect(() => {
-    if(searchCheckIn.includes(placeholder) || searchCheckOut.includes(placeholder)) {
-    setSearchCheckIn(languagePlaceholder);
-    setSearchCheckOut(languagePlaceholder);
-    }
-  }, [languagePlaceholder]);
+      languageInput()
+  },[languagePlaceholder])
+
+  useEffect(() => {
+    setLocation("")
+  },[i18n.language])
+
 
   const monthTranslations = {
     january: t('search.months.january'),
@@ -340,7 +357,7 @@ const SearchBar = ({ searchType, onSearch }) => {
             >
               <div className={styles.checkInTextWrapper}>
                 <span className={styles.label}>{t('search.checkIn')}</span>
-                <div className={styles.checkInText}>{formatDateToMonthDay(searchCheckIn, i18n.language)}
+                <div className={styles.checkInText}>{languagePlaceholder && formatDateToMonthDay(searchCheckIn, i18n.language, monthTranslations)}
                   <span className={styles.additionalDates}>
                     {searchCheckIn && searchCheckIn !== t('search.addDates') && (
                       <>
@@ -395,7 +412,7 @@ const SearchBar = ({ searchType, onSearch }) => {
             >
               <div className={styles.checkOutTextWrapper}>
                 <span className={styles.label}>{t('search.checkOut')}</span>
-                <div className={styles.checkOutText}>{formatDateToMonthDay(searchCheckOut, i18n.language)}
+                <div className={styles.checkOutText}>{languagePlaceholder && formatDateToMonthDay(searchCheckOut, i18n.language, monthTranslations)}
                   <span className={styles.additionalDates}>
                     {searchCheckOut && searchCheckOut !== t('search.addDates') && (
                       <>
@@ -424,9 +441,9 @@ const SearchBar = ({ searchType, onSearch }) => {
             </div>
             {showCalendar && (
               <div className={`${styles.calendarWrapper} ${closing ? styles.close : styles.open}`}>
-                <div className={styles.calendarToggleWrapper}>
+                {/* <div className={styles.calendarToggleWrapper}>
                   <CalendarToggle />
-                </div>
+                </div> */}
                 <div className={styles.calendarContentWrapper}>
                   <Calendar 
                     dayItemWidth="48px" 

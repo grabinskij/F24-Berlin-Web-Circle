@@ -56,15 +56,17 @@
       "december": "Грудень"
     },
     "days": {
-      "sunday": "Неділя",
-      "monday": "Понеділок",
-      "tuesday": "Вівторок",
-      "wednesday": "Середа",
-      "thursday": "Четвер",
-      "friday": "П’ятниця",
-      "saturday": "Субота",
-      "day": "День",
-      "days": "Дні"
+      "sun": "Нд",
+      "mon": "Пн",
+      "tue": "Вт",
+      "wed": "Ср",
+      "thu": "Чт",
+      "fri": "Пт",
+      "sat": "Сб",
+      "day": "день",
+      "days": "дні",
+      "daysUkr": "днів",
+      "exactDates": "Точні дати"
     },
     "flexible": "Гнучкий",
     "stays": "Проживання",
