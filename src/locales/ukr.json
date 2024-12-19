@@ -15,7 +15,8 @@
     "luxuryVillas": "Розкішні вілли",
     "beachHouses": "Будинки на пляжі",
     "chalets": "Шале",
-    "riversideCabins": "Річкові котеджі"
+    "riversideCabins": "Річкові котеджі",
+    "filters": "Фільтри"
   },
   "search": {
     "searchDestinations": "Шукати місця",
@@ -86,5 +87,25 @@
     "under": "Молодше 2",
     "anywhere": "Будь-де",
     "anyWeek": "Будь-який тиждень"
+  },
+  "priceRangeModal": {
+    "roomsBeds": "Кімнати та ліжка",
+    "bedrooms": "Спальні",
+    "beds": "Ліжка",
+    "bathrooms": "Ванні кімнати",
+    "clearAll": "Очистити все",
+    "showPlaces": "Показати 1,000+ місць",
+    "priceRange": "Ціновий діапазон",
+    "nightlyPrices": "Ціни за ніч з урахуванням зборів і податків",
+    "minimum": "Мінімум",
+    "maximum": "Максимум",
+    "any": "Добав"
+  },
+  "sharePopup": {
+    "shareExperience": "Поділіться цим досвідом",
+    "joinSession": "Приєднайтеся до Living Room Session з Doja Cat",
+    "copyLink": "Скопіювати посилання",
+    "messages": "Повідомлення",
+    "moreOptions": "Більше опцій"
   }
 }

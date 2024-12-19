@@ -2,9 +2,12 @@ import { useEffect } from "react";
 import styles from "./FilterButton.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSliders } from "@fortawesome/free-solid-svg-icons";
+import { useTranslation } from "react-i18next";
 
 const FilterButton = ({toggleModal, setHistogramData = () => {}}) => {
-  // Simulating dynamic data fetching or processing
+
+  const { t } = useTranslation();
+
   useEffect(() => {
     if (!setHistogramData) {
       console.warn("setHistogramData is not provided to FilterButton");
@@ -38,7 +41,7 @@ const FilterButton = ({toggleModal, setHistogramData = () => {}}) => {
       <div className={styles.filterButton} onClick={toggleModal}>
         <div className={styles.contentFilter}>
           <FontAwesomeIcon icon={faSliders} className={styles.icon} />
-          <h6>Filters</h6>
+          <h6>{t("categories.filters")}</h6>
         </div>
       </div>
     </>
