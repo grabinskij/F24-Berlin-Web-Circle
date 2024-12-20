@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import styles from "./ProductGallery.module.css";
 import ProductGalleryPopup from "../ProductGalleryPopup/ProductGalleryPopup";
 import { useWindowSize } from "../../hooks/useWindowSize";
+import { useTranslation } from "react-i18next";
 
 const ProductGallery = ({
   bigImage,
@@ -15,32 +16,34 @@ const ProductGallery = ({
     setShowPopupProductGallery((prevState) => !prevState);
   };
 
+  const { t } = useTranslation();
+
   const windowWidth = useWindowSize();
 
   const roomsData = [
     {
       id: 1,
-      name: "Living area",
+      name: t('product.livingArea'),
       image: bigImage
     },
     {
       id: 2,
-      name: "Kitchen",
+      name: t('product.kitchen'),
       image: smallTopLeftImage
     },
     {
       id: 3,
-      name: "Full bathroom",
+      name: t('product.fullBathroom'),
       image: smallTopRightImage
     },
     {
       id: 4,
-      name: "Exterior",
+      name: t('product.exterior'),
       image: smallBottomLeftImage
     },
     {
       id: 5,
-      name: "Bedroom area",
+      name: t('product.bedroomArea'),
       image: smallBottomRightImage
     },
   ];
@@ -69,7 +72,7 @@ const ProductGallery = ({
                 d="M3 11.5a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3zm5 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3zm5 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3zm-10-5a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3zm5 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3zm5 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3zm-10-5a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3zm5 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3zm5 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"
               ></path>
             </svg>
-            <span>Show all photos</span>
+            <span>{t('product.showAllPhotos')}</span>
           </div>
         )}
       </div>
@@ -114,7 +117,7 @@ const ProductGallery = ({
                 d="M3 11.5a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3zm5 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3zm5 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3zm-10-5a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3zm5 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3zm5 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3zm-10-5a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3zm5 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3zm5 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"
               ></path>
             </svg>
-            <span>Show all photos</span>
+            <span>{t('product.showAllPhotos')}</span>
           </div>
         </div>
       </div>

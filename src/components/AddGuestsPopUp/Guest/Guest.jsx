@@ -147,7 +147,7 @@ const Guest = ({
       >
         <div className={styles.title}>{
           title === "Adults" && t('search.adults') ||
-          title === "Infants" && t('search.infants') ||
+          title === "Infants" && t('search.infantsBig') ||
           title === "Children" && t('search.children') ||
           title === "Pets" && t('search.Pets')
         }</div>
@@ -163,7 +163,7 @@ const Guest = ({
               className={styles.descriptionLink}
               onClick={toggleGuestCountPopup}
             >
-              {description}
+              {t('product.bringingServiceAnimal', description)}
             </div>
           )
         )}

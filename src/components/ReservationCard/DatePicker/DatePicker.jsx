@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { CloseButtonIcon } from '../../../icons/CloseButtonIcon'
 import {isDayBeforeBooked, convertStringToDateObject, minStayBeforeBooked} from '../../../utils/dateUtils'
 import styles from './DatePicker.module.css'
+import { useTranslation } from 'react-i18next'
 
 const DatePicker = ({
   checkInDate,
@@ -26,6 +27,8 @@ const DatePicker = ({
 }) => {
   const [checkInFocus, setCheckInFocus] = useState(false)
   const [checkOutFocus, setCheckOutFocus] = useState(false)
+
+  const { t } = useTranslation();
 
   const checkInInputRef = useRef(null)
   const checkOutInputRef = useRef(null)
@@ -185,7 +188,7 @@ const DatePicker = ({
       >
         <div className={styles.checkinSectionContent}>
           <div className={styles.checkinInputWrapper}>
-            <label>Check-in</label>
+            <label>{t('search.checkIn')}</label>
             {renderAsForm || !renderAsButton ? (
               <input
                 type="text"
@@ -201,7 +204,7 @@ const DatePicker = ({
                   (checkInDate && inputCheckInDate === '') ||
                   (checkInFocus === true && inputCheckInDate !== '')
                     ? 'MM/DD/YYYY'
-                    : 'Add date'
+                    : t('search.addDates')
                 }
                 onFocus={handleCheckInFocus}
                 onBlur={() => {
@@ -225,7 +228,7 @@ const DatePicker = ({
                 required={checkInFocus}
               />
             ) : (
-              <div>{checkInDate ? checkInDate : <span>Add date</span>}</div>
+              <div>{checkInDate ? checkInDate : <span>{t('search.addDates')}</span>}</div>
             )}
           </div>
           {renderAsForm ||
@@ -262,7 +265,7 @@ const DatePicker = ({
           } ${checkOutError && checkInFocus ? styles.checkOutErrorLabel : ''}`}
         >
           <div className={styles.checkoutInputWrapper}>
-            <label>Checkout</label>
+            <label>{t('search.checkOut')}</label>
             {renderAsForm || !renderAsButton ? (
               checkInDate !== 0 && (
                 <input
@@ -283,7 +286,7 @@ const DatePicker = ({
                     (checkOutDate && inputCheckOutDate === '') ||
                     (checkOutFocus === true && inputCheckOutDate !== '')
                       ? 'MM/DD/YYYY'
-                      : 'Add date'
+                      : t('search.addDates')
                   }
                   onFocus={handleCheckOutFocus}
                   onBlur={() => {
@@ -313,7 +316,7 @@ const DatePicker = ({
                 />
               )
             ) : (
-              <div>{checkOutDate ? checkOutDate : <span>Add date</span>}</div>
+              <div>{checkOutDate ? checkOutDate : <span>{t('search.addDates')}</span>}</div>
             )}
           </div>
           {renderAsForm ||

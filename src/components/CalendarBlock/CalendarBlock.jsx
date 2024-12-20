@@ -3,6 +3,7 @@ import styles from './CalendarBlock.module.css'
 import { calculateNights, getStayPeriod } from '../../utils/dateUtils'
 import  Calendar  from '../Calendar/Calendar' 
 import { useWindowSize } from '../../hooks/useWindowSize'
+import { useTranslation } from 'react-i18next'
 
 const CalendarBlock = ({
   setCheckInDate,
@@ -17,6 +18,8 @@ const CalendarBlock = ({
 
   const windowWidth = useWindowSize();
 
+  const { t, i18n } = useTranslation();
+
     const {
       bookingData: {
         minStayNights,
@@ -28,7 +31,7 @@ const CalendarBlock = ({
     checkInDate && checkOutDate ? calculateNights(checkInDate, checkOutDate) : 0
 
   const stayPeriod =
-    checkInDate && checkOutDate ? getStayPeriod(checkInDate, checkOutDate) : ''
+    checkInDate && checkOutDate ? getStayPeriod(checkInDate, checkOutDate, i18n.language) : ''
 
   return (
     <div className={styles.selectorContainer}>
@@ -36,18 +39,18 @@ const CalendarBlock = ({
         <div className={styles.selectorTitle}>
           <h2>
             {nightsCount > 0
-              ? `${nightsCount} ${nightsCount > 1 ? 'nights' : 'night'}`
-              : 'Select dates'}
+              ? `${nightsCount} ${t('product.nights', { count: nightsCount })}`
+              : t('product.select_dates')}
           </h2>
           <span>
             {stayPeriod ? (
               <span>{stayPeriod}</span>
             ) : minStayNights ? (
-              `Minimum stay: ${minStayNights} ${
-                minStayNights > 1 ? 'nights' : 'night'
+              `${t('product.minimum_stay')}: ${minStayNights} ${
+                t('product.nights', { count: nightsCount })
               }`
             ) : (
-              'Add your travel dates for exact pricing'
+              t('product.add_travel_dates')
             )}
           </span>
         </div>
@@ -130,7 +133,7 @@ const CalendarBlock = ({
                 setCheckOutDate('')
               }}
             >
-              Clear dates
+             {t('product.clearDates')}
             </button>
           </div>
         </div>

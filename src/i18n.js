@@ -14,7 +14,18 @@ i18n.use(initReactI18next).init({
   fallbackLng: 'en',
   interpolation: {
     escapeValue: false,
+    formatSeparator: ',',
+    format: function(value, format) {
+      if (format === 'uppercase') {
+        return value.toUpperCase();
+      }
+      return value;
+    }
   },
+  pluralSeparator: '_',
+  pluralization: true, // Enable pluralization
+  keySeparator: '.', // Key separator for nested keys (e.g., product.guests)
+  nsSeparator: ':', // Namespace separator
 })
 
 export default i18n

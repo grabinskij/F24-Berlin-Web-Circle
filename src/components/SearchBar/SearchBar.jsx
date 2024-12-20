@@ -544,9 +544,9 @@ const SearchBar = ({ searchType, onSearch }) => {
             <span className={styles.label}>{t('search.who')}</span>
             <span className={styles.guestsText}>
               {adultsAndChildrenCount ? `${adultsAndChildrenCount <=15 ? adultsAndChildrenCount :
-               adultsAndChildrenCount + '+'} ${adultsAndChildrenCount !== 1 ? t('search.guests') : t('search.guest')}` : ''}
-              {infantsCount ? `, ${infantsCount} ${infantsCount !== 1 ? t('search.infants') : t('search.infant')}` : ''}
-              {petsCount ? `, ${petsCount} ${petsCount !== 1 ? t('search.pets') : t('search.pet')}` : ''}
+               adultsAndChildrenCount + '+'} ${t('search.guests', { count: adultsAndChildrenCount })}` : ''}
+              {infantsCount ? `, ${infantsCount} ${t('search.infants', { count: infantsCount })}` : ''}
+              {petsCount ? `, ${petsCount} ${t('search.pets', { count: petsCount })}` : ''}
               {!adultsAndChildrenCount && !infantsCount && !petsCount && t('search.addGuests')}
             </span>
           </div>

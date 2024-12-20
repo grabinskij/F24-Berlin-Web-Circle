@@ -25,6 +25,7 @@ import { useParams } from "react-router-dom";
 import CalendarBlock from "../components/CalendarBlock/CalendarBlock";
 import CalendarBlockPopUp from "../components/CalendarBlock/CalendarBlockPopUp/CalendarBlockPopUp";
 import { fetchData } from "../api/fetchProductData";
+import { useTranslation } from "react-i18next";
 
 
 const ProductPage = () => {
@@ -44,6 +45,7 @@ const ProductPage = () => {
 
   const { productId } = useParams();
 
+  const { t } = useTranslation();
 
   useEffect(() => {
     fetchData(setLoading, setError, setPlace, setBooking, productId);
@@ -85,10 +87,10 @@ const ProductPage = () => {
           <div className={styles.IconButton}>
             <IconButton
               faIcon={faArrowUpFromBracket}
-              label="Share"
+              label={t('product.share')}
               onClick={handleShare}
             />
-            <IconButton faIcon={faHeart} label="Save" onClick={handleSave} />
+            <IconButton faIcon={faHeart} label={t('product.save')} onClick={handleSave} />
           </div>
         </div>
         {!!place.images && <ProductGallery
@@ -129,7 +131,7 @@ const ProductPage = () => {
             {
               !!place.amenities && <Amenities
                 amenities={place.amenities}
-                title="What this place offers"
+                title={t('product.whatThisPlaceOffers')}
                 onClick={handleShowAmenities}
               />
             }

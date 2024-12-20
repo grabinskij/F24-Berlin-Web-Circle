@@ -2,8 +2,12 @@ import StarRating from "../StarRating/StarRating";
 import "./FavoriteStay.css"
 import Left from "../../assets/fav-badge-left.png";
 import Right from "../../assets/fav-badge-right.png";
+import { useTranslation } from "react-i18next";
 
 const FavoriteStay = ({ rating = 5, reviews = 71 }) => {
+
+  const { t } = useTranslation();
+
   return (
     <div className="fav-stay-container">
       <div className="fav-stay-grid-container">
@@ -15,7 +19,7 @@ const FavoriteStay = ({ rating = 5, reviews = 71 }) => {
             alt="fav-badge-left" />
           </div>
 
-          <div className="host-badge-text">Guest{<br></br>}favorite</div>
+          <div className="host-badge-text">{t('product.guestFavorite')}</div> 
 
           <div className="host-badge-right">
           <img className="right" src={Right}
@@ -45,7 +49,7 @@ const FavoriteStay = ({ rating = 5, reviews = 71 }) => {
         <span className="space-above"></span>
           <div className="review-value">{reviews}</div>
           <div className="reviews-link">
-            <a href="#"></a>Reviews
+            <a href="#"></a>{t('product.reviews', { count: reviews })}
           </div>
         </div>
         <div></div>

@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import {
   WifiIcon,
   KitchenIcon,
@@ -26,8 +27,10 @@ const ICONS_MAP = {
   firepit: <FirepitIcon />,
 };
 
-function Amenities({ title, amenities, onClick }) {
+function Amenities({ title, amenities }) {
   const [isModalOpen, setModalOpen] = useState(false);
+
+  const { t } = useTranslation();
 
   const renderIcon = (type) => {
     return ICONS_MAP[type] || <SaunaIcon />;
@@ -54,7 +57,7 @@ function Amenities({ title, amenities, onClick }) {
       </ul>
       {showAllAmenities && (
         <button className={styles.showAmenitiesButton} onClick={handleModalToggle}>
-          Show all {amenities.length} amenities
+          {t('product.showAllAmenities')} 
         </button>
       )}
 
@@ -64,7 +67,7 @@ function Amenities({ title, amenities, onClick }) {
             <button className={styles.closeButton} onClick={handleModalToggle}>
               x
             </button>
-            <h2 className={styles.ModalTitle}>What this place offers</h2>
+            <h2 className={styles.ModalTitle}>{t('product.whatThisPlaceOffers')}</h2>
             <ul className={styles.modalAmenitiesContainer}>
               {amenities.map((amenity, index) => (
                 <li key={index} className={styles.amenitiesList}>

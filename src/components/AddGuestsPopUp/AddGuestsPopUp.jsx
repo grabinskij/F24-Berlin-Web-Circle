@@ -2,6 +2,7 @@ import styles from './AddGuestsPopUp.module.css'
 import Guest from './Guest/Guest'
 import { guestsData } from '../../utils/guestData'
 import { useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
 
 const AddGuestsPopUp = ({
   onGuestChange,
@@ -21,6 +22,8 @@ const AddGuestsPopUp = ({
   handleGuestSearchClick,
   setGuests,
 }) => {
+  const { t } = useTranslation()
+
   const { peopleNumber, petsNumber } = allowGuestsNumber
   const adjustedAdultsCount = initialAdultsCount === 0 && (infantsCount > 0 || petsCount > 0 || childrenCount > 0)
     ? 1
@@ -37,7 +40,10 @@ const AddGuestsPopUp = ({
       );
       }
     }, [adjustedAdultsCount, setGuests, isSearchWhoDropdown]);
-console.log(guestsData)
+
+    const peopleWord = t('search.guests', {count: peopleNumber}); 
+    const petsWord =  t('search.pets', {count: petsNumber}) 
+
   return (
     <div className={styles.popup} style={style}>
       {guestsData?.map((guest) => {
@@ -76,16 +82,13 @@ console.log(guestsData)
       {!isSearchWhoDropdown && (
         <>
           <div className={styles.popupText}>
-            This place has a maximum of {peopleNumber}{' '}
-            {peopleNumber !== 1 ? 'guests' : 'guest'}, not including infants.
+            {t('product.maximumGuests', { peopleNumber, peopleWord })}
             {petsNumber > 0
-              ? ` If you're bringing more than ${petsNumber} pet${
-                  petsNumber !== 1 ? 's' : ''
-                }, please let your host know.`
-              : " Pets aren't allowed."}
+             ? t('product.petsAllowed', { petsNumber, petsWord })
+             : t('product.petsNotAllowed')}
           </div>
           <div className={styles.closePopUp}>
-            <button onClick={toggleShowGuests}>Close</button>
+            <button onClick={toggleShowGuests}>{t('product.close')}</button>
           </div>
         </>
       )}

@@ -3,12 +3,14 @@ export const calculateNights = (checkIn, checkOut) => {
   return ((new Date(checkOut) - new Date(checkIn)) / (1000 * 60 * 60 * 24)) | 0
 }
 
-export const formatDate = (date) => {
+export const formatDate = (date, language) => {
+  const locale = language === 'de' ? 'de-DE' : language === 'ukr' ? 'uk-UA' : 'en-US';
+
   const options = { month: 'short', day: 'numeric', year: 'numeric' }
-  return new Date(date).toLocaleDateString('en-US', options)
+  return new Date(date).toLocaleDateString(locale, options)
 }
 
-export const getStayPeriod = (checkIn, checkOut) => {
+export const getStayPeriod = (checkIn, checkOut, language) => {
   const checkInDate = new Date(checkIn)
   const checkOutDate = new Date(checkOut)
 
@@ -16,8 +18,8 @@ export const getStayPeriod = (checkIn, checkOut) => {
     return ''
   }
 
-  const formattedCheckIn = formatDate(checkInDate)
-  const formattedCheckOut = formatDate(checkOutDate)
+  const formattedCheckIn = formatDate(checkInDate, language)
+  const formattedCheckOut = formatDate(checkOutDate, language)
 
   return `${formattedCheckIn} - ${formattedCheckOut}`
 }
