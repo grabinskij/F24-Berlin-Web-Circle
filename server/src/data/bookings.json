@@ -479,7 +479,12 @@
         "petsNumber": 2
       }
     },
-    "alreadyBookedDates": []
+    "alreadyBookedDates": [
+      {
+        "startDate": "12/20/2024",
+        "endDate": "12/21/2024"
+      }
+    ]
   },
   {
     "id": 21,
