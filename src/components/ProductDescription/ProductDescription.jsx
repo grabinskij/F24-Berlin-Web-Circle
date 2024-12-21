@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./ProductDescription.module.css";
 import ProductDescriptionPopup from "./ProductDescriptionPopup";
+import { useTranslation } from "react-i18next";
 
 const ProductDescription = ({
   descriptionPlace,
@@ -10,6 +11,8 @@ const ProductDescription = ({
 }) => {
   const maxTxtLength = 174;
   const [limitedText, setLimitedText] = useState(descriptionPlace || "");
+
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (descriptionPlace.length > maxTxtLength) {
@@ -28,12 +31,12 @@ const ProductDescription = ({
     <div className={styles.productDescription}>
       <div className={styles.productDescriptionText}>
         <span>{descriptionSpace}</span>
-        <span className={styles.spaceTitle}>The space</span>
+        <span className={styles.spaceTitle}>{t('product.theSpace')} </span>
         <span>{limitedText}</span>
       </div>
       <div className={styles.arrowRightContainer} onClick={showPopupHandler}>
         <span className={styles.showMore}>
-          Show more
+          {t('product.showMore')} 
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"

@@ -1,6 +1,10 @@
+import { useTranslation } from 'react-i18next';
 import styles from './HostSummary.module.css'
 
 const HostSummary = ({ hostName, hostingDuration, role, profilePicUrl }) => {
+
+  const { t } = useTranslation();
+
   return (
     <div className={styles.hostInfo}>
       <div className={styles.profilePicContainer}>
@@ -42,18 +46,16 @@ const HostSummary = ({ hostName, hostingDuration, role, profilePicUrl }) => {
       </div>
 
       <div className={styles.hostDetails}>
-        <h2 className={styles.hostedBy}>{`Hosted by ${hostName}`}</h2>
+        <h2 className={styles.hostedBy}>{`${t('product.hostedBy')} ${hostName}`}</h2>
         <p className={styles.hostingDuration}>
           {(role === 'Superhost' || role === 'Superhosts')  && (
             <>
-              {`${role} `}
+              {`${t('product.superhosts', role)} `}
               <span>&#183;</span>
             </>
           )}
           <span>
-            {` ${hostingDuration || 0} ${
-              hostingDuration > 1 ? 'years' : 'year'
-            } hosting`}
+            {` ${hostingDuration || 0} ${t('product.years', { count: hostingDuration })} ${t('product.hosting')}`}
           </span>
         </p>
       </div>

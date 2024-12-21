@@ -1,7 +1,9 @@
 import Styles from "./Reviews.module.css";
 import StarRating from "../StarRating/StarRating";
+import { useTranslation } from "react-i18next";
 
 const formattedReviewDate = (reviewedDateString) => {
+
     const reviewedDate = new Date(reviewedDateString);
     const currentDate = new Date();
 
@@ -22,6 +24,9 @@ const formattedReviewDate = (reviewedDateString) => {
 }
 
 const Reviews = ({ name, picture, rating, reviewText, date }) => {
+
+  const { t } = useTranslation();
+
   let limit = 125; //to be edited (around 125)
 
   const isReviewTextLong = reviewText.length > limit;
@@ -39,7 +44,7 @@ const Reviews = ({ name, picture, rating, reviewText, date }) => {
           </div>
           <div className={Styles.reviewerDetails}>
             <h3>{name}</h3>
-            <p>3 years on Airbnb</p> {/*TODO make this dynamic*/}
+            <p>3 {t('product.yearsOnAirbnb', { count: 3 })}</p> {/*TODO make this dynamic*/}
           </div>
         </div>
         <div className={Styles.ratingContainer}>
@@ -52,7 +57,7 @@ const Reviews = ({ name, picture, rating, reviewText, date }) => {
         <p>{displayedReviewText}</p>
         {isReviewTextLong && (
           <div className={Styles.showMore}>
-            <button>Show more</button>
+            <button>{t('product.showMore')}</button>
           </div>
         )}
       </div>

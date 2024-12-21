@@ -103,5 +103,152 @@
       "cleaningFee": 10,
       "longStayDiscount": 0
     }
+  },
+  {
+    "reservationId": 6,
+    "productId": 20,
+    "checkInDate": "12/20/2024",
+    "checkOutDate": "12/21/2024",
+    "guestCounts": {
+      "adults": 1,
+      "children": 0,
+      "infants": 0,
+      "pets": 0
+    },
+    "totalPrice": 200,
+    "breakdown": {
+      "nights": 1,
+      "pricePerNight": 150,
+      "basePrice": 150,
+      "airbnbServiceFee": 10,
+      "cleaningFee": 40,
+      "longStayDiscount": 0
+    }
+  },
+  {
+    "reservationId": 7,
+    "productId": 1,
+    "checkInDate": "12/20/2024",
+    "checkOutDate": "12/23/2024",
+    "guestCounts": {
+      "adults": 1,
+      "children": 0,
+      "infants": 0,
+      "pets": 0
+    },
+    "totalPrice": 458,
+    "breakdown": {
+      "nights": 3,
+      "pricePerNight": 146,
+      "basePrice": 438,
+      "airbnbServiceFee": 10,
+      "cleaningFee": 10,
+      "longStayDiscount": 0
+    }
+  },
+  {
+    "reservationId": 8,
+    "productId": 3,
+    "checkInDate": "12/22/2024",
+    "checkOutDate": "12/24/2024",
+    "guestCounts": {
+      "adults": 1,
+      "children": 0,
+      "infants": 0,
+      "pets": 0
+    },
+    "totalPrice": 250,
+    "breakdown": {
+      "nights": 2,
+      "pricePerNight": 115,
+      "basePrice": 230,
+      "airbnbServiceFee": 10,
+      "cleaningFee": 10,
+      "longStayDiscount": 0
+    }
+  },
+  {
+    "reservationId": 9,
+    "productId": 3,
+    "checkInDate": "12/25/2024",
+    "checkOutDate": "12/27/2024",
+    "guestCounts": {
+      "adults": 1,
+      "children": 0,
+      "infants": 0,
+      "pets": 0
+    },
+    "totalPrice": 250,
+    "breakdown": {
+      "nights": 2,
+      "pricePerNight": 115,
+      "basePrice": 230,
+      "airbnbServiceFee": 10,
+      "cleaningFee": 10,
+      "longStayDiscount": 0
+    }
+  },
+  {
+    "reservationId": 10,
+    "productId": 15,
+    "checkInDate": "12/20/2024",
+    "checkOutDate": "12/23/2024",
+    "guestCounts": {
+      "adults": 1,
+      "children": 0,
+      "infants": 0,
+      "pets": 0
+    },
+    "totalPrice": 440,
+    "breakdown": {
+      "nights": 3,
+      "pricePerNight": 130,
+      "basePrice": 390,
+      "airbnbServiceFee": 10,
+      "cleaningFee": 40,
+      "longStayDiscount": 0
+    }
+  },
+  {
+    "reservationId": 11,
+    "productId": 8,
+    "checkInDate": "12/20/2024",
+    "checkOutDate": "12/23/2024",
+    "guestCounts": {
+      "adults": 1,
+      "children": 0,
+      "infants": 0,
+      "pets": 0
+    },
+    "totalPrice": 445,
+    "breakdown": {
+      "nights": 3,
+      "pricePerNight": 135,
+      "basePrice": 405,
+      "airbnbServiceFee": 10,
+      "cleaningFee": 30,
+      "longStayDiscount": 0
+    }
+  },
+  {
+    "reservationId": 12,
+    "productId": 4,
+    "checkInDate": "01/14/2025",
+    "checkOutDate": "01/17/2025",
+    "guestCounts": {
+      "adults": 1,
+      "children": 0,
+      "infants": 0,
+      "pets": 0
+    },
+    "totalPrice": 362,
+    "breakdown": {
+      "nights": 3,
+      "pricePerNight": 114,
+      "basePrice": 342,
+      "airbnbServiceFee": 10,
+      "cleaningFee": 10,
+      "longStayDiscount": 0
+    }
   }
 ]

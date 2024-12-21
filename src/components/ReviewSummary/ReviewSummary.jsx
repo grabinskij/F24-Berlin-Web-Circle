@@ -9,6 +9,7 @@ import {
   AggregateRatingStarIcon,
 } from '../../icons'
 import RatingBar from '../RatingBar/RatingBar'
+import { useTranslation } from 'react-i18next';
 
 const ReviewSummary = ({
   totalAvgRating,
@@ -24,24 +25,26 @@ const ReviewSummary = ({
   },
 }) => {
 
+  const { t } = useTranslation();
+
   const categories = [
     {
-      title: 'Cleanliness',
+      title: t('product.cleanliness'),
       rating: cleanlinessAvgRating,
       Icon: CleanlinessIcon,
     },
-    { title: 'Accuracy', rating: accuracyAvgRating, Icon: AccuracyIcon },
-    { title: 'Check-in', rating: checkInAvgRating, Icon: CheckInIcon },
+    { title: t('product.accuracy'), rating: accuracyAvgRating, Icon: AccuracyIcon },
+    { title: t('product.checkIn'), rating: checkInAvgRating, Icon: CheckInIcon },
     {
-      title: 'Communication',
+      title: t('product.communication'),
       rating: communicationAvgRating,
       Icon: CommunicationIcon,
     },
-    { title: 'Location', rating: locationAvgRating, Icon: Location },
-    { title: 'Value', rating: valueAvgRating, Icon: Value },
+    { title: t('product.location'), rating: locationAvgRating, Icon: Location },
+    { title: t('product.value'), rating: valueAvgRating, Icon: Value },
   ]
 
-  const reviewText = totalReviewsCount > 1 ? ' reviews' : ' review';
+  const reviewText = t('product.reviews', { count: totalReviewsCount })
 
   return (
     <div className={styles.container}>
@@ -56,7 +59,7 @@ const ReviewSummary = ({
         </div>
       </header>
       <main className={styles.main}>
-        <RatingBar starTotals={starTotals} title={'Overall rating'} />
+        <RatingBar starTotals={starTotals} title={t('product.overallRating')} />
         {categories.map(({ title, rating, Icon }) => (
           <div key={title} className={styles.ratingItem}>
             <div className={styles.ratingItemSummary}>

@@ -1,6 +1,7 @@
 import MeetYourHostRight from "./MeetYourHostRight/MeetYourHostRight";
 import styles from "./MeetYourHostSection.module.css";
 import MeetYourHostLeft from "./MeetYourHostLeft/MeetYourHostLeft";
+import { useTranslation } from "react-i18next";
 
 const MeetYourHostSection = ({
   name,
@@ -12,11 +13,14 @@ const MeetYourHostSection = ({
   yearsHosting,
   profileText
 }) => {
+
+  const { t } = useTranslation();
+
   return (
     <div className={styles.meetYourHostSection}>
       <div className={styles.meetYourHostSectionContainer}>
         <div className={styles.meetYourHostTitle}>
-          <h2>Meet your Host</h2>
+          <h2>{t('product.meetYourHost')}</h2>
         </div>
         <div className={styles.meetYourHostSectionInnerContainer}>
           <MeetYourHostLeft
@@ -32,7 +36,7 @@ const MeetYourHostSection = ({
           <MeetYourHostRight
             name={name}
             responseRate="100%"
-            responseTime="an hour"
+            responseTime={t('product.hour')}
           />
         </div>
       </div>

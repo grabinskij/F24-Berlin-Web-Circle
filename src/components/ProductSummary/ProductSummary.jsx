@@ -1,4 +1,4 @@
-import React from "react";
+import { useTranslation } from "react-i18next";
 import styles from "./ProductSummary.module.css";
 
 const ProductSummary = ({
@@ -11,23 +11,32 @@ const ProductSummary = ({
   starGrade,
   reviews,
 }) => {
-  const ProductSummaryInformation = [guests, bedrooms, beds, baths];
+  
+  const { t } = useTranslation();
+
+  const ProductSummaryInformation = [
+    { value: guests.value, key: t('product.guests', { count: guests.value }) },
+    { value: bedrooms.value, key: t('product.bedrooms', { count: bedrooms.value }) },
+    { value: beds.value, key: t('product.beds', { count: beds.value }) },
+    { value: baths.value, key: t('product.baths', { count: baths.value }) },
+  ];
+
   return (
     <div className={styles.productSummaryContainer}>
       <h2 className={styles.address}>
         {accommodation} in {address}
       </h2>
       <div>
-        {ProductSummaryInformation.map((el, index) => (
-          <div className={styles.information} key={index}>
-            <span>
-              {el.value} {el.value > 1 ? el.key + "s" : el.key}
-            </span>{" "}
-            {index < ProductSummaryInformation.length - 1 && (
-              <span>&#183; </span>
-            )}
-          </div>
-        ))}
+          {ProductSummaryInformation.map((item, index) => (
+            <div className={styles.information} key={index}>
+              <span>
+              {item.key}
+              </span>{" "}
+              {index < ProductSummaryInformation.length - 1 && (
+                <span>&#183; </span>
+              )}
+            </div>
+          ))}
       </div>
       <div className={styles.reviewsContainer}>
         <svg
@@ -46,7 +55,7 @@ const ProductSummary = ({
         </svg>
         <span> {starGrade}</span> <span>&#183;</span>{" "}
         <span className={styles.reviews}>
-          {reviews} {reviews > 1 ? "reviews " : "review "}
+          {reviews} {t('product.reviews', { count: reviews })}
         </span>
       </div>
     </div>

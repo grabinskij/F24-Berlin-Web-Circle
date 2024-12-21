@@ -13,6 +13,7 @@ import { calculateNights } from '../../utils/dateUtils'
 import Swal from 'react-sweetalert2'
 import { useNavigate } from 'react-router-dom';
 import { getSuccessHtml } from '../../utils/displayHelpers';
+import { useTranslation } from 'react-i18next'
 
 
 function ReservationCard({
@@ -31,6 +32,8 @@ function ReservationCard({
 }) {
 
   const navigate = useNavigate();
+
+  const { t } = useTranslation();
 
   const {
     bookingData: {
@@ -156,10 +159,10 @@ function ReservationCard({
     <div className={styles.reservationCard}>
       <Swal
         show={!!successData}
-        title="Reservation Successful!"
-        html={getSuccessHtml(successData)}
+        title={t('product.reservationSuccessful')}
+        html={getSuccessHtml(successData, t)}
         icon="success"
-        confirmButtonText="OK"
+        confirmButtonText={t('product.ok')}
         onConfirm={() => {
           setSuccessData(null)
           navigate('/')
@@ -172,14 +175,14 @@ function ReservationCard({
               {checkInOut && !loading ? (
                 <>
                   <strong>{`€ ${pricePerNight} `}</strong>
-                  night
+                  {t('product.nights', {count: 1})}
                 </>
               ) : (
-                <span>Add dates for prices</span>
+                <span>{t('product.add_dates_for_prices')}</span>
               )}
             </div>
           ) : (
-            <h1 className={styles.soldOutGuestSection}>Booking closed</h1>
+            <h1 className={styles.soldOutGuestSection}>{t('product.booking_closed')}</h1>
           )}
           {isBookingOpen && (
             <div 
@@ -252,14 +255,14 @@ function ReservationCard({
                 }
                 className={styles.reserveButton}
               >
-                {loading ? 'Submitting...' : checkInOut ? 'Reserve' : 'Check availability'}
+                {loading ? `${t('product.submitting')}...` : checkInOut ? t('product.reserve') : t('product.check_availability')}
               </button>
             </div>
           </form>
           ) : (
             <div className="buttonContainer">
               <button className={styles.soldOutButton} disabled>
-                Sold Out
+              {t('product.sold_out')}
               </button>
             </div>
           )}
@@ -269,7 +272,7 @@ function ReservationCard({
         {isBookingOpen && (
           <div className={styles.noDatesMessage}>
             {!checkInOut && (
-              <p>Enter your travel dates to see the total price per night.</p>
+              <p>{t('product.enter_travel_dates_for_total_price')}.</p> 
             )}
           </div>
         )}
