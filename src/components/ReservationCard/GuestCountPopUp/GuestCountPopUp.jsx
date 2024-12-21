@@ -2,8 +2,11 @@ import Popup from '../PopUp/PopUp'
 import { CloseIcon } from '../../../icons'
 import AnimalServiceImg from '../../../assets/images/service-images/animal-service.jpg'
 import styles from './GuestCountPopUp.module.css'
+import { useTranslation } from 'react-i18next'
 
 const GuestCountPopUp = ({ isVisible, onClose, showGuests, setShowGuests, isSearchWhoDropdown }) => {
+
+  const { t } = useTranslation();
 
   if (!showGuests && !isSearchWhoDropdown) {
     setShowGuests(true)
@@ -25,14 +28,12 @@ const GuestCountPopUp = ({ isVisible, onClose, showGuests, setShowGuests, isSear
           />
         </div>
         <div className={styles.text}>
-          <h2 className={styles.title}>Service animals</h2>
+          <h2 className={styles.title}>{t('product.serviceAnimals')}</h2>
           <p>
-            Service animals aren&apos;t pets, so there&apos;s no need to add
-            them here.
+            {t('product.serviceAnimalNote')}
           </p>
           <p>
-            Traveling with an emotional support animal? Check out our
-            accessibility policy.
+            {t('product.emotionalSupportAnimal')}
           </p>
         </div>
       </section>

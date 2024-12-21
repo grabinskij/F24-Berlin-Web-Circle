@@ -63,7 +63,7 @@ const ProductPage = () => {
   const toggleKeyboardPopup = () => {
     setIsKeybordPopupVisible((prevState) => !prevState)
   }
-
+console.log(place)
 
   function handleShare() {
     alert("Share this experience");
@@ -207,27 +207,31 @@ const ProductPage = () => {
             },
           }}
         />}
-        { !!place.reviews &&
+        {!!place.reviews && (
           <div className={styles.reviews}>
             <ReviewsSection reviews={place.reviews}/>
           </div>
+          )
         }
-        <MapView
-          mapViewSampleImg={mapViewSampleImg}
-          address="Königslutter am Elm, Niedersachsen, Germany"
-          addressDescription="In the midst of a diverse nature park, you will find yourself surrounded by hilly landscapes covered with dense forests, moors, gorgeous heaths and salt marshes. The surroundings invite you to explore them at any time of the year: hike through one of the largest beech forests in the region, where you will occasionally encounter rare forest dwellers, go mushroom hunting in a popular hiking area nearby, or take a bike ride to a vantage point overlooking aln the midst of a diverse nature park, you will In the midst of a diverse nature park, you will find yourself surrounded by hilly landscapes covered with dense forests, moors, gorgeous heaths and salt marshes. The surroundings invite you to explore them at any time of the year: hike through one of the largest beech forests in the region, where you will occasionally encounter rare forest dwellers, go mushroom hunting in a popular hiking area nearby, or take a bike ride to a vantage point overlooking aln the midst of a diverse nature park, you will"
-        /> 
+        {!!place.mapView && <MapView
+            lat={place.mapView.lat}
+            lon={place.mapView.lon}
+            address={place.mapView.address}
+            addressDescription={place.mapView.addressDescription}
+          /> 
+        }
+        {!!place.hostSummary && <MeetYourHostSection 
+            name={place.hostSummary.hostName} 
+            image={place.hostSummary.profilePicUrl} 
+            role={place.hostSummary.role}
+            verified={true}
+            reviews={place.reviewSummary.totalReviewsCount}
+            rating={place.reviewSummary.totalAvgRating}
+            yearsHosting={place.hostSummary.hostingDuration}
+            profileText={place.productDescription.descriptionPlace}
+          />
+        }
       </div>
-      <MeetYourHostSection 
-          name={place.hostSummary.hostName} 
-          image={place.hostSummary.profilePicUrl} 
-          role={place.hostSummary.role}
-          verified={true}
-          reviews={place.reviewSummary.totalReviewsCount}
-          rating={place.reviewSummary.totalAvgRating}
-          yearsHosting={place.hostSummary.hostingDuration}
-          profileText={place.productDescription.descriptionPlace}
-      />
     </div>
   }
   </>);

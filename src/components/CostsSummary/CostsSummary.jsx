@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import styles from './CostsSummary.module.css'
 
 const CostsSummary = ({
@@ -11,23 +12,23 @@ const CostsSummary = ({
   totalPrice
 }) => {
 
+  const { t } = useTranslation();
+
   return (
     <div className={styles.priceSummary}>
       <div className={styles.infoSection}>
-        <div>You won&apos;t be charged yet</div>
-        <div>Price per night includes VAT and all applicable fees.</div>
+        <div>{t('product.noChargeYet')}</div> 
+        <div>{t('product.priceIncludes')}.</div>
       </div>
       <div className={styles.pricingDetails}>
         <div className={styles.priceItemsContainer}>
           <div className={styles.priceItem}>
-            <span>{`€ ${pricePerNight} x ${nights} night${
-              nights > 1 ? 's' : ''
-            }`}</span>
+            <span>{`€ ${pricePerNight} x ${nights} ${t('product.nights', {count: nights})}`}</span>
             <span>{`€ ${basePrice}`}</span>
           </div>
           {longStayDiscount > 0 && isDiscount && (
             <div className={styles.priceItem}>
-              <span>Long stay discount</span>
+              <span>{t('product.long_stay_discount')}</span>
               <span
                 className={styles.discountPriceItem}
               >{`-€ ${longStayDiscount}`}</span>
@@ -35,19 +36,19 @@ const CostsSummary = ({
           )}
           {cleaningFee > 0 && (
             <div className={styles.priceItem}>
-              <span>Cleaning fee</span>
+              <span>{t('product.cleaning_fee')}</span>
               <span>{`€ ${cleaningFee}`}</span>
             </div>
           )}
           {airbnbServiceFee > 0 && (
             <div className={styles.priceItem}>
-              <span>Airbnb service fee</span>
+              <span>{t('product.airbnb_service_fee')}</span>
               <span>{`€ ${airbnbServiceFee}`}</span>
             </div>
           )}
         </div>
         <div className={styles.totalPrice}>
-          <strong>Total</strong>
+          <strong>{t('product.total')}</strong>
           <strong>{`€ ${totalPrice}`}</strong>
         </div>
       </div>

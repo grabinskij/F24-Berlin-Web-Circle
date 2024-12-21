@@ -14,18 +14,18 @@ i18n.use(initReactI18next).init({
   fallbackLng: 'en',
   interpolation: {
     escapeValue: false,
-    formatSeparator: ',',
-    format: function(value, format) {
-      if (format === 'uppercase') {
-        return value.toUpperCase();
-      }
+    // eslint-disable-next-line no-unused-vars
+    format: function (value, format, lng) {
+      if (format === 'uppercase') return value.toUpperCase();
+      if (format === 'lowercase') return value.toLowerCase();
+      if (format === 'capitalize') return `${value.substr(0, 1).toUpperCase()}${value.substr(1)}`;
       return value;
-    }
+    },
   },
   pluralSeparator: '_',
-  pluralization: true, // Enable pluralization
-  keySeparator: '.', // Key separator for nested keys (e.g., product.guests)
-  nsSeparator: ':', // Namespace separator
+  pluralization: true, 
+  keySeparator: '.',
+  nsSeparator: ':',
 })
 
 export default i18n

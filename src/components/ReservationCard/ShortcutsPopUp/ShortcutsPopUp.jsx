@@ -1,8 +1,11 @@
+import { useTranslation } from 'react-i18next';
 import Popup from '../PopUp/PopUp'
 import ShortcutItem from './ShortcutItem/ShortcutItem'
 import styles from './ShortcutsPopUp.module.css'
 
 const ShortcutsPopUp = ({ isVisible, onClose, showCalendar, setShowCalendar }) => {
+
+const { t } = useTranslation();
 
 if (!showCalendar) {
   setShowCalendar(true)
@@ -12,31 +15,31 @@ if (!showCalendar) {
     <Popup isVisible={isVisible} onClose={onClose}>
       <div className={styles.contentContainer}>
         <div className={styles.header}>
-          <h2>Keyboard shortcuts</h2>
+          <h2>{t('product.keyboardShortcuts')}</h2>
         </div>
         <main className={styles.main}>
           <ShortcutItem
             symbols="&crarr;"
-            description="Select the date in focus"
+            description={t('product.selectDateInFocus')}
           />
           <ShortcutItem
             symbols={['\u2190', '\u2192']}
-            description="Move backward (left) and forward (right) by one day"
+            description={t('product.moveBackwardDay')}
           />
           <ShortcutItem
             symbols={['\u2191', '\u2193']}
-            description="Move backward (up) and forward (down) by one week"
+            description={t('product.moveBackwardWeek')}
           />
-          <ShortcutItem symbols="PGUP/PGDN" description="Switch months" />
+          <ShortcutItem symbols="PGUP/PGDN" description={t('product.switchMonths')} />
           <ShortcutItem
             symbols="HOME/END"
-            description="Go to the first or last day of a week"
+            description={t('product.goToFirstLastDay')}
           />
-          <ShortcutItem symbols="?" description="Open this panel" />
+          <ShortcutItem symbols="?" description={t('product.openThisPanel')} />
         </main>
         <div className={styles.buttonContainer}>
           <button className={styles.button} onClick={onClose}>
-            Back to calendar
+            {t('product.backToCalendar')}
           </button>
         </div>
       </div>

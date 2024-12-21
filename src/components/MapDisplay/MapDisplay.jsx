@@ -1,4 +1,3 @@
-import React from "react";
 import { AdvancedMarker, APIProvider, Map } from "@vis.gl/react-google-maps";
 import styles from "./MapDisplay.module.css";
 import HomeIcon from "../../icons/HomeIcon";

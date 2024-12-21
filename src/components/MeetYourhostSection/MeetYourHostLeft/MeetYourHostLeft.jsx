@@ -1,5 +1,5 @@
 import styles from "./MeetYourHostLeft.module.css";
-import ArrowRightIcon from "../../../icons/ArrowRightIcon";
+// import ArrowRightIcon from "../../../icons/ArrowRightIcon";
 import {
   BusinessIcon,
   LanguageIcon,
@@ -7,6 +7,7 @@ import {
   RoleIcon,
   VerifiedIcon
 } from "../../../icons";
+import { useTranslation } from "react-i18next";
 
 const MeetYourHostLeft = ({
   image,
@@ -18,10 +19,19 @@ const MeetYourHostLeft = ({
   yearsHosting,
   profileText,
 }) => {
+
+  const { t } = useTranslation();
+ 
   const languagesAndBusinessData = [
-    { icon: LanguageIcon, text: "Speaks German and English" },
-    { icon: BusinessIcon, text: "Business" },
+    { icon: LanguageIcon, text: t('product.speaksLanguages') },
+    { icon: BusinessIcon, text: t('product.business') }
   ];
+
+  const capitalize = (str) => {
+    if (!str || typeof str !== 'string') return ''; 
+    return str.trim().charAt(0).toUpperCase() + str.slice(2).toLowerCase();
+  };
+
 
   return (
     <div className={styles.hostInfoContainer}>
@@ -39,14 +49,14 @@ const MeetYourHostLeft = ({
             <h2 className={styles.personInfo}>{name}</h2>
             <div className={styles.roleContainer}>
               {role === "Superhost" ? <RoleIcon /> : ""}
-              <span className={styles.role}>{role}</span>
+              <span className={styles.role}>{t('product.superhosts', role)}</span>
             </div>
           </div>
         </div>
         <div className={styles.rightSide}>
           <div className={styles.reviewsContainer}>
             <span className={styles.reviewsNumbers}>{reviews}</span>
-            <span className={styles.reviewsText}>Reviews</span>
+            <span className={styles.reviewsText}>{capitalize(t('product.reviews', { count: reviews}))}</span>
           </div>
           <hr className={styles.borders} />
           <div className={styles.reviewsContainer}>
@@ -54,12 +64,12 @@ const MeetYourHostLeft = ({
               <span className={styles.reviewsNumbers}>{rating}</span>
               <ReviewsNumberIcon />
             </div>
-            <span className={styles.reviewsText}>Rating</span>
+            <span className={styles.reviewsText}>{t('product.rating')}</span>
           </div>
           <hr className={styles.borders} />
           <div className={styles.reviewsContainer}>
             <span className={styles.reviewsNumbers}>{yearsHosting}</span>
-            <span className={styles.reviewsText}>Year hosting</span>
+            <span className={styles.reviewsText}>{capitalize(t('product.years', {count: yearsHosting}))} {t('product.hosting')}</span>
           </div>
         </div>
       </div>
@@ -77,10 +87,10 @@ const MeetYourHostLeft = ({
           </div>
           <div className={styles.profileText}>{profileText}</div>
         </div>
-        <div className={styles.arrowRightContainer}>
-          <span className={styles.showMore}>Show more</span>
+        {/* <div className={styles.arrowRightContainer}>
+          <span className={styles.showMore}>{t('product.showMore')}</span>  
           <ArrowRightIcon />
-        </div>
+        </div> */}
       </div>
     </div>
   );
