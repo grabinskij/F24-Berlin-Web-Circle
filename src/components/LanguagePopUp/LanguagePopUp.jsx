@@ -12,6 +12,7 @@ const LanguagePopUp = ({ onCloseClick, isVisible }) => {
   const changeLanguage = (lng) => {
     try {
       i18n.changeLanguage(lng);
+      localStorage.setItem('language', lng);
       console.log("Language changed to:", lng);
     } catch (error) {
       console.error("Failed to change language", error);
