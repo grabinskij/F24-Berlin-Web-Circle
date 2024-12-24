@@ -1,10 +1,10 @@
 const places = require("../data/places.json");
 const constants = require('../constants/constants');
 
- function filterPlaces (region, checkIn, checkOut, guests = 1, category = null) {
+ function filterPlaces (region, checkIn, checkOut, guests = 1, category = null, language) {
 	const DEFAULT_NO_OF_DAYS_PER_STAY = 1;
 	const filteredResult = [];
-
+console.log(language)
 	let filteredDestinations;
 	// Filter by region.
 	if (!region) {

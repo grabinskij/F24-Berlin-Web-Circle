@@ -3,8 +3,12 @@ import { initReactI18next } from 'react-i18next'
 import en from './locales/en.json'
 import de from './locales/de.json'
 import ukr from './locales/ukr.json'
+import LanguageDetector from 'i18next-browser-languagedetector/cjs'
 
-i18n.use(initReactI18next).init({
+i18n
+  .use(initReactI18next)
+  .use(LanguageDetector)
+  .init({
   resources: {
     en: { translation: en },
     de: { translation: de },

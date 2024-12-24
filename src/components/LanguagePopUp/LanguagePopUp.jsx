@@ -14,6 +14,21 @@ const LanguagePopUp = ({ onCloseClick, isVisible }) => {
       i18n.changeLanguage(lng);
       localStorage.setItem('language', lng);
       console.log("Language changed to:", lng);
+      fetch(`http://localhost:8800/setLanguage?lng=${lng}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        credentials: 'include',  
+      })
+      .then(response => {
+        if (response.ok) {
+          console.log("Language cookie set to", lng);
+        } else {
+          console.error("Failed to set language on the server");
+        }
+      })
     } catch (error) {
       console.error("Failed to change language", error);
     }
