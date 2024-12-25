@@ -6,8 +6,12 @@ export const fetchData = async (setLoading, setError, setPlace, setBooking, prod
 
   try {
     const [placeResponse, bookingsResponse] = await Promise.all([
-      axios.get(`http://localhost:8800/places/${productId}`), 
-      axios.get(`http://localhost:8800/bookings/${productId}`) 
+      axios.get(`http://localhost:8800/places/${productId}`, {
+        withCredentials: true,
+      }), 
+      axios.get(`http://localhost:8800/bookings/${productId}`, {
+        withCredentials: true,
+      })
     ]);
     setPlace(placeResponse.data);
     setBooking(bookingsResponse.data);

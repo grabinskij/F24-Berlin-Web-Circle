@@ -97,7 +97,10 @@
     "ages": "Вік 2-12",
     "under": "Молодше 2",
     "anywhere": "Будь-де",
-    "anyWeek": "Будь-який тиждень"
+    "anyWeek": "Будь-який тиждень",
+    "USA": "США",
+    "Jordan": "Йорданія",
+    "Thailand": "Таїланд"
   },
   "priceRangeModal": {
     "roomsBeds": "Кімнати та ліжка",

@@ -1,20 +1,96 @@
 const express = require("express");
 const cors = require("cors");
-const products = require("./src/data/places.json");
+// const products = require("./src/data/places.json");
 const dotenv = require("dotenv");
+const i18next = require("i18next");
+const i18nextMiddleware = require("i18next-http-middleware");
+const Backend = require("i18next-fs-backend");
+const cookieParser = require("cookie-parser");
+const enTranslation = require('./locales/en/translation.json')
+const deTranslation = require('./locales/de/translation.json')
+const ukrTranslation = require('./locales/ukr/translation.json')
 // const prisma = require(".db/prisma");
-
-dotenv.config();
 
 const app = express();
 const PORT = 8800;
-
-app.use(cors());
+dotenv.config();
+app.use(cookieParser());
 app.use(express.json());
+app.use(i18nextMiddleware.handle(i18next));
+
+const corsOptions = {
+  origin: 'http://localhost:5173', 
+  methods: 'GET, POST, PUT, DELETE',
+  credentials: true,
+  allowedHeaders: ['Content-Type', 'Authorization'], 
+};
+app.use(cors(corsOptions));
+
+i18next
+  .use(Backend) 
+  .use(i18nextMiddleware.LanguageDetector) 
+  .init({
+    fallbackLng: "en",
+    backend: {
+      loadPath: "./locales/{{lng}}/translation.json",
+      allowMultiLoading: false, 
+    }, 
+    preload: ["en", "de", "ukr"], 
+    // debug: true,
+    // detection: {
+    //   order: ["cookie", "querystring", "header"],
+    //   lookupCookie: "language",
+    //   lookupQuerystring: "lng",
+    //   caches: ["cookie"]
+    // },
+    load: 'languageOnly', 
+    // lowerCaseLng: true,
+    languageMapping: {
+      'en-US': 'en',
+      'en-GB': 'en',
+      'de-DE': 'de',
+      'de-AT': 'de',
+      'uk': 'ukr',
+      'uk-UA': 'ukr'
+    } 
+  });
+
+
+app.get('/setLanguage', (req, res) => {
+  const { lng } = req.query;
+
+  if (lng) {
+    res.cookie('language', lng, {
+      maxAge: 900000000,
+      httpOnly: false,
+      sameSite: 'Lax', 
+      secure: false,
+      path: '/'
+    });
+    res.json({ message: `Language set to ${lng}` });
+  } else {
+    res.status(400).json({ message: 'No language provided' });
+  }
+});
 
 app.get("/places/:id", (req, res) => {
   const placeId = parseInt(req.params.id);
-  const place = products.find((p) => p.id === placeId);
+
+const fullLanguageCode = 
+req.cookies.language || 
+req.query.lng || 
+req.i18n?.language || 
+'en';
+
+const language = fullLanguageCode.split('-')[0];
+
+  const translationsMap = {
+    en: enTranslation,
+    de: deTranslation,
+    ukr: ukrTranslation,
+  };
+
+  const place = translationsMap[language]?.find((p) => p.id === placeId);
 
   if (place) {
     res.json(place);
@@ -22,6 +98,7 @@ app.get("/places/:id", (req, res) => {
     res.status(404).json({ error: `Place with ID ${placeId} not found.` });
   }
 });
+
 
 app.post("/savePlace", (req, res) => {
   const { placeId } = req.body;
@@ -31,6 +108,7 @@ app.post("/savePlace", (req, res) => {
     message: `Place ID ${placeId} saved successfully`,
   });
 });
+
 
 // import Routes
 const placesRoutes = require("./routes/places");

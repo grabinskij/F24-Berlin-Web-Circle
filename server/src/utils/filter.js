@@ -1,9 +1,14 @@
-const places = require("../data/places.json");
+// const places = require("../data/places.json");
+const enTranslation = require('../../locales/en/translation.json')
+const deTranslation = require('../../locales/de/translation.json')
+const ukrTranslation = require('../../locales/ukr/translation.json')
 const constants = require('../constants/constants');
 
- function filterPlaces (region, checkIn, checkOut, guests = 1, category = null) {
+ function filterPlaces (region, checkIn, checkOut, guests = 1, category = null, language) {
 	const DEFAULT_NO_OF_DAYS_PER_STAY = 1;
 	const filteredResult = [];
+		console.log('languagePlaces', language);
+  const places = language === 'en' ? enTranslation : language === 'de' ? deTranslation : language === 'ukr' ? ukrTranslation : enTranslation;
 
 	let filteredDestinations;
 	// Filter by region.
@@ -11,7 +16,7 @@ const constants = require('../constants/constants');
 		filteredDestinations = places;
 	}
 	else {
-		filteredDestinations = places.filter(place => place?.productSummary?.address?.toLowerCase().includes(region.toLowerCase()) && place?.productSummary?.guests?.value >= guests);
+		filteredDestinations = places.filter(place => place?.filteredAddress?.toLowerCase().includes(region.toLowerCase()) && place?.productSummary?.guests?.value >= guests);
 	}
 	// Filter by category
 	if (category) {

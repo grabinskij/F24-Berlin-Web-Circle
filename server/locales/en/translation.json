@@ -1,6 +1,7 @@
 [
   {
     "id": 1,
+    "filteredAddress": "Berlin, Germany",
     "title": "Cozy Apartment in City Center",
     "host": "Hosted by Wendy and Elisa",
     "price": "$100 per night",
@@ -130,6 +131,7 @@
   },
   {
     "id": 2,
+    "filteredAddress": "Zempow, Germany",
     "title": "Fabulous Flat in great Location",
     "host": "Hosted by Wendy and Elisa",
     "price": "$180 per night",
@@ -270,6 +272,7 @@
   },
   {
     "id": 3,
+    "filteredAddress": "Swan Lake, USA",
     "title": "Nice Home in Swan Lake",
     "host": "Hosted by John and Sarah",
     "price": "$130 per night",
@@ -400,6 +403,7 @@
   },
   {
     "id": 4,
+    "filteredAddress": "San Francisco, USA",
     "title": "Loft  San Francisco",
     "host": "Hosted by Mike and Laura",
     "price": "$210 per night",
@@ -526,6 +530,7 @@
   },
   {
     "id": 5,
+    "filteredAddress": "Big Bear Lake, USA",
     "title": "Nähe Big Bear Lake",
     "host": "Hosted by Emma and Jack",
     "price": "$180 per night",
@@ -661,6 +666,7 @@
   },
   {
     "id": 6,
+    "filteredAddress": "Miami Beach, USA",
     "title": "Beautiful flat 95m² in Miami Beach",
     "host": "Hosted by Anna",
     "price": "$120 per night",
@@ -796,6 +802,7 @@
   },
   {
     "id": 7,
+    "filteredAddress": "New York City, USA",
     "title": "Quiet room direct to metro station",
     "host": "Hosted by Sarah",
     "price": "$290 per night",
@@ -921,6 +928,7 @@
   },
   {
     "id": 8,
+    "filteredAddress": "Wadi Musa, Ma'an Governorate, Jordan",
     "title": "Nice room with ensuite bathroom",
     "host": "Hosted by Wadi Musa",
     "price": "$70 per night",
@@ -1046,6 +1054,7 @@
   },
   {
     "id": 9,
+    "filteredAddress": "Napa Valley, USA",
     "title": "Quiet room 32 min from Napa Valley",
     "host": "Hosted by John",
     "price": "$125 per night",
@@ -1059,6 +1068,7 @@
     "productSummary": {
       "accommodation": "Entire rental unit",
       "address": "Napa Valley, USA",
+      "categories": ["TINY_HOMES"],
       "guests": { "key": "guest", "value": 6 },
       "bedrooms": { "key": "bedroom", "value": 3 },
       "beds": { "key": "bed", "value": 4 },
@@ -1175,6 +1185,7 @@
   },
   {
     "id": 10,
+    "filteredAddress": "San Francisco, USA",
     "title": "Home in San Francisco",
     "host": "Hosted by Eric",
     "price": "$159 per night",
@@ -1295,6 +1306,7 @@
   },
   {
     "id": 11,
+    "filteredAddress": "Paris, France",
     "title": "France, Paris, Le Marais",
     "host": "Hosted by Sophie",
     "price": "$150 per night",
@@ -1308,6 +1320,7 @@
     "productSummary": {
       "accommodation": "Entire apartment",
       "address": "Paris, France",
+      "categories": ["TINY_HOMES", "CHALETS"],
       "guests": { "key": "guest", "value": 2 },
       "bedrooms": { "key": "bedroom", "value": 1 },
       "beds": { "key": "bed", "value": 1 },
@@ -1410,6 +1423,7 @@
   },
   {
     "id": 12,
+    "filteredAddress": "Rome, Italy",
     "title": "Italy, Rome, Trastevere",
     "host": "Hosted by Marco",
     "price": "$120 per night",
@@ -1525,6 +1539,7 @@
   },
   {
     "id": 13,
+    "filteredAddress": "Barcelona, Spain",
     "title": "Spain, Barcelona, Gothic Quarter",
     "host": "Hosted by Marta",
     "price": "$180 per night",
@@ -1640,6 +1655,7 @@
   },
   {
     "id": 14,
+    "filteredAddress": "Phanom, Thailand",
     "title": "House in nature lodge in Phanom, Thailand",
     "host": "Hosted by Waritsara",
     "price": "$250 per night",
@@ -1747,8 +1763,10 @@
     },
     "reservations": []
   },
+
   {
     "id": 15,
+    "filteredAddress": "Sydney, Australia",
     "title": "Australia, Sydney, Darling Harbour",
     "host": "Hosted by Olivia",
     "price": "$220 per night",
@@ -1860,6 +1878,7 @@
   },
   {
     "id": 16,
+    "filteredAddress": "Tokyo, Japan",
     "title": "Japan, Tokyo, Shibuya",
     "host": "Hosted by Kenji",
     "price": "$170 per night",
@@ -1980,6 +1999,7 @@
   },
   {
     "id": 17,
+    "filteredAddress": "Paris, France",
     "title": "France, Paris, Montmartre",
     "host": "Hosted by Sophie",
     "price": "$190 per night",
@@ -1993,6 +2013,7 @@
     "productSummary": {
       "accommodation": "Entire apartment",
       "address": "Paris, France",
+      "categories": ["LUXURY_VILLAS", "LUXE"],
       "guests": { "key": "guest", "value": 3 },
       "bedrooms": { "key": "bedroom", "value": 1 },
       "beds": { "key": "bed", "value": 1 },
@@ -2094,6 +2115,7 @@
   },
   {
     "id": 18,
+    "filteredAddress": "Rome, Italy",
     "title": "Italy, Rome, Trastevere",
     "host": "Hosted by Marco",
     "price": "$200 per night",
@@ -2207,6 +2229,7 @@
   },
   {
     "id": 19,
+    "filteredAddress": "Rio de Janeiro, Brazil",
     "title": "Brazil, Rio de Janeiro, Copacabana",
     "host": "Hosted by Ana",
     "price": "$180 per night",
@@ -2220,6 +2243,7 @@
     "productSummary": {
       "accommodation": "Entire apartment",
       "address": "Rio de Janeiro, Brazil",
+      "categories": ["RIVERSIDE_CABINS", "CHALETS"],
       "guests": { "key": "guest", "value": 4 },
       "bedrooms": { "key": "bedroom", "value": 2 },
       "beds": { "key": "bed", "value": 2 },
@@ -2326,6 +2350,7 @@
   },
   {
     "id": 20,
+    "filteredAddress": "New York City, USA",
     "title": "USA, New York, Manhattan",
     "host": "Hosted by Michael",
     "price": "$250 per night",
@@ -2339,6 +2364,7 @@
     "productSummary": {
       "accommodation": "Entire apartment",
       "address": "New York City, USA",
+      "categories": ["RIVERSIDE_CABINS"],
       "guests": { "key": "guest", "value": 4 },
       "bedrooms": { "key": "bedroom", "value": 2 },
       "beds": { "key": "bed", "value": 2 },
@@ -2449,6 +2475,7 @@
   },
   {
     "id": 21,
+    "filteredAddress": "Paris, France",
     "title": "France, Paris, Champs-Élysées",
     "host": "Hosted by Marie",
     "price": "€180 per night",
@@ -2462,6 +2489,7 @@
     "productSummary": {
       "accommodation": "Entire apartment",
       "address": "Paris, France",
+      "categories": ["CHALETS"],
       "guests": { "key": "guest", "value": 3 },
       "bedrooms": { "key": "bedroom", "value": 1 },
       "beds": { "key": "bed", "value": 1 },
@@ -2564,6 +2592,7 @@
   },
   {
     "id": 22,
+    "filteredAddress": "Tokyo, Japan",
     "title": "Japan, Tokyo, Shibuya",
     "host": "Hosted by Yuki",
     "price": "¥12,000 per night",
@@ -2577,6 +2606,7 @@
     "productSummary": {
       "accommodation": "Entire apartment",
       "address": "Tokyo, Japan",
+      "categories": ["LUXE"],
       "guests": { "key": "guest", "value": 2 },
       "bedrooms": { "key": "bedroom", "value": 1 },
       "beds": { "key": "bed", "value": 1 },
@@ -2687,6 +2717,7 @@
   },
   {
     "id": 23,
+    "filteredAddress": "Rome, Italy",
     "title": "Italy, Rome, Trastevere",
     "host": "Hosted by Luca",
     "price": "€150 per night",
@@ -2700,6 +2731,7 @@
     "productSummary": {
       "accommodation": "Entire apartment",
       "address": "Rome, Italy",
+      "categories": ["LUXE"],
       "guests": { "key": "guest", "value": 4 },
       "bedrooms": { "key": "bedroom", "value": 2 },
       "beds": { "key": "bed", "value": 2 },
@@ -2797,6 +2829,7 @@
   },
   {
     "id": 24,
+    "filteredAddress": "Sydney, Australia",
     "title": "Australia, Sydney, Bondi Beach",
     "host": "Hosted by Sarah",
     "price": "$300 per night",

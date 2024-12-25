@@ -2,7 +2,6 @@ import ReservationCard from "../components/ReservationCard/ReservationCard";
 import FavoriteStay from "../components/FavoriteStay/FavoriteStay";
 import HostSummary from "../components/HostSummary/HostSummary";
 import MapView from "../components/MapView/MapView";
-import mapViewSampleImg from "./../assets/map-view-sample.png";
 import ProductGallery from "../components/ProductGallery/ProductGallery";
 import ProductHighlight from "../components/ProductHighlight/ProductHighlight";
 import ProductSummary from "../components/ProductSummary/ProductSummary";

@@ -250,5 +250,26 @@
       "cleaningFee": 10,
       "longStayDiscount": 0
     }
+  },
+  {
+    "reservationId": 13,
+    "productId": 7,
+    "checkInDate": "01/05/2025",
+    "checkOutDate": "01/08/2025",
+    "guestCounts": {
+      "adults": 1,
+      "children": 0,
+      "infants": 0,
+      "pets": 0
+    },
+    "totalPrice": 380,
+    "breakdown": {
+      "nights": 3,
+      "pricePerNight": 120,
+      "basePrice": 360,
+      "airbnbServiceFee": 10,
+      "cleaningFee": 10,
+      "longStayDiscount": 0
+    }
   }
 ]
