@@ -197,7 +197,12 @@
         "petsNumber": 1
       }
     },
-    "alreadyBookedDates": []
+    "alreadyBookedDates": [
+      {
+        "startDate": "01/05/2025",
+        "endDate": "01/08/2025"
+      }
+    ]
   },
   {
     "id": 8,

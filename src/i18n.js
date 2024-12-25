@@ -5,6 +5,23 @@ import de from './locales/de.json'
 import ukr from './locales/ukr.json'
 import LanguageDetector from 'i18next-browser-languagedetector/cjs'
 
+const getLanguage = () => {
+  // const getCookie = (name) => {
+  //   const value = `; ${document.cookie}`;
+  //   const parts = value.split(`; ${name}=`);
+  //   if (parts.length === 2) return parts.pop().split(';').shift();
+  //   return null;
+  // };
+
+  // const languageFromCookie = getCookie('language');
+  const languageFromStorage = localStorage.getItem('language');
+  const browserLanguage = navigator.language?.split('-')[0];
+  
+  // return languageFromCookie || languageFromStorage || browserLanguage || 'en';
+  return languageFromStorage || browserLanguage || 'en';
+
+};
+
 i18n
   .use(initReactI18next)
   .use(LanguageDetector)
@@ -14,8 +31,13 @@ i18n
     de: { translation: de },
     ukr: { translation: ukr },
   },
-  lng: localStorage.getItem('language') || 'en',
+  lng: getLanguage(),
   fallbackLng: 'en',
+  // detection: {
+  //   order: ['cookie', 'localStorage', 'navigator'],
+  //   lookupCookie: 'language',
+  //   caches: ['cookie', 'localStorage'],
+  // },
   interpolation: {
     escapeValue: false,
     // eslint-disable-next-line no-unused-vars

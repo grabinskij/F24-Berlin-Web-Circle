@@ -3,36 +3,76 @@ import { useState } from 'react'
 import Popup from '../ReservationCard/PopUp/PopUp'
 import useOutsideClick from '../../hooks/useOutsideClick'
 import { useTranslation } from 'react-i18next'
+import { createSearchParams, useLocation, useNavigate, useSearchParams } from 'react-router-dom'
+import axios from 'axios'
+
 
 const LanguagePopUp = ({ onCloseClick, isVisible }) => {
   const [isLanguageSelected, setIsLanguageSelected] = useState(true)
+  const [searchParams] = useSearchParams()
 
   const { t, i18n } = useTranslation();
+  const navigate = useNavigate()
+  const location = useLocation()
 
-  const changeLanguage = (lng) => {
+  const changeLanguage = async (lng) => {
     try {
       i18n.changeLanguage(lng);
       localStorage.setItem('language', lng);
-      console.log("Language changed to:", lng);
-      fetch(`http://localhost:8800/setLanguage?lng=${lng}`, {
-        method: 'GET',
+
+      const params = new URLSearchParams(searchParams)
+      params.set('lng', lng)
+      navigate({
+        pathname: location.pathname,
+        search: createSearchParams(params).toString(),
+      })
+
+      const response = await axios.get(`http://localhost:8800/setLanguage`, {
+        params: { lng }, 
+        withCredentials: true,
         headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-        },
-        credentials: 'include',  
-      })
-      .then(response => {
-        if (response.ok) {
-          console.log("Language cookie set to", lng);
-        } else {
-          console.error("Failed to set language on the server");
+          'Content-Type': 'application/json'
         }
-      })
+      });
+  
+      if (response.status === 200) {
+        console.log("Language cookie set to", lng);
+        navigate({
+          pathname: location.pathname,
+          search: createSearchParams(params).toString(),
+        }, { replace: true }); 
+
+        setTimeout(() => {
+          window.location.reload();
+        }, 100);
+      } else {
+        console.error("Failed to set language on the server");
+      }
     } catch (error) {
-      console.error("Failed to change language", error);
+      console.error("Failed to change language", error.response?.data || error.message);
     }
   };
+
+
+//   .then(response => {
+//     if (!response.ok) {
+//       throw new Error('Failed to set language on server');
+//     }
+//     return response.json();
+//   })
+//   .then(() => {
+//     // Force reload i18n with new language
+//     i18n.reloadResources([lng]).then(() => {
+//       window.location.reload(); // Optional: only if you need a full page refresh
+//     });
+//   })
+//   .catch(error => {
+//     console.error("Failed to set language on server:", error);
+//   });
+// } catch (error) {
+//   console.error("Failed to change language:", error);
+// }
+
 
   const handleCurrencyChange = (currency) => {
     console.log(`Currency changed to: ${currency}`);

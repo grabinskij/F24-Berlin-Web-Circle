@@ -88,7 +88,10 @@
     "ages": "Ages 2-12",
     "under": "Under 2",
     "anywhere": "Anywhere",
-    "anyWeek": "Any week"
+    "anyWeek": "Any week",
+    "USA": "USA",
+    "Jordan": "Jordan",
+    "Thailand": "Thailand"
   },
     "priceRangeModal": {
       "roomsBeds": "Rooms and Beds",

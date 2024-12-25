@@ -260,10 +260,12 @@ const SearchBar = ({ searchType, onSearch }) => {
     const validateDate = (date) => (date && !isNaN(new Date(date).getTime()) ? date : null);
   
     const transformLocation = (location) => {
-      if (location === "United States") return "USA";
-      if (location === "Middle East") return "Jordan";
-      if (location === "Southeast Asia") return "Thailand";
-      if (location === "I'm flexible") return '';
+      if (location === t('search.unitedStates')) return 'USA';
+      if (location === t('search.middleEast')) return 'Jordan';
+      if (location === t('search.southeastAsia')) return 'Thailand'; 
+      if (location === t('search.spain')) return 'Spain';
+      if (location === t('search.italy')) return 'Italy';
+      if (location === t('search.imFlexible')) return '';
       return location;
     };
 

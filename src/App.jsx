@@ -32,7 +32,13 @@ function App() {
 
   useEffect(() => {
     axios
-      .get(`${BASE_URL}places`, {params: searchParams})
+      .get(`${BASE_URL}places`, {
+        params: searchParams,
+        withCredentials: true,
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
       .then((response) => setPlaces(response?.data))
       .catch((error) => console.error(`Something went wrong. ${error.message}.`));
   }, [searchParams]);

@@ -1,6 +1,7 @@
 [
   {
     "id": 1,
+    "filteredAddress": "Berlin, Germany",
     "title": "Gemütliche Wohnung im Stadtzentrum",
     "host": "Gastgeber: Wendy und Elisa",
     "price": "100 $ pro Nacht",
@@ -14,7 +15,7 @@
     "productSummary": {
       "accommodation": "Gesamte Mietwohnung",
       "address": "Berlin, Deutschland",
-      "categories": ["LUXUS_VILLEN", "LUXE"],
+      "categories": ["LUXURY_VILLAS", "LUXE"],
       "guests": { "key": "Gast", "value": 3 },
       "bedrooms": { "key": "Schlafzimmer", "value": 1 },
       "beds": { "key": "Bett", "value": 3 },
@@ -122,10 +123,12 @@
       "lat": 52.53549571269938,
       "address": "Königslutter am Elm, Niedersachsen, Deutschland",
       "addressDescription": "Mitten in einem vielfältigen Naturpark befinden Sie sich in einer hügeligen Landschaft mit dichten Wäldern, Mooren, wunderschönen Heideflächen und Salzwiesen. Die Umgebung lädt zu jeder Jahreszeit zu Erkundungen ein: Wandern Sie durch einen der größten Buchenwälder der Region, in dem Sie gelegentlich seltene Waldbewohner treffen, gehen Sie in einem beliebten Wandergebiet in der Nähe Pilze sammeln oder machen Sie eine Radtour zu einem Aussichtspunkt, der die Gegend überblickt."
-    }
+    },
+    "reservations": []
   },
   {
     "id": 2,
+    "filteredAddress": "Zempow, Germany",
     "title": "Fabelhafte Wohnung in großartiger Lage",
     "host": "Gastgeber: Wendy und Elisa",
     "price": "180 $ pro Nacht",
@@ -139,7 +142,7 @@
     "productSummary": {
       "accommodation": "Komplette Mietwohnung",
       "address": "Zempow, Deutschland",
-      "categories": ["TINY_HOMES", "SCHLÖSSER", "HÜTTEN"],
+      "categories": ["TINY_HOMES", "CASTLES", "CABINS"],
       "guests": { "key": "Gast", "value": 2 },
       "bedrooms": { "key": "Schlafzimmer", "value": 1 },
       "beds": { "key": "Bett", "value": 1 },
@@ -250,10 +253,12 @@
       "lat": 52.50494850601838,
       "address": "Zempow, Brandenburg, Deutschland",
       "addressDescription": "In einem ruhigen Waldgebiet gelegen, ideal für Wanderungen und Entspannung. Genießen Sie die Schönheit der Natur, nur eine kurze Autofahrt von lokalen Attraktionen entfernt."
-    }
+    },
+    "reservations": []
   },
   {
     "id": 3,
+    "filteredAddress": "Swan Lake, USA",
     "title": "Schönes Haus am Swan Lake",
     "host": "Gastgeber: John und Sarah",
     "price": "130 $ pro Nacht",
@@ -267,7 +272,7 @@
     "productSummary": {
       "accommodation": "Komplette Unterkunft",
       "address": "Swan Lake, USA",
-      "categories": ["KLEINE HÄUSER", "HÜTTEN"],
+      "categories": ["TINY_HOMES", "CABINS"],
       "guests": { "key": "Gast", "value": 4 },
       "bedrooms": { "key": "Schlafzimmer", "value": 2 },
       "beds": { "key": "Bett", "value": 3 },
@@ -368,10 +373,12 @@
       "lat": 52.50035561297163,
       "address": "Swan Lake, New York, USA",
       "addressDescription": "Eingebettet am See bietet das Ferienhaus sowohl Ruhe als auch Abenteuer. Erkunden Sie die lokalen Wanderwege oder genießen Sie eine Bootsfahrt auf dem See."
-    }
+    },
+    "reservations": []
   },
   {
     "id": 4,
+    "filteredAddress": "San Francisco, USA",
     "title": "Loft San Francisco",
     "host": "Gastgeber: Mike und Laura",
     "price": "210 $ pro Nacht",
@@ -385,7 +392,7 @@
     "productSummary": {
       "accommodation": "Ganze Mietwohnung",
       "address": "San Francisco, USA",
-      "categories": ["KLEINE HÄUSER", "HÜTTEN"],
+      "categories": ["TINY_HOMES", "CABINS"],
       "guests": { "key": "Gäste", "value": 2 },
       "bedrooms": { "key": "Schlafzimmer", "value": 1 },
       "beds": { "key": "Bett", "value": 1 },
@@ -482,10 +489,12 @@
       "lat": 52.530533117386106,
       "address": "Downtown, San Francisco, Kalifornien, USA",
       "addressDescription": "Befindet sich in einem belebten Gebiet mit Geschäften, Restaurants und kulturellen Sehenswürdigkeiten in fußläufiger Entfernung."
-    }
+    },
+    "reservations": []
   },
   {
     "id": 5,
+    "filteredAddress": "Big Bear Lake, USA",
     "title": "Nähe Big Bear Lake",
     "host": "Gastgeber: Emma und Jack",
     "price": "180 $ pro Nacht",
@@ -500,10 +509,10 @@
       "accommodation": "Ganze Mietwohnung",
       "address": "Big Bear Lake, USA",
       "categories": [
-        "KLEINE_HÄUSER",
-        "STRANDHAUS",
-        "STRANDHÄUSER",
-        "FLUSSHAÜSER"
+        "TINY_HOMES",
+        "BEACHFRONT",
+        "BEACH_HOUSES",
+        "RIVERSIDE_CABINS"
       ],
       "guests": { "key": "gäste", "value": 6 },
       "bedrooms": { "key": "schlafzimmer", "value": 3 },
@@ -605,10 +614,12 @@
       "lat": 52.572703710445744,
       "address": "Big Bear Lake, Kalifornien, USA",
       "addressDescription": "Abgelegen im Wald bietet die Hütte Ruhe und Zugang zu Outdoor-Aktivitäten."
-    }
+    },
+    "reservations": []
   },
   {
     "id": 6,
+    "filteredAddress": "Miami Beach, USA",
     "title": "Schöne Wohnung 95m² in Miami Beach",
     "host": "Gastgeberin: Anna",
     "price": "$120 pro Nacht",
@@ -623,9 +634,9 @@
       "accommodation": "Komplette Mietwohnung",
       "address": "Miami Beach, USA",
       "categories": [
-        "KLEINE_HÄUSER",
-        "AM_MEER",
-        "STRANDHÄUSER",
+        "TINY_HOMES",
+        "BEACHFRONT",
+        "BEACH_HOUSES",
         "RIVERSIDE_CABINS"
       ],
       "guests": { "key": "Gäste", "value": 4 },
@@ -728,10 +739,12 @@
       "lat": 52.470594210731385,
       "address": "Miami Beach, Florida, USA",
       "addressDescription": "Genießen Sie atemberaubende Ausblicke auf den Ozean und einfachen Zugang zu lokalen Attraktionen."
-    }
+    },
+    "reservations": []
   },
   {
     "id": 7,
+    "filteredAddress": "New York City, USA",
     "title": "Ruhiges Zimmer direkt zur U-Bahn-Station",
     "host": "Gastgeberin: Sarah",
     "price": "$290 pro Nacht",
@@ -841,10 +854,12 @@
       "lat": 52.50411704137263,
       "address": "New York City, New York, USA",
       "addressDescription": "Zentral gelegen, ideal für die Erkundung der Stadt."
-    }
+    },
+    "reservations": []
   },
   {
     "id": 8,
+    "filteredAddress": "Wadi Musa, Ma'an Governorate, Jordan",
     "title": "Schönes Zimmer mit eigenem Badezimmer",
     "host": "Gastgeber: Wadi Musa",
     "price": "$70 pro Nacht",
@@ -959,10 +974,12 @@
       "lat": 52.437529182378114,
       "address": "Wadi Musa, Ma'an Governorate, Jordanien",
       "addressDescription": "Eine erstklassige Lage im Herzen Jordaniens."
-    }
+    },
+    "reservations": []
   },
   {
     "id": 9,
+    "filteredAddress": "Napa Valley, USA",
     "title": "Ruhiges Zimmer 32 Minuten vom Napa Valley entfernt",
     "host": "Gastgeber: John",
     "price": "$125 pro Nacht",
@@ -976,6 +993,7 @@
     "productSummary": {
       "accommodation": "Ganze Mietwohnung",
       "address": "Napa Valley, USA",
+      "categories": ["TINY_HOMES"],
       "guests": { "key": "Gäste", "value": 6 },
       "bedrooms": { "key": "Schlafzimmer", "value": 3 },
       "beds": { "key": "Betten", "value": 4 },
@@ -1076,10 +1094,12 @@
       "lat": 52.49215719366196,
       "address": "Napa Valley, Kalifornien, USA",
       "addressDescription": "Ein friedlicher Rückzugsort, umgeben von Weinbergen."
-    }
+    },
+    "reservations": []
   },
   {
     "id": 10,
+    "filteredAddress": "San Francisco, USA",
     "title": "Haus in San Francisco",
     "host": "Gastgeber: Eric",
     "price": "$159 pro Nacht",
@@ -1099,7 +1119,7 @@
       "baths": { "key": "Bäder", "value": 2 },
       "starGrade": 4.8,
       "reviews": 30,
-      "categories": ["KLEINE_HÄUSER"]
+      "categories": ["TINY_HOMES"]
     },
     "highlights": [
       {
@@ -1189,10 +1209,12 @@
       "lat": 52.51297020838586,
       "address": "San Francisco, Kalifornien, USA",
       "addressDescription": "In der Nähe des Ufers gelegen mit hervorragendem Zugang zu Sehenswürdigkeiten."
-    }
+    },
+    "reservations": []
   },
   {
     "id": 11,
+    "filteredAddress": "Paris, France",
     "title": "Frankreich, Paris, Le Marais",
     "host": "Gastgeberin: Sophie",
     "price": "$150 pro Nacht",
@@ -1206,6 +1228,7 @@
     "productSummary": {
       "accommodation": "Ganze Wohnung",
       "address": "Paris, Frankreich",
+      "categories": ["TINY_HOMES", "CHALETS"],
       "guests": { "key": "Gäste", "value": 2 },
       "bedrooms": { "key": "Schlafzimmer", "value": 1 },
       "beds": { "key": "Bett", "value": 1 },
@@ -1293,10 +1316,12 @@
       "lat": 48.857555,
       "address": "Paris, Le Marais, Frankreich",
       "addressDescription": "Eingebettet in einem historischen Teil der Stadt mit Kopfsteinpflasterstraßen."
-    }
+    },
+    "reservations": []
   },
   {
     "id": 12,
+    "filteredAddress": "Rome, Italy",
     "title": "Italien, Rom, Trastevere",
     "host": "Gastgeber: Marco",
     "price": "$120 pro Nacht",
@@ -1315,7 +1340,7 @@
       "beds": { "key": "Bett", "value": 2 },
       "baths": { "key": "Bad", "value": 1 },
       "starGrade": 4.7,
-      "categories": ["KLEINE_HÄUSER", "CHALETS"],
+      "categories": ["TINY_HOMES", "CHALETS"],
       "reviews": 45
     },
     "highlights": [
@@ -1397,10 +1422,12 @@
       "lat": 41.892537,
       "address": "Rom, Trastevere, Italien",
       "addressDescription": "In einem lebhaften Viertel mit vielen Restaurants gelegen."
-    }
+    },
+    "reservations": []
   },
   {
     "id": 13,
+    "filteredAddress": "Barcelona, Spain",
     "title": "Spanien, Barcelona, Gotisches Viertel",
     "host": "Gastgeber: Marta",
     "price": "$180 pro Nacht",
@@ -1419,7 +1446,7 @@
       "beds": { "key": "Bett", "value": 2 },
       "baths": { "key": "Badezimmer", "value": 1 },
       "starGrade": 4.6,
-      "categories": ["KLEINE_HÄUSER", "CHALETS"],
+      "categories": ["TINY_HOMES", "CHALETS"],
       "reviews": 40
     },
     "highlights": [
@@ -1501,10 +1528,12 @@
       "lat": 41.3825,
       "address": "Barcelona, Spanien",
       "addressDescription": "Im Herzen des kulturellen Zentrums von Barcelona gelegen."
-    }
+    },
+    "reservations": []
   },
   {
     "id": 14,
+    "filteredAddress": "Phanom, Thailand",
     "title": "Haus in einer Naturunterkunft in Phanom, Thailand",
     "host": "Gastgeber: Waritsara",
     "price": "$250 pro Nacht",
@@ -1523,7 +1552,7 @@
       "beds": { "key": "Bett", "value": 2 },
       "baths": { "key": "Badezimmer", "value": 2 },
       "starGrade": 4.9,
-      "categories": ["LUXUS_VILLEN"],
+      "categories": ["LUXURY_VILLAS"],
       "reviews": 100
     },
     "highlights": [
@@ -1605,10 +1634,12 @@
       "lat": 40.748817,
       "address": "Phanom, Thailand",
       "addressDescription": "In der Nähe berühmter Sehenswürdigkeiten in Manhattan."
-    }
+    },
+    "reservations": []
   },
   {
     "id": 15,
+    "filteredAddress": "Sydney, Australia",
     "title": "Australien, Sydney, Darling Harbour",
     "host": "Gastgeber: Olivia",
     "price": "$220 pro Nacht",
@@ -1622,7 +1653,7 @@
     "productSummary": {
       "accommodation": "Komplette Wohnung",
       "address": "Sydney, Australien",
-      "categories": ["KLEINE_HÄUSER"],
+      "categories": ["TINY_HOMES"],
       "guests": { "key": "Gast", "value": 4 },
       "bedrooms": { "key": "Schlafzimmer", "value": 2 },
       "beds": { "key": "Bett", "value": 3 },
@@ -1709,10 +1740,12 @@
       "lat": -33.8688,
       "address": "Sydney, Darling Harbour, Australien",
       "addressDescription": "Direkt am Wasser gelegen, mit Zugang zu wichtigen Sehenswürdigkeiten."
-    }
+    },
+    "reservations": []
   },
   {
     "id": 16,
+    "filteredAddress": "Tokyo, Japan",
     "title": "Japan, Tokio, Shibuya",
     "host": "Gastgeber: Kenji",
     "price": "$170 pro Nacht",
@@ -1730,7 +1763,7 @@
       "bedrooms": { "key": "Schlafzimmer", "value": 1 },
       "beds": { "key": "Bett", "value": 1 },
       "baths": { "key": "Bad", "value": 1 },
-      "categories": ["LUXUS_VILLEN", "LUXE"],
+      "categories": ["LUXURY_VILLAS", "LUXE"],
       "starGrade": 4.7,
       "reviews": 65
     },
@@ -1817,10 +1850,12 @@
       "lat": 35.6616,
       "address": "Tokio, Shibuya, Japan",
       "addressDescription": "Im belebten Shibuya-Viertel gelegen."
-    }
+    },
+    "reservations": []
   },
   {
     "id": 17,
+    "filteredAddress": "Paris, France",
     "title": "Frankreich, Paris, Montmartre",
     "host": "Gastgeberin: Sophie",
     "price": "$190 pro Nacht",
@@ -1834,6 +1869,7 @@
     "productSummary": {
       "accommodation": "Ganze Wohnung",
       "address": "Paris, Frankreich",
+      "categories": ["LUXURY_VILLAS", "LUXE"],
       "guests": { "key": "Gast", "value": 3 },
       "bedrooms": { "key": "Schlafzimmer", "value": 1 },
       "beds": { "key": "Bett", "value": 1 },
@@ -1924,10 +1960,12 @@
       "lat": 48.8867,
       "address": "Paris, Montmartre, Frankreich",
       "addressDescription": "Im künstlerischen Viertel Montmartre gelegen."
-    }
+    },
+    "reservations": []
   },
   {
     "id": 18,
+    "filteredAddress": "Rome, Italy",
     "title": "Italien, Rom, Trastevere",
     "host": "Gastgeber: Marco",
     "price": "$200 pro Nacht",
@@ -1945,7 +1983,7 @@
       "bedrooms": { "key": "Schlafzimmer", "value": 1 },
       "beds": { "key": "Bett", "value": 1 },
       "baths": { "key": "Badezimmer", "value": 1 },
-      "categories": ["FLUSSHÄUSER", "CHALETS"],
+      "categories": ["RIVERSIDE_CABINS", "CHALETS"],
       "starGrade": 4.6,
       "reviews": 60
     },
@@ -2036,10 +2074,12 @@
       "lat": 41.8889,
       "address": "Rom, Trastevere, Italien",
       "addressDescription": "Gelegen im charmanten Stadtteil Trastevere."
-    }
+    },
+    "reservations": []
   },
   {
     "id": 19,
+    "filteredAddress": "Rio de Janeiro, Brazil",
     "title": "Brasilien, Rio de Janeiro, Copacabana",
     "host": "Gastgeberin: Ana",
     "price": "$180 pro Nacht",
@@ -2053,6 +2093,7 @@
     "productSummary": {
       "accommodation": "Ganzes Apartment",
       "address": "Rio de Janeiro, Brasilien",
+      "categories": ["RIVERSIDE_CABINS", "CHALETS"],
       "guests": { "key": "Gast", "value": 4 },
       "bedrooms": { "key": "Schlafzimmer", "value": 2 },
       "beds": { "key": "Bett", "value": 2 },
@@ -2143,10 +2184,12 @@
       "lat": -22.9714,
       "address": "Rio de Janeiro, Copacabana, Brasilien",
       "addressDescription": "Direkt am berühmten Copacabana-Strand gelegen."
-    }
+    },
+    "reservations": []
   },
   {
     "id": 20,
+    "filteredAddress": "New York City, USA",
     "title": "USA, New York, Manhattan",
     "host": "Gastgeber: Michael",
     "price": "$250 pro Nacht",
@@ -2160,6 +2203,7 @@
     "productSummary": {
       "accommodation": "Gesamte Wohnung",
       "address": "New York City, USA",
+      "categories": ["RIVERSIDE_CABINS"],
       "guests": { "key": "Gäste", "value": 4 },
       "bedrooms": { "key": "Schlafzimmer", "value": 2 },
       "beds": { "key": "Bett", "value": 2 },
@@ -2250,10 +2294,12 @@
       "lat": 40.758,
       "address": "New York City, Manhattan, USA",
       "addressDescription": "Im Herzen von Manhattan gelegen."
-    }
+    },
+    "reservations": []
   },
   {
     "id": 21,
+    "filteredAddress": "Paris, France",
     "title": "Frankreich, Paris, Champs-Élysées",
     "host": "Gastgeberin: Marie",
     "price": "€180 pro Nacht",
@@ -2267,6 +2313,7 @@
     "productSummary": {
       "accommodation": "Gesamte Wohnung",
       "address": "Paris, Frankreich",
+      "categories": ["CHALETS"],
       "guests": { "key": "Gäste", "value": 3 },
       "bedrooms": { "key": "Schlafzimmer", "value": 1 },
       "beds": { "key": "Betten", "value": 1 },
@@ -2353,10 +2400,12 @@
       "lat": 48.8656,
       "address": "Paris, Champs-Élysées, Frankreich",
       "addressDescription": "Im Herzen von Paris, in der Nähe ikonischer Sehenswürdigkeiten."
-    }
+    },
+    "reservations": []
   },
   {
     "id": 22,
+    "filteredAddress": "Tokyo, Japan",
     "title": "Japan, Tokio, Shibuya",
     "host": "Gastgeber: Yuki",
     "price": "¥12.000 pro Nacht",
@@ -2370,6 +2419,7 @@
     "productSummary": {
       "accommodation": "Ganze Wohnung",
       "address": "Tokio, Japan",
+      "categories": ["LUXE"],
       "guests": { "key": "Gast", "value": 2 },
       "bedrooms": { "key": "Schlafzimmer", "value": 1 },
       "beds": { "key": "Betten", "value": 1 },
@@ -2456,10 +2506,12 @@
       "lat": 35.658,
       "address": "Tokio, Shibuya, Japan",
       "addressDescription": "Im Herzen von Shibuya, Tokio."
-    }
+    },
+    "reservations": []
   },
   {
     "id": 23,
+    "filteredAddress": "Rome, Italy",
     "title": "Italien, Rom, Trastevere",
     "host": "Gastgeber: Luca",
     "price": "€150 pro Nacht",
@@ -2473,6 +2525,7 @@
     "productSummary": {
       "accommodation": "Ganze Wohnung",
       "address": "Rom, Italien",
+      "categories": ["LUXE"],
       "guests": { "key": "Gast", "value": 4 },
       "bedrooms": { "key": "Schlafzimmer", "value": 2 },
       "beds": { "key": "Betten", "value": 2 },
@@ -2559,10 +2612,12 @@
       "lat": 41.8884,
       "address": "Rom, Trastevere, Italien",
       "addressDescription": "Eingebettet in eines der malerischsten Viertel Roms."
-    }
+    },
+    "reservations": []
   },
   {
     "id": 24,
+    "filteredAddress": "Sydney, Australia",
     "title": "Australien, Sydney, Bondi Beach",
     "host": "Gastgeber: Sarah",
     "price": "$300 pro Nacht",
@@ -2576,7 +2631,7 @@
     "productSummary": {
       "accommodation": "Ganzes Apartment",
       "address": "Sydney, Australien",
-      "categories": ["KLEINWÄHNE", "STRANDHÄUSER"],
+      "categories": ["TINY_HOMES", "BEACH_HOUSES"],
       "guests": { "key": "Gäste", "value": 4 },
       "bedrooms": { "key": "Schlafzimmer", "value": 2 },
       "beds": { "key": "Betten", "value": 2 },
@@ -2663,6 +2718,7 @@
       "lat": -33.8915,
       "address": "Sydney, Bondi Beach, Australien",
       "addressDescription": "Direkt am Bondi Beach, ein Paradies für Surfer."
-    }
+    },
+    "reservations": []
   } 
 ]

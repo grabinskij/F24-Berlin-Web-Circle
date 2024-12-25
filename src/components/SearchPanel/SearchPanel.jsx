@@ -14,7 +14,6 @@ const SearchPanel = () => {
     const navigate = useNavigate();
 
     const { t } = useTranslation();
-
     // Toggle between "stays" and "experiences"
     const toggleSearchType = (type) => {
         setSearchType(type);
@@ -31,6 +30,7 @@ const SearchPanel = () => {
             infants,
             pets
         };
+        console.log('region', region)
 
         if (region) {
             searchQueries.region = region;
