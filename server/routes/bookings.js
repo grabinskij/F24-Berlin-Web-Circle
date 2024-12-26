@@ -5,6 +5,8 @@ const reservations = require('../src/data/reservations.json')
 const { calculateCosts } = require('../src/utils/costs')
 const fs = require('fs')
 const path = require('path')
+const exchangeRatesService = require('../src/utils/exchangeRatesService')
+
 
 
 const router = express.Router()
@@ -20,7 +22,7 @@ router.get('/:id', (req, res) => {
   }
 })
 
-router.post('/reservations/:id', (req, res) => {
+router.post('/reservations/:id', async (req, res) => {
   const productId = parseInt(req.params.id)
   const { checkInDate, checkOutDate, guests, totalPrice } = req.body
 
@@ -42,15 +44,47 @@ router.post('/reservations/:id', (req, res) => {
   } = bookingData
 
 
-  const costs = calculateCosts({
-    checkInDate,
-    checkOutDate,
-    pricePerNight,
-    airbnbServiceFee,
-    cleaningFee,
-    longStayDiscount,
-    nightsCountForDiscount: nightsCountForLongStayDiscount,
-  })
+  const { rates: exchangeRates, selectedCurrency } = exchangeRatesService.getRates();
+  
+  console.log('Retrieved from service:', {
+    exchangeRates,
+    selectedCurrency
+  });
+
+  if (!exchangeRates || Object.keys(exchangeRates).length === 0) {
+    return res.status(500).json({ 
+      message: 'Exchange rates not available',
+      debug: {
+        exchangeRates,
+        selectedCurrency
+      }
+    });
+  }
+  
+    const costs = calculateCosts({
+      checkInDate,
+      checkOutDate,
+      pricePerNight,
+      airbnbServiceFee,
+      cleaningFee,
+      longStayDiscount,
+      nightsCountForDiscount: nightsCountForLongStayDiscount,
+      exchangeRates,
+      selectedCurrency,
+    });
+
+
+ 
+
+  // const costs = calculateCosts({
+  //   checkInDate,
+  //   checkOutDate,
+  //   pricePerNight,
+  //   airbnbServiceFee,
+  //   cleaningFee,
+  //   longStayDiscount,
+  //   nightsCountForDiscount: nightsCountForLongStayDiscount,
+  // })
  
   if (costs.nights <= 0) {
     return res.status(400).json({ message: 'Invalid dates selected.' })

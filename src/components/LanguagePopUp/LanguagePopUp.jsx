@@ -7,10 +7,15 @@ import { createSearchParams, useLocation, useNavigate, useSearchParams } from 'r
 import axios from 'axios'
 
 
-const LanguagePopUp = ({ onCloseClick, isVisible }) => {
+const LanguagePopUp = ({ onCloseClick, isVisible, onCurrencyChange }) => {
   const [isLanguageSelected, setIsLanguageSelected] = useState(true)
   const [searchParams] = useSearchParams()
+  const [selectedCurrency, setSelectedCurrency] = useState('Euro') 
+  const [exchangeRateUSD, setExchangeRateUSD] = useState(1) 
+  const [exchangeRateUAH, setExchangeRateUAH] = useState(1)
 
+  // const apiKey = import.meta.env.VITE_EXCHANGE_RATE_API_KEY;
+  
   const { t, i18n } = useTranslation();
   const navigate = useNavigate()
   const location = useLocation()
@@ -53,29 +58,41 @@ const LanguagePopUp = ({ onCloseClick, isVisible }) => {
     }
   };
 
+  const handleCurrencyChange = async (currencyKey, currencyName) => {
 
-//   .then(response => {
-//     if (!response.ok) {
-//       throw new Error('Failed to set language on server');
-//     }
-//     return response.json();
-//   })
-//   .then(() => {
-//     // Force reload i18n with new language
-//     i18n.reloadResources([lng]).then(() => {
-//       window.location.reload(); // Optional: only if you need a full page refresh
-//     });
-//   })
-//   .catch(error => {
-//     console.error("Failed to set language on server:", error);
-//   });
-// } catch (error) {
-//   console.error("Failed to change language:", error);
-// }
+    if (currencyKey === 'EUR') {
+      setExchangeRateUSD(1);
+      setExchangeRateUAH(1);
+      setSelectedCurrency(currencyName);
+      onCurrencyChange(currencyKey, 1);
+      console.log(`Exchange rate for ${currencyName}: 1 (default)`);
+      return;
+    }
 
+    try {
+      setSelectedCurrency(currencyName);
 
-  const handleCurrencyChange = (currency) => {
-    console.log(`Currency changed to: ${currency}`);
+      const response = await axios.get(`http://localhost:8800/api/currency`, {
+        params: { selectedCurrency: currencyKey }
+      });
+
+      console.log('responseCurrency', response.data)
+      const rateEURtoUSD = response.data.quotes.EURUSD.end_rate;
+      const rateEURtoUAH = response.data.quotes.EURUAH.end_rate;
+
+      if (currencyKey === 'USD') {
+        setExchangeRateUSD(rateEURtoUSD); 
+        console.log(`Exchange rate for ${currencyName}: ${rateEURtoUSD}`);
+      } else if (currencyKey === 'UAH') {
+        setExchangeRateUAH(rateEURtoUAH);  
+        console.log(`Exchange rate for ${currencyName}: ${rateEURtoUAH}`);
+      }
+  
+      onCurrencyChange(currencyKey, currencyKey === 'USD' ? rateEURtoUSD : rateEURtoUAH);
+  
+    } catch (error) {
+      console.error("Error fetching exchange rates:", error);
+    }
   };
   
 
@@ -94,13 +111,24 @@ const LanguagePopUp = ({ onCloseClick, isVisible }) => {
     Ukrainian: { label: 'Українська', code: 'ukr' },
   };
 
-  const currency = {
-    Euro: 'Euro',
-    UsDollar: 'US Dollar',
-    Hryvnia: 'Гривня',
-  }
+  // const currency = {
+  //   Euro: 'Euro',
+  //   UsDollar: 'US Dollar',
+  //   Hryvnia: 'Гривня',
+  // }
 
-  const itemsToRender = isLanguageSelected ? languages : currency
+  // const currencyCodes = {
+  //   ["Euro"]: 'EUR',
+  //   ["United States Dollar"]: 'USD',
+  //   ["Ukrainian Hryvnia"]: 'UAH',
+  // }
+  const currencies = {
+    Euro: { label: 'Euro', code: 'EUR' },
+    'United States Dollar': { label: 'US Dollar', code: 'USD' },
+    'Ukrainian Hryvnia': { label: 'Hryvnia', code: 'UAH' },
+  };
+
+  const itemsToRender = isLanguageSelected ? languages : currencies
 
   return (
     <Popup onCloseClick={onCloseClick} isVisible={isVisible}>
@@ -147,17 +175,21 @@ const LanguagePopUp = ({ onCloseClick, isVisible }) => {
         </div>
         <div className={Styles.langCurrencyContainer}>
           <div className={Styles.langCurrencyWrapper}>
-            {Object.entries(itemsToRender).map(([key, value]) => (
+            {Object.entries(itemsToRender).map(([key, { label, code }]) => (
               <div key={key} className={Styles.item}>
              {isLanguageSelected ? (
                   <button
-                    onClick={() => changeLanguage(value.code || 'en')}
-                    className={i18n.language === value.code ? Styles.selected : ''} 
+                    onClick={() => changeLanguage(code || 'en')}
+                    className={i18n.language === code ? Styles.selected : ''} 
                   >
-                    {value.label || value}
+                    {label || key}
                   </button>
                 ) : (
-                  <button onClick={() => handleCurrencyChange(key)}>{value}</button>
+                  <button onClick={() => handleCurrencyChange(code, label)}
+                          className={selectedCurrency === label ? Styles.selected : ''}
+                  >
+                    {label}
+                  </button>
                 )}
               </div>
             ))}

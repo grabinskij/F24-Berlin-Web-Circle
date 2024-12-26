@@ -6,8 +6,13 @@ function calculateCosts({
     airbnbServiceFee,
     cleaningFee,
     longStayDiscount,
-    nightsCountForDiscount
+    nightsCountForDiscount,
+    exchangeRates,
+    selectedCurrency,
 }) {
+
+  console.log('exchangeRates', exchangeRates)
+  console.log('selectedCurrency', selectedCurrency)
  
   const nights = (new Date(checkOutDate) - new Date(checkInDate)) / (1000 * 60 * 60 * 24);
   const isDiscount = nights >= nightsCountForDiscount;
