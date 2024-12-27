@@ -12,6 +12,20 @@ const Root = () =>
 {
 	const [modalIsVisible, setModalIsVisible] = useState(false);
   const [isVisible, setIsVisiable] = useState(false);
+  const [exchangeRateUSD, setExchangeRateUSD] = useState(1) 
+  const [exchangeRateUAH, setExchangeRateUAH] = useState(1)
+  const [selectedCurrency, setSelectedCurrency] = useState('Euro') 
+
+  const onCurrencyChange = (currency, exchangeRate) => {
+    if (currency === 'USD') {
+      setExchangeRateUSD(exchangeRate); 
+    } else if (currency === 'UAH') {
+      setExchangeRateUAH(exchangeRate);  
+    } else {
+      setExchangeRateUSD(1);
+      setExchangeRateUAH(1);
+    }
+  }
 
   const closeModal = () => setModalIsVisible(false);
 
@@ -27,6 +41,10 @@ const Root = () =>
     modalIsVisible,
     setModalIsVisible,
     closeModal,
+    exchangeRateUSD,
+    exchangeRateUAH,
+    selectedCurrency,
+    setSelectedCurrency
   };
 
   const headerContext = {
@@ -59,7 +77,15 @@ const Root = () =>
         </>
       )}
       <div className={styles.languagePopUp}>
-          <LanguagePopUp onCloseClick={handelClose} isVisible={isVisible}/>
+          <LanguagePopUp 
+            onCloseClick={handelClose} 
+            isVisible={isVisible}
+            onCurrencyChange={onCurrencyChange}
+            setExchangeRateUSD={setExchangeRateUSD}
+            setExchangeRateUAH={setExchangeRateUAH}
+            selectedCurrency={selectedCurrency}
+            setSelectedCurrency={setSelectedCurrency}
+          />
       </div>
 		</div>
 	)

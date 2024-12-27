@@ -7,14 +7,31 @@ import { createSearchParams, useLocation, useNavigate, useSearchParams } from 'r
 import axios from 'axios'
 
 
-const LanguagePopUp = ({ onCloseClick, isVisible, onCurrencyChange }) => {
+const LanguagePopUp = ({ 
+  onCloseClick, 
+  isVisible, 
+  onCurrencyChange, 
+  setExchangeRateUSD, 
+  setExchangeRateUAH,
+  selectedCurrency, 
+  setSelectedCurrency
+}) => {
   const [isLanguageSelected, setIsLanguageSelected] = useState(true)
   const [searchParams] = useSearchParams()
-  const [selectedCurrency, setSelectedCurrency] = useState('Euro') 
-  const [exchangeRateUSD, setExchangeRateUSD] = useState(1) 
-  const [exchangeRateUAH, setExchangeRateUAH] = useState(1)
+  // const [selectedCurrency, setSelectedCurrency] = useState('Euro') 
+  // const [exchangeRateUSD, setExchangeRateUSD] = useState(1) 
+  // const [exchangeRateUAH, setExchangeRateUAH] = useState(1)
 
-  // const apiKey = import.meta.env.VITE_EXCHANGE_RATE_API_KEY;
+  // const onCurrencyChange = (currency, exchangeRate) => {
+  //   if (currency === 'USD') {
+  //     setExchangeRateUSD(exchangeRate); 
+  //   } else if (currency === 'UAH') {
+  //     setExchangeRateUAH(exchangeRate);  
+  //   } else {
+  //     setExchangeRateUSD(1);
+  //     setExchangeRateUAH(1);
+  //   }
+  // }
   
   const { t, i18n } = useTranslation();
   const navigate = useNavigate()
@@ -66,7 +83,7 @@ const LanguagePopUp = ({ onCloseClick, isVisible, onCurrencyChange }) => {
       setSelectedCurrency(currencyName);
       onCurrencyChange(currencyKey, 1);
       console.log(`Exchange rate for ${currencyName}: 1 (default)`);
-      return;
+      // return;
     }
 
     try {
@@ -76,19 +93,21 @@ const LanguagePopUp = ({ onCloseClick, isVisible, onCurrencyChange }) => {
         params: { selectedCurrency: currencyKey }
       });
 
-      console.log('responseCurrency', response.data)
       const rateEURtoUSD = response.data.quotes.EURUSD.end_rate;
       const rateEURtoUAH = response.data.quotes.EURUAH.end_rate;
 
-      if (currencyKey === 'USD') {
-        setExchangeRateUSD(rateEURtoUSD); 
-        console.log(`Exchange rate for ${currencyName}: ${rateEURtoUSD}`);
-      } else if (currencyKey === 'UAH') {
-        setExchangeRateUAH(rateEURtoUAH);  
-        console.log(`Exchange rate for ${currencyName}: ${rateEURtoUAH}`);
-      }
+      localStorage.setItem('exchangeRateUSD', rateEURtoUSD);
+      localStorage.setItem('exchangeRateUAH', rateEURtoUAH);
+      localStorage.setItem('selectedCurrency', currencyKey);
+      // if (currencyKey === 'USD') {
+      //   setExchangeRateUSD(rateEURtoUSD); 
+      //   console.log(`Exchange rate for ${currencyName}: ${rateEURtoUSD}`);
+      // } else if (currencyKey === 'UAH') {
+      //   setExchangeRateUAH(rateEURtoUAH);  
+      //   console.log(`Exchange rate for ${currencyName}: ${rateEURtoUAH}`);
+      // }
   
-      onCurrencyChange(currencyKey, currencyKey === 'USD' ? rateEURtoUSD : rateEURtoUAH);
+      onCurrencyChange(currencyKey, currencyKey === 'USD' ? rateEURtoUSD : currencyKey === 'UAH' ? rateEURtoUAH : 1);
   
     } catch (error) {
       console.error("Error fetching exchange rates:", error);

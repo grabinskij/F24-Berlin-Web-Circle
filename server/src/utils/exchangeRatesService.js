@@ -24,3 +24,29 @@ class ExchangeRatesService {
 
 // Export a singleton instance
 module.exports = new ExchangeRatesService();
+
+
+// exchangeRatesService.js
+
+
+// class ExchangeRatesService {
+//   constructor() {
+//     this.rates = null;
+//     this.selectedCurrency = null;
+//   }
+
+//   setRates(rates, selectedCurrency) {
+//     this.rates = rates;
+//     this.selectedCurrency = selectedCurrency;
+//     console.log('Rates set:', { rates, selectedCurrency });
+//   }
+
+//   getRates() {
+//     return {
+//       rates: this.rates,
+//       selectedCurrency: this.selectedCurrency
+//     };
+//   }
+// }
+
+// module.exports = global.exchangeRatesService = global.exchangeRatesService || new ExchangeRatesService();

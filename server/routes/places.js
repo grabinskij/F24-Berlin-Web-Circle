@@ -12,7 +12,6 @@ router.get("/", (req, res) => {
 		req.query.lng || 
 		req.i18n?.language || 
 		'en';
-console.log('cookie', req.cookies);
 const language = fullLanguageCode.split('-')[0];
 // console.log('languagePolate', language);
 	// checkIn and checkOut values are passed as strings. If the given string is not valid it will return 'Invalid Date'

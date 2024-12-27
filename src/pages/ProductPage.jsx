@@ -20,7 +20,7 @@ import Amenities from "../components/Amenities/Amenities";
 import { useEffect, useRef, useState } from "react";
 import ShortcutsPopUp from '../components/ReservationCard/ShortcutsPopUp/ShortcutsPopUp'
 import GuestCountPopUp from '../components/ReservationCard/GuestCountPopUp/GuestCountPopUp'
-import { useParams } from "react-router-dom";
+import { useOutletContext, useParams } from "react-router-dom";
 import CalendarBlock from "../components/CalendarBlock/CalendarBlock";
 import CalendarBlockPopUp from "../components/CalendarBlock/CalendarBlockPopUp/CalendarBlockPopUp";
 import { fetchData } from "../api/fetchProductData";
@@ -37,8 +37,10 @@ const ProductPage = () => {
   const [booking, setBooking] = useState(null);
   const [checkInDate, setCheckInDate] = useState(null)
   const [checkOutDate, setCheckOutDate] = useState(null)
+  const {exchangeRateUSD, exchangeRateUAH, selectedCurrency, setSelectedCurrency} = useOutletContext();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+
 
   const isInitializedRef = useRef(false)
 
@@ -62,7 +64,7 @@ const ProductPage = () => {
   const toggleKeyboardPopup = () => {
     setIsKeybordPopupVisible((prevState) => !prevState)
   }
-console.log(place)
+
 
   function handleShare() {
     alert("Share this experience");
@@ -160,6 +162,10 @@ console.log(place)
               setCheckInDate={setCheckInDate}
               setCheckOutDate={setCheckOutDate}
               isInitializedRef={isInitializedRef}
+              exchangeRateUSD={exchangeRateUSD}
+              exchangeRateUAH={exchangeRateUAH}
+              selectedCurrency={selectedCurrency} 
+              setSelectedCurrency={setSelectedCurrency}
             />
           }
           </div>

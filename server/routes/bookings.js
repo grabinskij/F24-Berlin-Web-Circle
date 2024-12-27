@@ -5,11 +5,17 @@ const reservations = require('../src/data/reservations.json')
 const { calculateCosts } = require('../src/utils/costs')
 const fs = require('fs')
 const path = require('path')
-const exchangeRatesService = require('../src/utils/exchangeRatesService')
-
-
+// const exchangeRatesService = require('../src/utils/exchangeRatesService')
 
 const router = express.Router()
+
+router.get('/', (req, res) => {
+  if (bookings.length > 0) {
+    res.json(bookings)
+  } else {
+    res.status(404).json({ error: `Bookings ${bookings.length} not found.`})
+  }
+})
 
 router.get('/:id', (req, res) => {
   const bookingId = parseInt(req.params.id)
@@ -23,9 +29,32 @@ router.get('/:id', (req, res) => {
 })
 
 router.post('/reservations/:id', async (req, res) => {
+
+  // const { rates: exchangeRates, selectedCurrency } = exchangeRatesService.getRates() || {};
+  
+  // if (!exchangeRates || Object.keys(exchangeRates).length === 0) {
+  //   console.error('Exchange rates not available:', exchangeRatesService.getRates());
+  //   return res.status(500).json({ 
+  //     message: 'Exchange rates not available. Please try again.'
+  //   });
+  // }
+
   const productId = parseInt(req.params.id)
   const { checkInDate, checkOutDate, guests, totalPrice } = req.body
 
+  // console.log('Rates stored in service:', exchangeRatesService.getRates());
+  // const { rates: exchangeRates, selectedCurrency } = exchangeRatesService.getRates();
+    
+    // if (!exchangeRates || Object.keys(exchangeRates).length === 0) {
+    //   return res.status(500).json({ 
+    //     message: 'Exchange rates not available',
+    //     debug: {
+    //       exchangeRates,
+    //       selectedCurrency
+    //     }
+    //   });
+    // }
+console.log('req.body', req.body)
   const reservation = bookings.find((b) => b.id === productId)
   if (!reservation) {
     return res
@@ -43,23 +72,6 @@ router.post('/reservations/:id', async (req, res) => {
     nightsCountForLongStayDiscount,
   } = bookingData
 
-
-  const { rates: exchangeRates, selectedCurrency } = exchangeRatesService.getRates();
-  
-  console.log('Retrieved from service:', {
-    exchangeRates,
-    selectedCurrency
-  });
-
-  if (!exchangeRates || Object.keys(exchangeRates).length === 0) {
-    return res.status(500).json({ 
-      message: 'Exchange rates not available',
-      debug: {
-        exchangeRates,
-        selectedCurrency
-      }
-    });
-  }
   
     const costs = calculateCosts({
       checkInDate,
@@ -69,12 +81,12 @@ router.post('/reservations/:id', async (req, res) => {
       cleaningFee,
       longStayDiscount,
       nightsCountForDiscount: nightsCountForLongStayDiscount,
-      exchangeRates,
-      selectedCurrency,
+      // exchangeRates,
+      // selectedCurrency,
     });
 
 
- 
+ console.log('Costs', costs)
 
   // const costs = calculateCosts({
   //   checkInDate,

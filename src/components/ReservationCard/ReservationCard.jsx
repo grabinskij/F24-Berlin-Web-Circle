@@ -28,7 +28,10 @@ function ReservationCard({
   setCheckInDate,
   setCheckOutDate,
   booking,
-  isInitializedRef
+  isInitializedRef,
+  exchangeRateUSD,
+  exchangeRateUAH,
+  selectedCurrency
 }) {
 
   const navigate = useNavigate();
@@ -93,15 +96,46 @@ function ReservationCard({
 
   const checkInOut = checkInDate && checkOutDate
 
+  const usd = exchangeRateUSD || 1;
+  const uah = exchangeRateUAH || 1;
+
+  let pricePerNightCurrency = pricePerNight;
+  let airbnbServiceFeeCurrency = airbnbServiceFee;
+  let cleaningFeeCurrency = cleaningFee;
+  let longStayDiscountCurrency = longStayDiscount;
+
+  if (selectedCurrency === 'USD') {
+    pricePerNightCurrency *= usd;
+    airbnbServiceFeeCurrency *= usd;
+    cleaningFeeCurrency *= usd;
+    longStayDiscountCurrency *= usd;
+  } else if (selectedCurrency === 'UAH') {
+    pricePerNightCurrency *= uah;
+    airbnbServiceFeeCurrency *= uah;
+    cleaningFeeCurrency *= uah;
+    longStayDiscountCurrency *= uah;
+  }
+
   const nights =
   checkInDate && checkOutDate ? calculateNights(checkInDate, checkOutDate) : 0
   const isDiscount = nights >= nightsCountForLongStayDiscount
-  const basePrice = nights * pricePerNight
+  const basePrice = nights * pricePerNightCurrency
   const totalPrice =
     basePrice +
-    airbnbServiceFee +
-    cleaningFee -
-    (isDiscount ? longStayDiscount : 0)
+    airbnbServiceFeeCurrency +
+    cleaningFeeCurrency -
+    (isDiscount ? longStayDiscountCurrency : 0)
+
+
+  // const nights =
+  // checkInDate && checkOutDate ? calculateNights(checkInDate, checkOutDate) : 0
+  // const isDiscount = nights >= nightsCountForLongStayDiscount
+  // const basePrice = nights * pricePerNight
+  // const totalPrice =
+  //   basePrice +
+  //   airbnbServiceFee +
+  //   cleaningFee -
+  //   (isDiscount ? longStayDiscount : 0)
 
   
   const handleFormSubmit = async (e) => {
@@ -282,10 +316,10 @@ function ReservationCard({
         <CostsSummary
           checkInDate={checkInDate}
           checkOutDate={checkOutDate}
-          pricePerNight={pricePerNight}
-          cleaningFee={cleaningFee}
-          airbnbServiceFee={airbnbServiceFee}
-          longStayDiscount={longStayDiscount}
+          pricePerNight={pricePerNightCurrency}
+          cleaningFee={cleaningFeeCurrency}
+          airbnbServiceFee={airbnbServiceFeeCurrency}
+          longStayDiscount={longStayDiscountCurrency}
           nightsCountForDiscount={nightsCountForLongStayDiscount}
           nights={nights}
           basePrice={basePrice}
