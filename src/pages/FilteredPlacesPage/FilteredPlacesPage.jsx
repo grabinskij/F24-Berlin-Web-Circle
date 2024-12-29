@@ -9,6 +9,7 @@ import { BASE_URL } from "../../constants/constants";
 import PriceRangeModal from "../../components/PriceRangeModal/PriceRangeModal";
 import useOutsideClick from "../../hooks/useOutsideClick";
 import { useTranslation } from "react-i18next";
+import { convertCurrency } from "../../utils/currencyConvertation";
 
 
 function FilteredPlacesPage() {
@@ -79,19 +80,17 @@ function FilteredPlacesPage() {
         return booking?.bookingData?.pricePerNight || 0; 
     }
     return 0; 
-};
-
+  };
 
   const priceCurrencyCalculation = (price) => {
-    console.log('Price received for calculation:', price);
     if (currency === 'USD') {
-        return Math.round(price * rateEURUSD); 
+        return convertCurrency(price, rateEURUSD) 
     } else if (currency === 'UAH') {
-        return Math.round(price * rateEURUAH); 
+        return convertCurrency(price, rateEURUAH);
     } else {
         return Math.round(price); 
     }
-};
+  };
 
   return (
     <div> 

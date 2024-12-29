@@ -1,6 +1,5 @@
 const express = require("express");
 const cors = require("cors");
-// const products = require("./src/data/places.json");
 const dotenv = require("dotenv");
 const i18next = require("i18next");
 const i18nextMiddleware = require("i18next-http-middleware");
@@ -10,8 +9,6 @@ const enTranslation = require('./locales/en/translation.json')
 const deTranslation = require('./locales/de/translation.json')
 const ukrTranslation = require('./locales/ukr/translation.json')
 const axios = require('axios');
-const exchangeRatesService = require('./src/utils/exchangeRatesService');
-const { calculateCosts } = require("./src/utils/costs");
 
 // const prisma = require(".db/prisma");
 
@@ -112,41 +109,15 @@ app.post("/savePlace", (req, res) => {
 
 
 app.get('/api/currency', async (req, res) => {
-  const { selectedCurrency } = req.query;
   try {
     const response = await axios.get(`${EXCHANGE_URL}?access_key=${API_KEY}&source=EUR&currencies=USD,UAH&format=1`);
     const rates = response.data;
-
-    // exchangeRatesService.setRates({
-    //   USD: rates.quotes.EURUSD.end_rate,
-    //   UAH: rates.quotes.EURUAH.end_rate
-    // }, selectedCurrency);
-    if(rates && selectedCurrency) {
-      calculateCosts({
-        rates,
-        selectedCurrency,
-      })
-    }
     res.json(rates);
   } catch (error) {
     console.error("Error fetching exchange rates:", error);
     res.status(500).json({ error: 'Error fetching exchange rates' });
   }
 });
-
-
-
-// app.get('/api/currency', async (req, res) => {
-//   try {
-//     const response = await axios.get(`${EXCHANGE_URL}?access_key=${API_KEY}&source=EUR&currencies=USD,UAH&format=1`);
-//     res.json(response.data);
-//   } catch (error) {
-//     console.error("Error fetching exchange rates:", error.response ? error.response.data : error.message);
-//     res.status(500).json({ error: 'Error fetching exchange rates' });
-//   }
-// });
-
-
 
 // import Routes
 const placesRoutes = require("./routes/places");

@@ -9,7 +9,8 @@ const CostsSummary = ({
   nights,
   basePrice,
   isDiscount,
-  totalPrice
+  totalPrice,
+  selectedCurrency,
 }) => {
 
   const { t } = useTranslation();
@@ -23,33 +24,35 @@ const CostsSummary = ({
       <div className={styles.pricingDetails}>
         <div className={styles.priceItemsContainer}>
           <div className={styles.priceItem}>
-            <span>{`€ ${pricePerNight} x ${nights} ${t('product.nights', {count: nights})}`}</span>
-            <span>{`€ ${basePrice}`}</span>
+            <span>{`${selectedCurrency === 'USD' ? '$' : selectedCurrency === 'UAH' ? '₴' : "€"}${pricePerNight} x ${nights} ${t('product.nights', {count: nights})}`}</span>
+            <span>{`${selectedCurrency === 'USD' ? '$' : selectedCurrency === 'UAH' ? '₴' : "€"}${basePrice}`}</span>
           </div>
           {longStayDiscount > 0 && isDiscount && (
             <div className={styles.priceItem}>
               <span>{t('product.long_stay_discount')}</span>
               <span
                 className={styles.discountPriceItem}
-              >{`-€ ${longStayDiscount}`}</span>
+              >
+                {`-${selectedCurrency === 'USD' ? '$' : selectedCurrency === 'UAH' ? '₴' : "€"}${longStayDiscount}`}
+              </span>
             </div>
           )}
           {cleaningFee > 0 && (
             <div className={styles.priceItem}>
               <span>{t('product.cleaning_fee')}</span>
-              <span>{`€ ${cleaningFee}`}</span>
+              <span>{`${selectedCurrency === 'USD' ? '$' : selectedCurrency === 'UAH' ? '₴' : "€"}${cleaningFee}`}</span>
             </div>
           )}
           {airbnbServiceFee > 0 && (
             <div className={styles.priceItem}>
               <span>{t('product.airbnb_service_fee')}</span>
-              <span>{`€ ${airbnbServiceFee}`}</span>
+              <span>{`${selectedCurrency === 'USD' ? '$' : selectedCurrency === 'UAH' ? '₴' : "€"}${airbnbServiceFee}`}</span>
             </div>
           )}
         </div>
         <div className={styles.totalPrice}>
           <strong>{t('product.total')}</strong>
-          <strong>{`€ ${totalPrice}`}</strong>
+          <strong>{`${selectedCurrency === 'USD' ? '$' : selectedCurrency === 'UAH' ? '₴' : "€"}${totalPrice}`}</strong>
         </div>
       </div>
     </div>

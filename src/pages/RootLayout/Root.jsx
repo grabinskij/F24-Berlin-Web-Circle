@@ -16,11 +16,12 @@ const Root = () =>
   const [exchangeRateUAH, setExchangeRateUAH] = useState(1)
   const [selectedCurrency, setSelectedCurrency] = useState('Euro') 
 
+
   const onCurrencyChange = (currency, exchangeRate) => {
     if (currency === 'USD') {
-      setExchangeRateUSD(exchangeRate); 
+      setExchangeRateUSD(exchangeRate);
     } else if (currency === 'UAH') {
-      setExchangeRateUAH(exchangeRate);  
+      setExchangeRateUAH(exchangeRate); 
     } else {
       setExchangeRateUSD(1);
       setExchangeRateUAH(1);

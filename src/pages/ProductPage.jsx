@@ -37,7 +37,7 @@ const ProductPage = () => {
   const [booking, setBooking] = useState(null);
   const [checkInDate, setCheckInDate] = useState(null)
   const [checkOutDate, setCheckOutDate] = useState(null)
-  const {exchangeRateUSD, exchangeRateUAH, selectedCurrency, setSelectedCurrency} = useOutletContext();
+  const {exchangeRateUSD, exchangeRateUAH, selectedCurrency} = useOutletContext();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -48,11 +48,15 @@ const ProductPage = () => {
 
   const { t } = useTranslation();
 
+  const rateEURUSD = parseFloat(localStorage.getItem('exchangeRateUSD')) || exchangeRateUSD || 1;
+  const rateEURUAH = parseFloat(localStorage.getItem('exchangeRateUAH')) || exchangeRateUAH || 1;
+  const currency = localStorage.getItem('selectedCurrency') || selectedCurrency || 'EUR';
+
   useEffect(() => {
     fetchData(setLoading, setError, setPlace, setBooking, productId);
   }, [productId]);
 
-
+console.log('place', place)
   const toggleShortcutsPopup = () => {
     setIsShortcutsPopupVisible((prevState) => !prevState)
   }
@@ -122,12 +126,12 @@ const ProductPage = () => {
             />}
             {!!place.highlights && <ProductHighlight highlights={place.highlights} />}
             <hr className={styles.separator} />
-            <ProductDescription
-              descriptionPlace="The apartment consists of a large living room, a private, large bathroom with a bathtub and a high space, which is suitable for the storage of luggage and is accessed by a staircase.accessed by a staircase"
-              descriptionSpace="The apartment starts from a quiet courtyard and has its own entrance, which does not depart from the general stairwell."
-              guestAccess="You have access to all areas of the flat. The flat has its own entrance."
-              otherThings="Do not smoke in rooms!"
-            />{" "}
+            {!!place.productDescription && <ProductDescription
+                descriptionPlace = {place.productDescription.descriptionPlace}
+                descriptionSpace={place.productDescription.descriptionSpace}
+                guestAccess={place.productDescription.guestAccess}
+                otherThings={place.productDescription.otherThings}
+              />}
             <hr className={styles.separator} />
             {
               !!place.amenities && <Amenities
@@ -162,10 +166,9 @@ const ProductPage = () => {
               setCheckInDate={setCheckInDate}
               setCheckOutDate={setCheckOutDate}
               isInitializedRef={isInitializedRef}
-              exchangeRateUSD={exchangeRateUSD}
-              exchangeRateUAH={exchangeRateUAH}
-              selectedCurrency={selectedCurrency} 
-              setSelectedCurrency={setSelectedCurrency}
+              exchangeRateUSD={rateEURUSD}
+              exchangeRateUAH={rateEURUAH}
+              selectedCurrency={currency} 
             />
           }
           </div>

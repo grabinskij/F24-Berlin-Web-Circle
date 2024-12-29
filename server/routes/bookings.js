@@ -1,11 +1,10 @@
 const express = require('express')
 const bookings = require('../src/data/bookings.json')
 const reservations = require('../src/data/reservations.json')
-
 const { calculateCosts } = require('../src/utils/costs')
 const fs = require('fs')
 const path = require('path')
-// const exchangeRatesService = require('../src/utils/exchangeRatesService')
+
 
 const router = express.Router()
 
@@ -30,31 +29,17 @@ router.get('/:id', (req, res) => {
 
 router.post('/reservations/:id', async (req, res) => {
 
-  // const { rates: exchangeRates, selectedCurrency } = exchangeRatesService.getRates() || {};
-  
-  // if (!exchangeRates || Object.keys(exchangeRates).length === 0) {
-  //   console.error('Exchange rates not available:', exchangeRatesService.getRates());
-  //   return res.status(500).json({ 
-  //     message: 'Exchange rates not available. Please try again.'
-  //   });
-  // }
-
   const productId = parseInt(req.params.id)
-  const { checkInDate, checkOutDate, guests, totalPrice } = req.body
-
-  // console.log('Rates stored in service:', exchangeRatesService.getRates());
-  // const { rates: exchangeRates, selectedCurrency } = exchangeRatesService.getRates();
-    
-    // if (!exchangeRates || Object.keys(exchangeRates).length === 0) {
-    //   return res.status(500).json({ 
-    //     message: 'Exchange rates not available',
-    //     debug: {
-    //       exchangeRates,
-    //       selectedCurrency
-    //     }
-    //   });
-    // }
-console.log('req.body', req.body)
+  const { 
+    checkInDate, 
+    checkOutDate, 
+    guests, 
+    totalPrice,
+    exchangeRateUSD,
+    exchangeRateUAH,
+    selectedCurrency
+  } = req.body
+console.log('selectedCurrencyBack', selectedCurrency)
   const reservation = bookings.find((b) => b.id === productId)
   if (!reservation) {
     return res
@@ -72,33 +57,22 @@ console.log('req.body', req.body)
     nightsCountForLongStayDiscount,
   } = bookingData
 
-  
-    const costs = calculateCosts({
-      checkInDate,
-      checkOutDate,
-      pricePerNight,
-      airbnbServiceFee,
-      cleaningFee,
-      longStayDiscount,
-      nightsCountForDiscount: nightsCountForLongStayDiscount,
-      // exchangeRates,
-      // selectedCurrency,
-    });
 
-
- console.log('Costs', costs)
-
-  // const costs = calculateCosts({
-  //   checkInDate,
-  //   checkOutDate,
-  //   pricePerNight,
-  //   airbnbServiceFee,
-  //   cleaningFee,
-  //   longStayDiscount,
-  //   nightsCountForDiscount: nightsCountForLongStayDiscount,
-  // })
+  const costs = calculateCosts({
+    checkInDate,
+    checkOutDate,
+    pricePerNight,
+    airbnbServiceFee,
+    cleaningFee,
+    longStayDiscount,
+    nightsCountForDiscount: nightsCountForLongStayDiscount,
+    selectedCurrency,
+    exchangeRateUSD,
+    exchangeRateUAH,
+    totalPrice
+  });
  
-  if (costs.nights <= 0) {
+  if (costs?.nights <= 0) {
     return res.status(400).json({ message: 'Invalid dates selected.' })
   }
 
@@ -108,8 +82,8 @@ console.log('req.body', req.body)
     checkInDate,
     checkOutDate,
     guestCounts: guests,
-    totalPrice: costs.totalPrice,
-    breakdown: costs.breakdown,
+    totalPrice: costs?.totalPrice,
+    breakdown: costs?.breakdown,
   }
 
   const newBookingToClient = {
@@ -117,10 +91,9 @@ console.log('req.body', req.body)
     checkInDate,
     checkOutDate,
     guestCounts: guests,
-    totalPrice: costs.totalPrice,
-    breakdown: costs.breakdown,
+    totalPrice: costs?.totalPrice,
+    breakdown: costs?.breakdown,
   }
-
 
   const isOverlapping = alreadyBookedDates.some(
     (date) =>
@@ -134,7 +107,7 @@ console.log('req.body', req.body)
       .json({ message: 'Selected dates overlap with existing bookings.' })
   }
 
-  if (totalPrice !== costs.totalPrice) {
+  if (costs?.totalPrice !== costs?.totalPriceToCompare) {
     return res
       .status(400)
       .json({ message: 'Total price does not match the calculated price.' })
