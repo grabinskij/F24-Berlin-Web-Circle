@@ -8,19 +8,28 @@ import CalendarToggle from "../../components/calendarToggle/CalendarToggle";
 import { BASE_URL } from "../../constants/constants";
 import PriceRangeModal from "../../components/PriceRangeModal/PriceRangeModal";
 import useOutsideClick from "../../hooks/useOutsideClick";
+import { useTranslation } from "react-i18next";
+import { convertCurrency } from "../../utils/currencyConvertation";
 
 
 function FilteredPlacesPage() {
   const [places, setPlaces] = useState([]);
   const [selectPlaceId, setSelectPlaceId] = useState(null);
   const [searchParams] = useSearchParams();
-  const { modalIsVisible, setModalIsVisible, closeModal } = useOutletContext();
+  const { modalIsVisible, setModalIsVisible, closeModal, exchangeRateUSD, exchangeRateUAH, selectedCurrency } = useOutletContext();
   const [isModalOpen, setModalOpen] = useState(false);
   const [histogramData, setHistogramData] = useState([]);
+  const [bookings, setBookings] = useState([]);
+
+  const rateEURUSD = parseFloat(localStorage.getItem('exchangeRateUSD')) || exchangeRateUSD || 1;
+  const rateEURUAH = parseFloat(localStorage.getItem('exchangeRateUAH')) || exchangeRateUAH || 1;
+  const currency = localStorage.getItem('selectedCurrency') || selectedCurrency || 'EUR';
 
   const toggleModal = () => setModalOpen((prev) => !prev);
 
   const priceRangeRef = useOutsideClick(() => setModalOpen(false))
+
+  const { t } = useTranslation();
 
 	useEffect(() => {
     if (isModalOpen) {
@@ -43,6 +52,14 @@ function FilteredPlacesPage() {
       .catch((error) => console.error(`Something went wrong. ${error.message}.`));
   }, [searchParams]);
 
+  useEffect(() => {
+    axios.get(
+      (`http://localhost:8800/bookings`)
+    )
+    .then((response) => setBookings(response?.data))
+    .catch((error) => console.error(`Something went wrong. ${error.message}.`));
+  }, [searchParams] ); 
+
   const handlePlaceClick = (placeId) => {
     setSelectPlaceId(placeId);
     console.log("Selected Place ID:", placeId);
@@ -55,6 +72,24 @@ function FilteredPlacesPage() {
       .catch((error) => {
         console.error("Error sending place ID:", error.message);
       });
+  };
+
+  const pricePerNightCurrencyCalculation = (placeId) => {
+    if (bookings.length > 0) {
+        const booking = bookings.find((booking) => booking.id === placeId); 
+        return booking?.bookingData?.pricePerNight || 0; 
+    }
+    return 0; 
+  };
+
+  const priceCurrencyCalculation = (price) => {
+    if (currency === 'USD') {
+        return convertCurrency(price, rateEURUSD) 
+    } else if (currency === 'UAH') {
+        return convertCurrency(price, rateEURUAH);
+    } else {
+        return Math.round(price); 
+    }
   };
 
   return (
@@ -83,7 +118,11 @@ function FilteredPlacesPage() {
               >
                 <h2 className="title">{place.title}</h2>
                 <p className="host">{place.host}</p>
-                <p className="price">{place.price}</p>
+                <p className="price">{`
+                  ${priceCurrencyCalculation(pricePerNightCurrencyCalculation(place.id))}${currency === 'USD' ? '$' : currency === 'UAH' ? '₴' : "€"}
+                  ${t('product.forNight', {count: 1})}
+                  `}
+                </p>
               </ProductCard>
             )
           )

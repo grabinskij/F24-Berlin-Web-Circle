@@ -1,83 +1,99 @@
 import Styles from './LanguagePopUp.module.css'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Popup from '../ReservationCard/PopUp/PopUp'
 import useOutsideClick from '../../hooks/useOutsideClick'
 import { useTranslation } from 'react-i18next'
-import { createSearchParams, useLocation, useNavigate, useSearchParams } from 'react-router-dom'
 import axios from 'axios'
 
-
-const LanguagePopUp = ({ onCloseClick, isVisible }) => {
+const LanguagePopUp = ({
+  onCloseClick,
+  isVisible,
+  onCurrencyChange,
+  setExchangeRateUSD,
+  setExchangeRateUAH,
+  setSelectedCurrency,
+  selectedCurrency,
+}) => {
   const [isLanguageSelected, setIsLanguageSelected] = useState(true)
-  const [searchParams] = useSearchParams()
+  const { t, i18n } = useTranslation()
 
-  const { t, i18n } = useTranslation();
-  const navigate = useNavigate()
-  const location = useLocation()
+  useEffect(() => {
+    setSelectedCurrency(localStorage.getItem('selectedCurrency'))
+  }, [])
 
   const changeLanguage = async (lng) => {
     try {
-      i18n.changeLanguage(lng);
-      localStorage.setItem('language', lng);
-
-      const params = new URLSearchParams(searchParams)
-      params.set('lng', lng)
-      navigate({
-        pathname: location.pathname,
-        search: createSearchParams(params).toString(),
-      })
+      i18n.changeLanguage(lng)
+      localStorage.setItem('language', lng)
 
       const response = await axios.get(`http://localhost:8800/setLanguage`, {
-        params: { lng }, 
+        params: { lng },
         withCredentials: true,
         headers: {
-          'Content-Type': 'application/json'
-        }
-      });
-  
-      if (response.status === 200) {
-        console.log("Language cookie set to", lng);
-        navigate({
-          pathname: location.pathname,
-          search: createSearchParams(params).toString(),
-        }, { replace: true }); 
+          'Content-Type': 'application/json',
+        },
+      })
 
+      if (response.status === 200) {
         setTimeout(() => {
-          window.location.reload();
-        }, 100);
+          window.location.reload()
+        }, 50)
       } else {
-        console.error("Failed to set language on the server");
+        console.error('Failed to set language on the server')
       }
     } catch (error) {
-      console.error("Failed to change language", error.response?.data || error.message);
+      console.error(
+        'Failed to change language',
+        error.response?.data || error.message
+      )
     }
-  };
+  }
 
+  const handleCurrencyChange = async (currencyKey) => {
+    if (currencyKey === 'EUR') {
+      setExchangeRateUSD(1)
+      setExchangeRateUAH(1)
+      setSelectedCurrency(currencyKey)
+      onCurrencyChange(currencyKey, 1)
+    }
 
-//   .then(response => {
-//     if (!response.ok) {
-//       throw new Error('Failed to set language on server');
-//     }
-//     return response.json();
-//   })
-//   .then(() => {
-//     // Force reload i18n with new language
-//     i18n.reloadResources([lng]).then(() => {
-//       window.location.reload(); // Optional: only if you need a full page refresh
-//     });
-//   })
-//   .catch(error => {
-//     console.error("Failed to set language on server:", error);
-//   });
-// } catch (error) {
-//   console.error("Failed to change language:", error);
-// }
+    try {
+      setSelectedCurrency(currencyKey)
 
+      const response = await axios.get(`http://localhost:8800/api/currency`, {
+        params: { selectedCurrency: currencyKey },
+      })
 
-  const handleCurrencyChange = (currency) => {
-    console.log(`Currency changed to: ${currency}`);
-  };
-  
+      const rateEURtoUSD = response.data.quotes.EURUSD.end_rate
+      const rateEURtoUAH = response.data.quotes.EURUAH.end_rate
+
+      const roundedRateEURtoUSD = Math.floor(rateEURtoUSD * 100) / 100
+      const roundedRateEURtoUAH = Math.floor(rateEURtoUAH * 100) / 100
+
+      localStorage.setItem('exchangeRateUSD', roundedRateEURtoUSD)
+      localStorage.setItem('exchangeRateUAH', roundedRateEURtoUAH)
+      localStorage.setItem('selectedCurrency', currencyKey)
+
+      onCurrencyChange(
+        currencyKey,
+        currencyKey === 'USD'
+          ? roundedRateEURtoUSD
+          : currencyKey === 'UAH'
+          ? roundedRateEURtoUAH
+          : 1
+      )
+
+      if (response.status === 200) {
+        setTimeout(() => {
+          window.location.reload()
+        }, 50)
+      } else {
+        console.error('Failed to set currency on the server')
+      }
+    } catch (error) {
+      console.error('Error fetching exchange rates:', error)
+    }
+  }
 
   const languageRef = useOutsideClick(onCloseClick)
 
@@ -92,15 +108,15 @@ const LanguagePopUp = ({ onCloseClick, isVisible }) => {
     English: { label: 'English', code: 'en' },
     German: { label: 'Deutsch', code: 'de' },
     Ukrainian: { label: 'Українська', code: 'ukr' },
-  };
-
-  const currency = {
-    Euro: 'Euro',
-    UsDollar: 'US Dollar',
-    Hryvnia: 'Гривня',
   }
 
-  const itemsToRender = isLanguageSelected ? languages : currency
+  const currencies = {
+    Euro: { label: 'Euro', code: 'EUR' },
+    'United States Dollar': { label: 'US Dollar', code: 'USD' },
+    'Ukrainian Hryvnia': { label: 'Hryvnia', code: 'UAH' },
+  }
+
+  const itemsToRender = isLanguageSelected ? languages : currencies
 
   return (
     <Popup onCloseClick={onCloseClick} isVisible={isVisible}>
@@ -147,17 +163,25 @@ const LanguagePopUp = ({ onCloseClick, isVisible }) => {
         </div>
         <div className={Styles.langCurrencyContainer}>
           <div className={Styles.langCurrencyWrapper}>
-            {Object.entries(itemsToRender).map(([key, value]) => (
+            {Object.entries(itemsToRender).map(([key, { label, code }]) => (
               <div key={key} className={Styles.item}>
-             {isLanguageSelected ? (
+                {isLanguageSelected ? (
                   <button
-                    onClick={() => changeLanguage(value.code || 'en')}
-                    className={i18n.language === value.code ? Styles.selected : ''} 
+                    onClick={() => changeLanguage(code || 'en')}
+                    className={i18n.language === code ? Styles.selected : ''}
                   >
-                    {value.label || value}
+                    {label || key}
                   </button>
                 ) : (
-                  <button onClick={() => handleCurrencyChange(key)}>{value}</button>
+                  <button
+                    onClick={() => {
+                      handleCurrencyChange(code, label)
+                      onCloseClick()
+                    }}
+                    className={selectedCurrency === code ? Styles.selected : ''}
+                  >
+                    {label}
+                  </button>
                 )}
               </div>
             ))}

@@ -217,6 +217,7 @@
       "hour": "an hour",
       "respondsWithin": "Responds within",
       "paymentProtection": "To protect your payment, never transfer money or communicate outside of the Airbnb website or app.",
-      "superhostsDescription": "Superhosts are experienced, highly rated hosts who are committed to providing great stays for guests"
+      "superhostsDescription": "Superhosts are experienced, highly rated hosts who are committed to providing great stays for guests",
+      "forNight": "per night"
     }
 }

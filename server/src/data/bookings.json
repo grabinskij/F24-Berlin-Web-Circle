@@ -20,16 +20,7 @@
         "petsNumber": 2
       }
     },
-    "alreadyBookedDates": [
-      {
-        "startDate": "12/10/2024",
-        "endDate": "12/13/2024"
-      },
-      {
-        "startDate": "12/20/2024",
-        "endDate": "12/23/2024"
-      }
-    ]
+    "alreadyBookedDates": []
   },
   {
     "id": 2,
@@ -52,7 +43,16 @@
         "petsNumber": 1
       }
     },
-    "alreadyBookedDates": []
+    "alreadyBookedDates": [
+      {
+        "startDate": "12/29/2024",
+        "endDate": "01/01/2025"
+      },
+      {
+        "startDate": "01/02/2025",
+        "endDate": "01/05/2025"
+      }
+    ]
   },
   {
     "id": 3,
@@ -77,28 +77,8 @@
     },
     "alreadyBookedDates": [
       {
-        "startDate": "12/05/2024",
-        "endDate": "12/07/2024"
-      },
-      {
-        "startDate": "12/19/2024",
-        "endDate": "12/21/2024"
-      },
-      {
-        "startDate": "12/08/2024",
-        "endDate": "12/10/2024"
-      },
-      {
-        "startDate": "12/12/2025",
-        "endDate": "12/16/2025"
-      },
-      {
-        "startDate": "12/22/2024",
-        "endDate": "12/24/2024"
-      },
-      {
-        "startDate": "12/25/2024",
-        "endDate": "12/27/2024"
+        "startDate": "12/29/2024",
+        "endDate": "12/31/2024"
       }
     ]
   },
@@ -123,12 +103,7 @@
         "petsNumber": 2
       }
     },
-    "alreadyBookedDates": [
-      {
-        "startDate": "01/14/2025",
-        "endDate": "01/17/2025"
-      }
-    ]
+    "alreadyBookedDates": []
   },
   {
     "id": 5,
@@ -197,12 +172,7 @@
         "petsNumber": 1
       }
     },
-    "alreadyBookedDates": [
-      {
-        "startDate": "01/05/2025",
-        "endDate": "01/08/2025"
-      }
-    ]
+    "alreadyBookedDates": []
   },
   {
     "id": 8,
@@ -225,12 +195,7 @@
         "petsNumber": 0
       }
     },
-    "alreadyBookedDates": [
-      {
-        "startDate": "12/20/2024",
-        "endDate": "12/23/2024"
-      }
-    ]
+    "alreadyBookedDates": []
   },
   {
     "id": 9,
@@ -299,7 +264,12 @@
         "petsNumber": 0
       }
     },
-    "alreadyBookedDates": []
+    "alreadyBookedDates": [
+      {
+        "startDate": "12/29/2024",
+        "endDate": "01/03/2025"
+      }
+    ]
   },
   {
     "id": 12,
@@ -391,12 +361,7 @@
         "petsNumber": 1
       }
     },
-    "alreadyBookedDates": [
-      {
-        "startDate": "12/20/2024",
-        "endDate": "12/23/2024"
-      }
-    ]
+    "alreadyBookedDates": []
   },
   {
     "id": 16,
@@ -511,12 +476,7 @@
         "petsNumber": 2
       }
     },
-    "alreadyBookedDates": [
-      {
-        "startDate": "12/20/2024",
-        "endDate": "12/21/2024"
-      }
-    ]
+    "alreadyBookedDates": []
   },
   {
     "id": 21,

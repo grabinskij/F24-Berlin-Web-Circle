@@ -14,6 +14,7 @@ import Swal from 'react-sweetalert2'
 import { useNavigate } from 'react-router-dom';
 import { getSuccessHtml } from '../../utils/displayHelpers';
 import { useTranslation } from 'react-i18next'
+import { convertCurrency } from '../../utils/currencyConvertation'
 
 
 function ReservationCard({
@@ -28,7 +29,10 @@ function ReservationCard({
   setCheckInDate,
   setCheckOutDate,
   booking,
-  isInitializedRef
+  isInitializedRef,
+  exchangeRateUSD,
+  exchangeRateUAH,
+  selectedCurrency
 }) {
 
   const navigate = useNavigate();
@@ -93,15 +97,41 @@ function ReservationCard({
 
   const checkInOut = checkInDate && checkOutDate
 
+  const usd = exchangeRateUSD 
+  const uah = exchangeRateUAH
+
+  let pricePerNightCurrency;
+  let airbnbServiceFeeCurrency; 
+  let cleaningFeeCurrency; 
+  let longStayDiscountCurrency; 
+
+  if (selectedCurrency === 'USD') {
+    pricePerNightCurrency = convertCurrency(pricePerNight, usd);
+    airbnbServiceFeeCurrency = convertCurrency(airbnbServiceFee, usd);
+    cleaningFeeCurrency = convertCurrency(cleaningFee, usd);
+    longStayDiscountCurrency = convertCurrency(longStayDiscount, usd);
+  } else if (selectedCurrency === 'UAH') {
+    pricePerNightCurrency = convertCurrency(pricePerNight, uah);
+    airbnbServiceFeeCurrency = convertCurrency(airbnbServiceFee, uah);
+    cleaningFeeCurrency = convertCurrency(cleaningFee, uah);
+    longStayDiscountCurrency = convertCurrency(longStayDiscount, uah);
+  } else {
+    pricePerNightCurrency = pricePerNight;
+    airbnbServiceFeeCurrency = airbnbServiceFee;
+    cleaningFeeCurrency = cleaningFee;
+    longStayDiscountCurrency = longStayDiscount;
+  }
+
   const nights =
   checkInDate && checkOutDate ? calculateNights(checkInDate, checkOutDate) : 0
   const isDiscount = nights >= nightsCountForLongStayDiscount
-  const basePrice = nights * pricePerNight
+
+  const basePrice = nights * pricePerNightCurrency
   const totalPrice =
     basePrice +
-    airbnbServiceFee +
-    cleaningFee -
-    (isDiscount ? longStayDiscount : 0)
+    airbnbServiceFeeCurrency +
+    cleaningFeeCurrency -
+    (isDiscount ? longStayDiscountCurrency : 0)
 
   
   const handleFormSubmit = async (e) => {
@@ -123,7 +153,10 @@ function ReservationCard({
         infants: infantsCount,
         pets: petsCount,
       },
-      totalPrice
+      totalPrice,
+      exchangeRateUSD,
+      exchangeRateUAH,
+      selectedCurrency
     };
 
     try {
@@ -174,7 +207,7 @@ function ReservationCard({
             <div className={styles.pricingGuestSection}>
               {checkInOut && !loading ? (
                 <>
-                  <strong>{`€ ${pricePerNight} `}</strong>
+                  <strong>{`${selectedCurrency === 'USD' ? '$' : selectedCurrency === 'UAH' ? '₴' : "€"}${pricePerNightCurrency}`}</strong>
                   {t('product.nights', {count: 1})}
                 </>
               ) : (
@@ -282,15 +315,16 @@ function ReservationCard({
         <CostsSummary
           checkInDate={checkInDate}
           checkOutDate={checkOutDate}
-          pricePerNight={pricePerNight}
-          cleaningFee={cleaningFee}
-          airbnbServiceFee={airbnbServiceFee}
-          longStayDiscount={longStayDiscount}
+          pricePerNight={pricePerNightCurrency}
+          cleaningFee={cleaningFeeCurrency}
+          airbnbServiceFee={airbnbServiceFeeCurrency}
+          longStayDiscount={longStayDiscountCurrency}
           nightsCountForDiscount={nightsCountForLongStayDiscount}
           nights={nights}
           basePrice={basePrice}
           isDiscount={isDiscount}
           totalPrice={totalPrice}
+          selectedCurrency={selectedCurrency}
         />
       )}
     </div>

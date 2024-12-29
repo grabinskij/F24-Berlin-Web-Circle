@@ -1,13 +1,20 @@
 const express = require('express')
 const bookings = require('../src/data/bookings.json')
 const reservations = require('../src/data/reservations.json')
-
 const { calculateCosts } = require('../src/utils/costs')
 const fs = require('fs')
 const path = require('path')
 
 
 const router = express.Router()
+
+router.get('/', (req, res) => {
+  if (bookings.length > 0) {
+    res.json(bookings)
+  } else {
+    res.status(404).json({ error: `Bookings ${bookings.length} not found.`})
+  }
+})
 
 router.get('/:id', (req, res) => {
   const bookingId = parseInt(req.params.id)
@@ -20,10 +27,19 @@ router.get('/:id', (req, res) => {
   }
 })
 
-router.post('/reservations/:id', (req, res) => {
-  const productId = parseInt(req.params.id)
-  const { checkInDate, checkOutDate, guests, totalPrice } = req.body
+router.post('/reservations/:id', async (req, res) => {
 
+  const productId = parseInt(req.params.id)
+  const { 
+    checkInDate, 
+    checkOutDate, 
+    guests, 
+    totalPrice,
+    exchangeRateUSD,
+    exchangeRateUAH,
+    selectedCurrency
+  } = req.body
+console.log('selectedCurrencyBack', selectedCurrency)
   const reservation = bookings.find((b) => b.id === productId)
   if (!reservation) {
     return res
@@ -50,9 +66,13 @@ router.post('/reservations/:id', (req, res) => {
     cleaningFee,
     longStayDiscount,
     nightsCountForDiscount: nightsCountForLongStayDiscount,
-  })
+    selectedCurrency,
+    exchangeRateUSD,
+    exchangeRateUAH,
+    totalPrice
+  });
  
-  if (costs.nights <= 0) {
+  if (costs?.nights <= 0) {
     return res.status(400).json({ message: 'Invalid dates selected.' })
   }
 
@@ -62,8 +82,8 @@ router.post('/reservations/:id', (req, res) => {
     checkInDate,
     checkOutDate,
     guestCounts: guests,
-    totalPrice: costs.totalPrice,
-    breakdown: costs.breakdown,
+    totalPrice: costs?.totalPrice,
+    breakdown: costs?.breakdown,
   }
 
   const newBookingToClient = {
@@ -71,10 +91,9 @@ router.post('/reservations/:id', (req, res) => {
     checkInDate,
     checkOutDate,
     guestCounts: guests,
-    totalPrice: costs.totalPrice,
-    breakdown: costs.breakdown,
+    totalPrice: costs?.totalPrice,
+    breakdown: costs?.breakdown,
   }
-
 
   const isOverlapping = alreadyBookedDates.some(
     (date) =>
@@ -88,7 +107,7 @@ router.post('/reservations/:id', (req, res) => {
       .json({ message: 'Selected dates overlap with existing bookings.' })
   }
 
-  if (totalPrice !== costs.totalPrice) {
+  if (costs?.totalPrice !== costs?.totalPriceToCompare) {
     return res
       .status(400)
       .json({ message: 'Total price does not match the calculated price.' })

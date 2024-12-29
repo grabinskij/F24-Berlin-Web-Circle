@@ -1,6 +1,5 @@
 const express = require("express");
 const cors = require("cors");
-// const products = require("./src/data/places.json");
 const dotenv = require("dotenv");
 const i18next = require("i18next");
 const i18nextMiddleware = require("i18next-http-middleware");
@@ -9,6 +8,8 @@ const cookieParser = require("cookie-parser");
 const enTranslation = require('./locales/en/translation.json')
 const deTranslation = require('./locales/de/translation.json')
 const ukrTranslation = require('./locales/ukr/translation.json')
+const axios = require('axios');
+
 // const prisma = require(".db/prisma");
 
 const app = express();
@@ -26,6 +27,11 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 
+
+const API_KEY = process.env.EXCHANGE_RATE_API_KEY;
+const EXCHANGE_URL = 'http://api.exchangerate.host/change';
+
+
 i18next
   .use(Backend) 
   .use(i18nextMiddleware.LanguageDetector) 
@@ -36,15 +42,7 @@ i18next
       allowMultiLoading: false, 
     }, 
     preload: ["en", "de", "ukr"], 
-    // debug: true,
-    // detection: {
-    //   order: ["cookie", "querystring", "header"],
-    //   lookupCookie: "language",
-    //   lookupQuerystring: "lng",
-    //   caches: ["cookie"]
-    // },
     load: 'languageOnly', 
-    // lowerCaseLng: true,
     languageMapping: {
       'en-US': 'en',
       'en-GB': 'en',
@@ -110,11 +108,23 @@ app.post("/savePlace", (req, res) => {
 });
 
 
+app.get('/api/currency', async (req, res) => {
+  try {
+    const response = await axios.get(`${EXCHANGE_URL}?access_key=${API_KEY}&source=EUR&currencies=USD,UAH&format=1`);
+    const rates = response.data;
+    res.json(rates);
+  } catch (error) {
+    console.error("Error fetching exchange rates:", error);
+    res.status(500).json({ error: 'Error fetching exchange rates' });
+  }
+});
+
 // import Routes
 const placesRoutes = require("./routes/places");
 const destinationsRoutes = require("./routes/destinations");
 const searchedPlacesRoutes = require("./routes/searchedPlaces");
 const bookingsRoutes = require("./routes/bookings");
+
 
 // Use Routes
 app.use("/places", placesRoutes);
