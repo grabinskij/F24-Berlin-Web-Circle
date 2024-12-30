@@ -13,6 +13,7 @@ import {
 } from "../../icons";
 import styles from "./Amenities.module.css";
 import { useState } from "react";
+import Popup from "../ReservationCard/PopUp/PopUp";
 
 const ICONS_MAP = {
   kitchen: <KitchenIcon />,
@@ -62,7 +63,7 @@ function Amenities({ title, amenities }) {
       )}
 
       {isModalOpen && (
-        <div className={styles.modalOverlay} onClick={handleModalToggle}>
+       <Popup isVisible={isModalOpen} onClose={handleModalToggle} className={styles.amenitiesContainer}>
           <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
             <button className={styles.closeButton} onClick={handleModalToggle}>
               x
@@ -79,7 +80,7 @@ function Amenities({ title, amenities }) {
               ))}
             </ul>
           </div>
-        </div>
+        </Popup>
       )}
     </div>
   );

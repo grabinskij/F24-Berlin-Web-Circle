@@ -56,7 +56,7 @@ const ProductPage = () => {
     fetchData(setLoading, setError, setPlace, setBooking, productId);
   }, [productId]);
 
-console.log('place', place)
+
   const toggleShortcutsPopup = () => {
     setIsShortcutsPopupVisible((prevState) => !prevState)
   }
@@ -133,13 +133,11 @@ console.log('place', place)
                 otherThings={place.productDescription.otherThings}
               />}
             <hr className={styles.separator} />
-            {
-              !!place.amenities && <Amenities
+            {!!place.amenities && <Amenities
                 amenities={place.amenities}
                 title={t('product.whatThisPlaceOffers')}
                 onClick={handleShowAmenities}
-              />
-            }
+              />}
             {booking.bookingData.isBookingOpen && <hr className={styles.separator} />}
             {!!booking && booking.bookingData.isBookingOpen && <CalendarBlock 
               booking={booking}
@@ -149,8 +147,7 @@ console.log('place', place)
               setCheckInDate={setCheckInDate}
               setCheckOutDate={setCheckOutDate}
               isInitializedRef={isInitializedRef}
-            />  
-            }
+            />}
           </div>
           <div className={styles.ReservationCard}>
           {!!booking && <ReservationCard

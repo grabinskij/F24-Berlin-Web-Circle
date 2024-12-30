@@ -23,6 +23,8 @@ const ProductDescription = ({
   }, [descriptionPlace]);
 
   const [showPopup, setShowPopup] = useState(false);
+
+
   const showPopupHandler = () => {
     setShowPopup(!showPopup);
   };
@@ -57,6 +59,7 @@ const ProductDescription = ({
           descriptionSpace={descriptionSpace}
           guestAccess={guestAccess}
           otherThings={otherThings}
+          showPopup={showPopup}
         />
       )}
     </div>
