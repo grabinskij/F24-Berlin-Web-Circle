@@ -119,8 +119,8 @@
       }
     },
     "mapView": {
-      "lon": 13.418727606497178,
-      "lat": 52.53549571269938,
+      "lon": 10.816730,
+      "lat": 52.252361,
       "address": "Königslutter am Elm, Niedersachsen, Deutschland",
       "addressDescription": "Mitten in einem vielfältigen Naturpark befinden Sie sich in einer hügeligen Landschaft mit dichten Wäldern, Mooren, wunderschönen Heideflächen und Salzwiesen. Die Umgebung lädt zu jeder Jahreszeit zu Erkundungen ein: Wandern Sie durch einen der größten Buchenwälder der Region, in dem Sie gelegentlich seltene Waldbewohner treffen, gehen Sie in einem beliebten Wandergebiet in der Nähe Pilze sammeln oder machen Sie eine Radtour zu einem Aussichtspunkt, der die Gegend überblickt."
     },
@@ -249,8 +249,8 @@
       }
     },
     "mapView": {
-      "lon": 13.435814739439822,
-      "lat": 52.50494850601838,
+      "lon": 12.742220,
+      "lat": 53.208920,
       "address": "Zempow, Brandenburg, Deutschland",
       "addressDescription": "In einem ruhigen Waldgebiet gelegen, ideal für Wanderungen und Entspannung. Genießen Sie die Schönheit der Natur, nur eine kurze Autofahrt von lokalen Attraktionen entfernt."
     },
@@ -369,8 +369,8 @@
       }
     },
     "mapView": {
-      "lon": 13.346990144269132,
-      "lat": 52.50035561297163,
+      "lon": -74.8490,
+      "lat": 41.7811,
       "address": "Swan Lake, New York, USA",
       "addressDescription": "Eingebettet am See bietet das Ferienhaus sowohl Ruhe als auch Abenteuer. Erkunden Sie die lokalen Wanderwege oder genießen Sie eine Bootsfahrt auf dem See."
     },
@@ -485,8 +485,8 @@
       }
     },
     "mapView": {
-      "lon": 13.405743442175709,
-      "lat": 52.530533117386106,
+      "lon": -122.419420,
+      "lat": 37.774930,
       "address": "Downtown, San Francisco, Kalifornien, USA",
       "addressDescription": "Befindet sich in einem belebten Gebiet mit Geschäften, Restaurants und kulturellen Sehenswürdigkeiten in fußläufiger Entfernung."
     },
@@ -610,8 +610,8 @@
       }
     },
     "mapView": {
-      "lon": 13.350123166340774,
-      "lat": 52.572703710445744,
+      "lon": -116.911420,
+      "lat": 34.243890,
       "address": "Big Bear Lake, Kalifornien, USA",
       "addressDescription": "Abgelegen im Wald bietet die Hütte Ruhe und Zugang zu Outdoor-Aktivitäten."
     },
@@ -735,8 +735,8 @@
       }
     },
     "mapView": {
-      "lon": 13.335657730330263,
-      "lat": 52.470594210731385,
+      "lon": -80.130050,
+      "lat": 25.790650,
       "address": "Miami Beach, Florida, USA",
       "addressDescription": "Genießen Sie atemberaubende Ausblicke auf den Ozean und einfachen Zugang zu lokalen Attraktionen."
     },
@@ -850,8 +850,8 @@
       }
     },
     "mapView": {
-      "lon": 13.38867806406207,
-      "lat": 52.50411704137263,
+      "lon": -74.005940,
+      "lat": 40.712780,
       "address": "New York City, New York, USA",
       "addressDescription": "Zentral gelegen, ideal für die Erkundung der Stadt."
     },
@@ -970,8 +970,8 @@
       }
     },
     "mapView": {
-      "lon": 13.24118749634843,
-      "lat": 52.437529182378114,
+      "lon": 35.480000,
+      "lat": 30.322200,
       "address": "Wadi Musa, Ma'an Governorate, Jordanien",
       "addressDescription": "Eine erstklassige Lage im Herzen Jordaniens."
     },
@@ -1090,8 +1090,8 @@
       }
     },
     "mapView": {
-      "lon": 13.418006315035646,
-      "lat": 52.49215719366196,
+      "lon": -122.265390,
+      "lat": 38.502470,
       "address": "Napa Valley, Kalifornien, USA",
       "addressDescription": "Ein friedlicher Rückzugsort, umgeben von Weinbergen."
     },
@@ -1205,8 +1205,8 @@
       }
     },
     "mapView": {
-      "lon": 13.451137984545161,
-      "lat": 52.51297020838586,
+      "lon": -122.419420,
+      "lat": 37.774930,
       "address": "San Francisco, Kalifornien, USA",
       "addressDescription": "In der Nähe des Ufers gelegen mit hervorragendem Zugang zu Sehenswürdigkeiten."
     },
@@ -1312,8 +1312,8 @@
       }
     },
     "mapView": {
-      "lon": 2.361495,
-      "lat": 48.857555,
+      "lon": 2.361500,
+      "lat": 48.861100,
       "address": "Paris, Le Marais, Frankreich",
       "addressDescription": "Eingebettet in einem historischen Teil der Stadt mit Kopfsteinpflasterstraßen."
     },
@@ -1418,8 +1418,8 @@
       }
     },
     "mapView": {
-      "lon": 12.470215,
-      "lat": 41.892537,
+      "lon": 12.470800,
+      "lat": 41.894700,
       "address": "Rom, Trastevere, Italien",
       "addressDescription": "In einem lebhaften Viertel mit vielen Restaurants gelegen."
     },
@@ -1524,8 +1524,8 @@
       }
     },
     "mapView": {
-      "lon": 2.17691,
-      "lat": 41.3825,
+      "lon": 2.1734,
+      "lat": 41.3851,
       "address": "Barcelona, Spanien",
       "addressDescription": "Im Herzen des kulturellen Zentrums von Barcelona gelegen."
     },
@@ -1630,8 +1630,8 @@
       }
     },
     "mapView": {
-      "lon": -73.985428,
-      "lat": 40.748817,
+      "lon": 99.0765,
+      "lat": 8.4016,
       "address": "Phanom, Thailand",
       "addressDescription": "In der Nähe berühmter Sehenswürdigkeiten in Manhattan."
     },
@@ -1736,8 +1736,8 @@
       }
     },
     "mapView": {
-      "lon": 151.2099,
-      "lat": -33.8688,
+      "lon": 151.1993,
+      "lat": -33.8728,
       "address": "Sydney, Darling Harbour, Australien",
       "addressDescription": "Direkt am Wasser gelegen, mit Zugang zu wichtigen Sehenswürdigkeiten."
     },
@@ -1847,7 +1847,7 @@
     },
     "mapView": {
       "lon": 139.7034,
-      "lat": 35.6616,
+      "lat": 35.6595,
       "address": "Tokio, Shibuya, Japan",
       "addressDescription": "Im belebten Shibuya-Viertel gelegen."
     },
@@ -1956,7 +1956,7 @@
       }
     },
     "mapView": {
-      "lon": 2.3444,
+      "lon": 2.3429,
       "lat": 48.8867,
       "address": "Paris, Montmartre, Frankreich",
       "addressDescription": "Im künstlerischen Viertel Montmartre gelegen."
@@ -2070,8 +2070,8 @@
       }
     },
     "mapView": {
-      "lon": 12.4683,
-      "lat": 41.8889,
+      "lon": 12.4708,
+      "lat": 41.8947,
       "address": "Rom, Trastevere, Italien",
       "addressDescription": "Gelegen im charmanten Stadtteil Trastevere."
     },
@@ -2180,8 +2180,8 @@
       }
     },
     "mapView": {
-      "lon": -43.1822,
-      "lat": -22.9714,
+      "lon": -43.1824,
+      "lat": -22.9707,
       "address": "Rio de Janeiro, Copacabana, Brasilien",
       "addressDescription": "Direkt am berühmten Copacabana-Strand gelegen."
     },
@@ -2290,8 +2290,8 @@
       }
     },
     "mapView": {
-      "lon": -73.9857,
-      "lat": 40.758,
+      "lon": -73.9712,
+      "lat": 40.7831,
       "address": "New York City, Manhattan, USA",
       "addressDescription": "Im Herzen von Manhattan gelegen."
     },
@@ -2396,8 +2396,8 @@
       }
     },
     "mapView": {
-      "lon": 2.3023,
-      "lat": 48.8656,
+      "lon": 2.3074,
+      "lat": 48.8698,
       "address": "Paris, Champs-Élysées, Frankreich",
       "addressDescription": "Im Herzen von Paris, in der Nähe ikonischer Sehenswürdigkeiten."
     },
@@ -2503,7 +2503,7 @@
     },
     "mapView": {
       "lon": 139.7034,
-      "lat": 35.658,
+      "lat": 35.6595,
       "address": "Tokio, Shibuya, Japan",
       "addressDescription": "Im Herzen von Shibuya, Tokio."
     },
@@ -2608,8 +2608,8 @@
       }
     },
     "mapView": {
-      "lon": 12.4534,
-      "lat": 41.8884,
+      "lon": 12.4708,
+      "lat": 41.8947,
       "address": "Rom, Trastevere, Italien",
       "addressDescription": "Eingebettet in eines der malerischsten Viertel Roms."
     },
@@ -2714,7 +2714,7 @@
       }
     },
     "mapView": {
-      "lon": 151.2754,
+      "lon": 151.2743,
       "lat": -33.8915,
       "address": "Sydney, Bondi Beach, Australien",
       "addressDescription": "Direkt am Bondi Beach, ein Paradies für Surfer."

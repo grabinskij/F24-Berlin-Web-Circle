@@ -15,6 +15,7 @@
   height: 480px;
   background-color: rgb(199, 207, 207);
   border-radius: 10px;
+  z-index: 999;
 }
 .mapImg {
   height: 100%;
@@ -51,3 +52,7 @@
 .arrowRight {
   margin-top: 5px;
 }
+/* .mapContainer .leaflet-control-container .leaflet-top, 
+.mapContainer .leaflet-control-container .leaflet-bottom {
+  z-index: 999;
+} */
