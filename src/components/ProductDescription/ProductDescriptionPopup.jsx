@@ -1,17 +1,21 @@
 import { useTranslation } from "react-i18next";
 import styles from "./ProductDescriptionPopup.module.css";
+import Popup from "../ReservationCard/PopUp/PopUp";
+
+
 const ProductDescriptionPopup = ({
   showPopupHandler,
   descriptionPlace,
   descriptionSpace,
   guestAccess,
   otherThings,
+  showPopup
 }) => {
 
   const { t } = useTranslation();
 
   return (
-    <div className={styles.popupContainer}>
+    <Popup isVisible={showPopup} onClose={showPopupHandler}>
       <div className={styles.mainContainer}>
         <div className={styles.popupContainerElememts}>
           <svg
@@ -36,7 +40,7 @@ const ProductDescriptionPopup = ({
           <span>{otherThings}</span>
         </div>
       </div>
-    </div>
+    </Popup>
   );
 };
 
