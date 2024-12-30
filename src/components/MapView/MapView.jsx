@@ -11,7 +11,7 @@ const MapView = ({ address, addressDescription, lat, lon }) => {
     <div className={styles.mapWiewContainer}>
       <h2 className={styles.whereYouBe}>{t('product.whereYoullBe')}</h2>
       <div className={styles.mapContainer}>
-        <MapDisplay lat={lat} lng={lon} />
+        <MapDisplay lat={lat} lng={lon} address={address} addressDescription={addressDescription} />
       </div>
       <div className={styles.addressContainer}>
         <h4 className={styles.addressLocation}>{address}</h4>

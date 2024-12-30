@@ -1,33 +1,35 @@
-import { AdvancedMarker, APIProvider, Map } from "@vis.gl/react-google-maps";
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import styles from "./MapDisplay.module.css";
 import HomeIcon from "../../icons/HomeIcon";
+import "leaflet/dist/leaflet.css"; 
 
-const MapDisplay = ({ lat, lng }) => {
+const MapDisplay = ({ lat, lng, address, addressDescription }) => {
+
+  const position = [lat, lng]; 
+
   return (
     <div className={styles.mainContainer}>
-      <APIProvider apiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY || " "}>
-        <Map
-          mapId="20a9930d81d7adbc"
-          className={styles.mainMap}
-          defaultCenter={{ lat: lat, lng: lng }}
-          defaultZoom={12}
-          gestureHandling={"greedy"}
-          disableDefaultUI={true}
-          zoomControl={true}
-          streetViewControl={true}
-          mapTypeControl={true}
-          fullscreenControl={true}
-          cameraControl={true}
-        />
-        <AdvancedMarker clickable={true} position={{ lat: lat, lng: lng }}>
-          <div className={styles.mai}>
-            <div className={styles.imgContainer}>
-              <HomeIcon width={30} height={30} />
-            </div>
+    <MapContainer
+      center={position} 
+      zoom={12} 
+      className={styles.mainMap}
+      scrollWheelZoom={false} 
+    >
+      <TileLayer
+        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+      />
+      <Marker position={position}>
+        <Popup>
+          <div className={styles.imgContainer}>
+            <HomeIcon width={30} height={30} />
           </div>
-        </AdvancedMarker>
-      </APIProvider>
-    </div>
+          {address} <br />
+          {addressDescription}
+        </Popup>
+      </Marker>
+    </MapContainer>
+  </div>
   );
 };
 
