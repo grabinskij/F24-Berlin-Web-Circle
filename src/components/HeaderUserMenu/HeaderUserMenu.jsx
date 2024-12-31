@@ -2,9 +2,15 @@ import { useState } from "react";
 import styles from "./HeaderUserMenu.module.css";
 import useOutsideClick from "../../hooks/useOutsideClick";
 import { useTranslation } from "react-i18next";
+import Authentification from "../Authentification/Authentification";
 
 const HeaderUserMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [showAuthPopup, setShowAuthPopup] = useState(false);
+
+  const showAuthPopupHandler = () => {
+    setShowAuthPopup((prevState) => !prevState);
+  };
 
   const handleClick = () => {
     setIsOpen((prevState) => !prevState);
@@ -53,8 +59,23 @@ const HeaderUserMenu = () => {
       {isOpen && (
         <div className={styles.dropdownMenu}>
           <ul>
-            <li className={styles.signUp}>{t('search.signUp')}</li>
-            <li>{t('search.logIn')}</li> 
+            <li 
+              onClick={() => {
+                showAuthPopupHandler()
+                setIsOpen(false)
+              }} 
+              className={styles.signUp}
+            >
+              {t('search.signUp')}
+            </li> 
+            <li
+              onClick={() => {
+                showAuthPopupHandler()
+                setIsOpen(false)
+              }} 
+            >
+              {t('search.logIn')}
+            </li> 
             <hr className={styles.menuSeperator} />
             <li>{t('search.giftCards')}</li>
             <li>{t('search.hostAnExperience')}</li>
@@ -62,6 +83,11 @@ const HeaderUserMenu = () => {
           </ul>
         </div>
       )}
+      <Authentification 
+        showAuthPopupHandler={showAuthPopupHandler}
+        showAuthPopup={showAuthPopup}
+        setShowAuthPopup={setShowAuthPopup}
+      />
     </div>
   );
 };
