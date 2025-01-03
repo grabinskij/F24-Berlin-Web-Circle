@@ -100,7 +100,8 @@
     "anyWeek": "Будь-який тиждень",
     "USA": "США",
     "Jordan": "Йорданія",
-    "Thailand": "Таїланд"
+    "Thailand": "Таїланд",
+    "bookings": "Бронювання"
   },
   "priceRangeModal": {
     "roomsBeds": "Кімнати та ліжка",
@@ -247,5 +248,22 @@
     "paymentProtection": "Щоб захистити ваш платіж, ніколи не переказуйте гроші та не спілкуйтеся за межами сайту чи додатку Airbnb.",
     "superhostsDescription": "Супергосподарі — це досвідчені, високо оцінені господарі, які зобов'язані забезпечити чудове перебування для гостей",
     "forNight": "за ніч"
+  },
+  "authentication": {
+    "logOut": "Вийти",
+    "login_or_register": "Увійти або зареєструватися",
+    "first_name": "Ім'я",
+    "last_name": "Прізвище",
+    "email": "Електронна пошта",
+    "password": "Пароль",
+    "all_fields_required": "Всі поля обов'язкові",
+    "name_cannot_be_empty": "Ім'я не може бути порожнім",
+    "name_cannot_be_longer_than_40": "Ім'я не може бути довшим за 40 символів",
+    "surname_cannot_be_empty": "Прізвище не може бути порожнім",
+    "surname_cannot_be_longer_than_40": "Прізвище не може бути довшим за 40 символів",
+    "email_is_not_correct": "Електронна пошта неправильна",
+    "password_length_error": "Пароль має бути довший за 6 символів і коротший за 50",
+    "password_cannot_be_empty": "Пароль не може бути порожнім",
+    "please_fill_all_fields": "Будь ласка, заповніть всі поля"
   }
 } 

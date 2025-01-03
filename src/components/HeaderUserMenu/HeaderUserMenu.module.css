@@ -76,10 +76,6 @@
     text-align: left;
   }
   
-  .dropdownMenu .signUp {
-    font-weight: 600;
-  }
-  
   .dropdownMenu li {
     padding: 8px 16px;
     cursor: pointer;
@@ -95,6 +91,13 @@
     border: none; 
     border-top: 1px solid #ddd; 
     width: 100%;
+  }
+  .verifiedName {
+    color: white;
+    background-color: rgb(44, 44, 44);
+    font-size: 14px;
+    padding: 6px 10px;
+    border-radius: 50%;
   }
 
   @media (max-width: 768px) {

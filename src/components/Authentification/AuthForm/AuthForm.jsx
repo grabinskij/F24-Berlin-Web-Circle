@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import styles from './AuthForm.module.css'
 import { CloseIcon } from '../../../icons'
+import { useTranslation } from 'react-i18next'
 
 export const AuthForm = ({ 
     handleClick, 
@@ -8,52 +9,85 @@ export const AuthForm = ({
     setEmail,
     email,
     setPass,
-    pass
+    pass,
+    name,
+    setName,
+    surname,
+    setSurname,
+    formValid,
+    setFormValid,
+    submitError
   }) => {
-  const [emailDirty, setEmailDirty] = useState(false)
-  const [emailError, setEmailError] = useState('Email can not be empty')
-  const [passDirty, setPassDirty] = useState(false)
-  const [passError, setPassError] = useState('Password can not be empty')
-  const [formValid, setFormValid] = useState(false)
+  const [emailError, setEmailError] = useState('')
+  const [passError, setPassError] = useState('')
+  const [nameError, setNameError] = useState('')
+  const [surnameError, setSurnameError] = useState('')
+  const [focusedField, setFocusedField] = useState(null);
+
+  const { t } = useTranslation()
 
   useEffect(() => {
-    if (emailError || passError) {
+    if ( !emailError && !passError && !nameError && !surnameError &&
+      !email && !pass && !name && !surname) {
       setFormValid(false)
     } else {
       setFormValid(true)
     }
-  }, [emailError, passError])
+  }, [emailError,
+     passError, 
+     nameError, 
+     surnameError, 
+     setFormValid,
+     email, 
+     pass, 
+     name,  
+     surname
+    ])
+  
+
+  const nameHandler = (e) => {
+    const value = e.target.value;
+    setName(value); 
+    if (!value.trim()) {
+      setNameError(t('authentication.name_cannot_be_empty'));
+    } else if (value.length > 40) {
+      setNameError(t('authentication.name_cannot_be_longer_than_40'));
+    } else {
+      setNameError('');
+    }
+  };
+  
+  const surnameHandler = (e) => {
+    const value = e.target.value;
+    setSurname(value); 
+    if (!value.trim()) {
+      setSurnameError(t('authentication.surname_cannot_be_empty'));
+    } else if (value.length > 40) {
+      setSurnameError(t('authentication.surname_cannot_be_longer_than_40'));
+    } else {
+      setSurnameError(''); 
+    }
+  };
 
   const emailHandler = (e) => {
     setEmail(e.target.value)
     const valEmail =
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
     if (!valEmail.test(String(e.target.value).toLowerCase())) {
-      setEmailError('Email is not correct')
+      setEmailError(t('authentication.email_is_not_correct'))
     } else {
       setEmailError('')
     }
   }
   const passHandler = (e) => {
     setPass(e.target.value)
-    if (e.target.value.length < 5 || e.target.value.length > 20) {
-      setPassError('Password should be longer than 3 and shorter than 20')
+    if (e.target.value.length <= 6 || e.target.value.length > 50) {
+      setPassError(t('authentication.password_length_error'))
       if (!e.target.value) {
-        setPassError('Password can not be empty')
+        setPassError(t('authentication.password_cannot_be_empty'))
       }
     } else {
       setPassError('')
-    }
-  }
-
-  const blurHandler = (e) => {
-    switch (e.target.name) {
-      case 'email':
-        setEmailDirty(true)
-        break
-      case 'pass':
-        setPassDirty(true)
-        break
     }
   }
 
@@ -67,39 +101,72 @@ export const AuthForm = ({
           >
             <CloseIcon />
           </button>
-          <h3>Login or register</h3>
+          <h3>{t('authentication.login_or_register')}</h3>
         </div>
         <div className={styles.formContent}>
-          {emailDirty && emailError && (
+        {focusedField === 'name' && nameError && (
+            <div className={styles.error}>{nameError}</div>
+          )}
+        <input
+            name="name"
+            type="text"
+            value={name}
+            onFocus={() => setFocusedField('name')}
+            onBlur={() => setFocusedField(null)}
+            onChange={(e) => nameHandler(e)}
+            placeholder={t('authentication.first_name')}
+            required
+          />
+        {focusedField === 'surname' && surnameError && (
+            <div className={styles.error}>{surnameError}</div>
+          )}
+        <input
+            name="surname"
+            type="text"
+            value={surname}
+            onFocus={() => setFocusedField('surname')}
+            onBlur={() => setFocusedField(null)}
+            onChange={(e) => surnameHandler(e)}
+            placeholder={t('authentication.last_name')}
+            required
+          />
+          {focusedField === 'email' && emailError && (
             <div className={styles.error}>{emailError}</div>
           )}
           <input
-            onBlur={(e) => blurHandler(e)}
             name="email"
             type="email"
             value={email}
+            onFocus={() => setFocusedField('email')}
+            onBlur={() => setFocusedField(null)}
             onChange={(e) => emailHandler(e)}
-            placeholder="email"
+            placeholder={t('authentication.email')}
+            required
           />
-          {passDirty && passError && (
+          {focusedField === 'pass' && passError && (
             <div className={styles.error}>{passError}</div>
           )}
           <input
-            onBlur={(e) => blurHandler(e)}
             name="pass"
             type="password"
             value={pass}
+            onFocus={() => setFocusedField('pass')}
+            onBlur={() => setFocusedField(null)}
             onChange={(e) => passHandler(e)}
-            placeholder="password"
+            placeholder={t('authentication.password')}
+            required
           />
+        </div>
+        <div>
+          {submitError && <div className={styles.error}>{t('authentication.please_fill_all_fields')}</div>}
         </div>
         <div className={styles.confirmButtonContainer}>
           <button
             disabled={!formValid}
             className={styles.confirmButton}
-            onClick={() => handleClick(email, pass)}
+            onClick={() => handleClick()}
           >
-            Login
+            {t('search.logIn')}
           </button>
         </div>
       </div>

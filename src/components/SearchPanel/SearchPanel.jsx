@@ -30,7 +30,6 @@ const SearchPanel = () => {
             infants,
             pets
         };
-        console.log('region', region)
 
         if (region) {
             searchQueries.region = region;

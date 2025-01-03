@@ -17,7 +17,7 @@
 }
 .formInner .formHeader {
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
   padding: 10px 14px;
   border-bottom: 1px solid #cfcfcf;
@@ -26,12 +26,14 @@
 }
 .formInner .formHeader h3 {
   margin: 0;
+  position: relative;
 }
 .formInner .closeButton {
-  margin-right: 80px;
-  display: flex;
   border: none;
   padding: 0;
+  position: absolute;
+  top: 5px;
+  left: 5px;
 }
 .formInner .confirmButtonContainer {
   padding: 10px 20px;

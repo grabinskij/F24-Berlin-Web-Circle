@@ -1,24 +1,42 @@
-import { useState } from "react";
-import styles from "./HeaderUserMenu.module.css";
-import useOutsideClick from "../../hooks/useOutsideClick";
-import { useTranslation } from "react-i18next";
-import Authentification from "../Authentification/Authentification";
+import { useState } from 'react'
+import styles from './HeaderUserMenu.module.css'
+import useOutsideClick from '../../hooks/useOutsideClick'
+import { useTranslation } from 'react-i18next'
+import Authentification from '../Authentification/Authentification'
+import { useAuth } from '../../context/AuthContext'
+import { useNavigate } from 'react-router-dom'
 
 const HeaderUserMenu = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [showAuthPopup, setShowAuthPopup] = useState(false);
+  const [isOpen, setIsOpen] = useState(false)
+  const [showAuthPopup, setShowAuthPopup] = useState(false)
+  const [verifiedName, setVerifiedName] = useState(localStorage.getItem('verifiedName') || '')
+  const { user, loading, logout } = useAuth()
+
+  const navigate = useNavigate()
 
   const showAuthPopupHandler = () => {
-    setShowAuthPopup((prevState) => !prevState);
-  };
+    setShowAuthPopup((prevState) => !prevState)
+  }
 
   const handleClick = () => {
-    setIsOpen((prevState) => !prevState);
-  };
+    setIsOpen((prevState) => !prevState)
+  }
 
-  const { t } = useTranslation();
+  const { t } = useTranslation()
 
-  const userMenuRef = useOutsideClick(() => setIsOpen(false));
+  const userMenuRef = useOutsideClick(() => setIsOpen(false))
+
+  const handleLogout = () => {
+    logout()
+    setIsOpen(false)
+    setVerifiedName('')
+    localStorage.removeItem('verifiedName')
+    navigate('/')
+  }
+
+
+  const firstLetterOfName = verifiedName?.charAt(0).toUpperCase();
+
 
   return (
     <div className={styles.headerContainer} ref={userMenuRef}>
@@ -43,6 +61,7 @@ const HeaderUserMenu = () => {
             />
           </svg>
         </div>
+        { !verifiedName ? (
         <div>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -55,41 +74,54 @@ const HeaderUserMenu = () => {
             />
           </svg>
         </div>
+        ) : (
+          <span className={styles.verifiedName}>{firstLetterOfName}</span> 
+        )}
       </button>
       {isOpen && (
         <div className={styles.dropdownMenu}>
           <ul>
-            <li 
-              onClick={() => {
-                showAuthPopupHandler()
-                setIsOpen(false)
-              }} 
-              className={styles.signUp}
-            >
-              {t('search.signUp')}
-            </li> 
-            <li
-              onClick={() => {
-                showAuthPopupHandler()
-                setIsOpen(false)
-              }} 
-            >
-              {t('search.logIn')}
-            </li> 
+            {!user && !loading ? (
+              <>
+                <li
+                  onClick={() => {
+                    showAuthPopupHandler()
+                    setIsOpen(false)
+                  }}
+                  className={styles.signUp}
+                >
+                  {t('search.signUp')}
+                </li>
+                <li
+                  onClick={() => {
+                    showAuthPopupHandler()
+                    setIsOpen(false)
+                  }}
+                >
+                  {t('search.logIn')}
+                </li>
+              </>
+            ) : (
+              <li onClick={() => handleLogout()}>{t('authentication.logOut')}</li>
+            )}
             <hr className={styles.menuSeperator} />
             <li>{t('search.giftCards')}</li>
+            {user && !loading && (
+            <li onClick={() => navigate('/bookings')}>{t('search.bookings')}</li>
+            )}
             <li>{t('search.hostAnExperience')}</li>
             <li>{t('search.helpCenter')}</li>
           </ul>
         </div>
       )}
-      <Authentification 
+      <Authentification
         showAuthPopupHandler={showAuthPopupHandler}
         showAuthPopup={showAuthPopup}
         setShowAuthPopup={setShowAuthPopup}
+        setVerifiedName={setVerifiedName}
       />
     </div>
-  );
-};
+  )
+}
 
-export default HeaderUserMenu;
+export default HeaderUserMenu

@@ -16,23 +16,48 @@ const writeUsersToFile = (users) => {
   fs.writeFileSync(usersFilePath, JSON.stringify(users, null, 2));
 };
 
-router.post('/register', verifyToken, (req, res) => {
-  const { email, name } = req.user;
-
+router.post('/register', verifyToken, async (req, res) => {
   try {
+    const { name, surname } = req.body;
+    const email = req.user?.email;
+
+    if (!name || !surname || !email) {
+      return res.status(400).json({ 
+        error: 'Name, surname, and email are required.' 
+      });
+    }
+
     const users = readUsersFromFile();
+
     let user = users.find((u) => u.email === email);
 
     if (!user) {
-      user = { email, name };
+      user = {
+        userId: users.length + 1, 
+        email,
+        name,
+        surname,
+        createdAt: new Date().toISOString(),
+      };
+
       users.push(user);
+
+      writeUsersToFile(users);
+    } else {
+      user.name = name;
+      user.surname = surname;
+
       writeUsersToFile(users);
     }
 
     res.status(201).send(user);
+
   } catch (error) {
-    console.error('Error:', error);
-    res.status(500).send({ message: 'Server error' });
+    console.error('Error processing request:', error.message);
+    res.status(500).json({
+      message: 'Server error',
+      error: error.message,
+    });
   }
 });
 
