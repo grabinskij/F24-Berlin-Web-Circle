@@ -1,0 +1,59 @@
+.formContainer {
+  width: 400px;
+}
+.formInner input{
+  display: block;
+  width: 100%;
+  padding: 14px 24px;
+  margin-bottom: 10px;
+  border-radius: 6px;
+  border: 1px solid black;
+}
+.formInner input:last-child{
+  margin: 0;
+}
+.formContent {
+  padding: 32px 20px;
+}
+.formInner .formHeader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 14px;
+  border-bottom: 1px solid #cfcfcf;
+  width: 100%;
+  font-size: 14px;
+}
+.formInner .formHeader h3 {
+  margin: 0;
+  position: relative;
+}
+.formInner .closeButton {
+  border: none;
+  padding: 0;
+  position: absolute;
+  top: 5px;
+  left: 5px;
+}
+.formInner .confirmButtonContainer {
+  padding: 10px 20px;
+  border-top: 1px solid #cfcfcf;
+}
+.formInner .confirmButton {
+  border: none;
+  width: 100%;
+  margin: 1rem 0;
+  padding: 14px 24px;
+  color: white;
+  background-image: radial-gradient(circle,
+      rgb(255, 56, 92) 0%,
+      rgb(230, 30, 77) 27.5%,
+      rgb(227, 28, 95) 40%,
+      rgb(215, 4, 102) 57.5%,
+      rgb(189, 30, 89) 75%,
+      rgb(189, 30, 89) 100%);
+}
+.error {
+  color: rgb(194, 60, 60);
+  font-size: 0.875rem;
+}

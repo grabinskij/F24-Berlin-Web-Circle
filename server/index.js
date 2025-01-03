@@ -119,11 +119,17 @@ app.get('/api/currency', async (req, res) => {
   }
 });
 
+app.get('/health', (req, res) => {
+  res.status(200).send('Server is running');
+});
+
+
 // import Routes
 const placesRoutes = require("./routes/places");
 const destinationsRoutes = require("./routes/destinations");
 const searchedPlacesRoutes = require("./routes/searchedPlaces");
 const bookingsRoutes = require("./routes/bookings");
+const userRoutes = require('./routes/userRoutes');
 
 
 // Use Routes
@@ -131,6 +137,7 @@ app.use("/places", placesRoutes);
 app.use("/destinations", destinationsRoutes);
 app.use("/s", searchedPlacesRoutes);
 app.use("/bookings", bookingsRoutes);
+app.use('/users', userRoutes);
 
 app.listen(PORT, (error) => {
   if (error) console.log("Error starting the server:", error);

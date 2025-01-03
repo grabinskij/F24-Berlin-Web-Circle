@@ -20,6 +20,7 @@ function App() {
   const [isModalOpen, setModalOpen] = useState(false);
   const [histogramData, setHistogramData] = useState([]);
   const [bookings, setBookings] = useState([]);
+  
 
   const rateEURUSD = parseFloat(localStorage.getItem('exchangeRateUSD')) || exchangeRateUSD || 1;
   const rateEURUAH = parseFloat(localStorage.getItem('exchangeRateUAH')) || exchangeRateUAH || 1;
@@ -39,11 +40,11 @@ function App() {
     }
   }, [isModalOpen]);
 
+
   useEffect(() => {
     axios
       .get(`${BASE_URL}places`, {
         params: searchParams,
-        withCredentials: true,
         headers: {
           'Content-Type': 'application/json'
         }
@@ -54,7 +55,7 @@ function App() {
 
   useEffect(() => {
       axios.get(
-        (`http://localhost:8800/bookings`)
+        (`${BASE_URL}bookings`)
       )
       .then((response) => setBookings(response?.data))
       .catch((error) => console.error(`Something went wrong. ${error.message}.`));
@@ -63,7 +64,6 @@ function App() {
 
   const handlePlaceClick = (placeId) => {
     setSelectPlaceId(placeId);
-    console.log("Selected Place ID:", placeId);
 
     axios
       .post(`${BASE_URL}savePlace`, { placeId })

@@ -1,0 +1,61 @@
+[
+  {
+    "userId": 1,
+    "email": "creta.moja@gmail.com",
+    "createdAt": "2025-01-02T17:44:05.525Z"
+  },
+  {
+    "userId": 2,
+    "email": "fucjo.pop@gmail.com",
+    "createdAt": "2025-01-02T17:55:44.689Z"
+  },
+  {
+    "userId": 3,
+    "email": "dandf.kijdf@gmail.com",
+    "createdAt": "2025-01-02T19:36:13.748Z",
+    "name": "Borio",
+    "surname": "Nory"
+  },
+  {
+    "userId": 4,
+    "email": "an.inskij@gmail.com",
+    "createdAt": "2025-01-03T10:28:04.972Z",
+    "name": "Hojo",
+    "surname": "Moho"
+  },
+  {
+    "userId": 5,
+    "email": "an2.inskij2@gmail.com",
+    "createdAt": "2025-01-03T10:31:06.352Z",
+    "name": "ert2",
+    "surname": "dfgfdf2"
+  },
+  {
+    "userId": 6,
+    "email": "an3.inskij3@gmail.com",
+    "createdAt": "2025-01-03T10:33:54.943Z",
+    "name": "Do",
+    "surname": "Fo"
+  },
+  {
+    "userId": 7,
+    "email": "an4.inskij4@gmail.com",
+    "name": "Go",
+    "surname": "Bo",
+    "createdAt": "2025-01-03T10:39:28.363Z"
+  },
+  {
+    "userId": 8,
+    "email": "ohoh.jaja@gmail.com",
+    "name": "Oh",
+    "surname": "Ja",
+    "createdAt": "2025-01-03T11:35:24.435Z"
+  },
+  {
+    "userId": 9,
+    "email": "jojo.gogo@gmail.com",
+    "name": "Mymine",
+    "surname": "Jojo",
+    "createdAt": "2025-01-03T18:17:04.211Z"
+  }
+]

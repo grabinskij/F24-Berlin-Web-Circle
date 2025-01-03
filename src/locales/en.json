@@ -91,7 +91,8 @@
     "anyWeek": "Any week",
     "USA": "USA",
     "Jordan": "Jordan",
-    "Thailand": "Thailand"
+    "Thailand": "Thailand", 
+    "bookings": "Bookings"
   },
     "priceRangeModal": {
       "roomsBeds": "Rooms and Beds",
@@ -219,5 +220,22 @@
       "paymentProtection": "To protect your payment, never transfer money or communicate outside of the Airbnb website or app.",
       "superhostsDescription": "Superhosts are experienced, highly rated hosts who are committed to providing great stays for guests",
       "forNight": "per night"
+    },
+    "authentication": {
+      "logOut": "Log Out",
+      "login_or_register": "Login or register",
+      "first_name": "First name",
+      "last_name": "Last name",
+      "email": "Email",
+      "password": "Password",
+      "all_fields_required": "All fields are required",
+      "name_cannot_be_empty": "Name cannot be empty",
+      "name_cannot_be_longer_than_40": "Name cannot be longer than 40 characters",
+      "surname_cannot_be_empty": "Surname cannot be empty",
+      "surname_cannot_be_longer_than_40": "Surname cannot be longer than 40 characters",
+      "email_is_not_correct": "Email is not correct",
+      "password_length_error": "Password should be longer than 6 and shorter than 50",
+      "password_cannot_be_empty": "Password cannot be empty",
+      "please_fill_all_fields": "Please fill all fields"
     }
 }

@@ -7,7 +7,7 @@ const constants = require('../constants/constants');
  function filterPlaces (region, checkIn, checkOut, guests = 1, category = null, language) {
 	const DEFAULT_NO_OF_DAYS_PER_STAY = 1;
 	const filteredResult = [];
-		console.log('languagePlaces', language);
+
   const places = language === 'en' ? enTranslation : language === 'de' ? deTranslation : language === 'ukr' ? ukrTranslation : enTranslation;
 
 	let filteredDestinations;

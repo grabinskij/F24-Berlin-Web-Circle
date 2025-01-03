@@ -39,7 +39,7 @@ router.post('/reservations/:id', async (req, res) => {
     exchangeRateUAH,
     selectedCurrency
   } = req.body
-console.log('selectedCurrencyBack', selectedCurrency)
+
   const reservation = bookings.find((b) => b.id === productId)
   if (!reservation) {
     return res
